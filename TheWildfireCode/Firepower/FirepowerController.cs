@@ -80,18 +80,7 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat),IHeal
         int increase = val + ignite;
         if (player.GetRelic<BoxOfTinder>() != null)
             increase += 1;
-        NCreature? creatureNode = NCombatRoom.Instance?.GetCreatureNode(player.Creature);
-        if (creatureNode != null)
-        {
-            NFireBurstVfx? child = NFireBurstVfx.Create(creatureNode.GetBottomOfHitbox(), 1f, new Color("b18aff"));
-            if (child != null)
-            {
-                SfxCmd.Play("event:/sfx/characters/attack_fire");
-                NCombatRoom? instance = NCombatRoom.Instance;
-                if (instance != null)
-                    instance.CombatVfxContainer.AddChildSafely((Godot.Node)child);
-            }
-        }
+        SfxCmd.Play("event:/sfx/characters/attack_fire");
         Firepower.Set(player.PlayerCombatState, increase);
         await FirepowerHooks.AfterIgnite(player.Creature.CombatState, choiceContext, increase, player);
     }
