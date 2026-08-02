@@ -14,7 +14,8 @@ public class FlintStrike() : TheWildfireCard(2,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(15, ValueProp.Move), new IgniteVar(7)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(15, ValueProp.Move), new IgniteVar(3),
+    new DynamicVar("Scorch", 2)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.Scorch,CardKeyword.Ethereal];
     protected override HashSet<CardTag> CanonicalTags
     {
@@ -27,11 +28,11 @@ public class FlintStrike() : TheWildfireCard(2,
     {
         await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_slash").Execute(choiceContext);
         await FirepowerController.Ignite(choiceContext, DynamicVars["Ignite"].IntValue, Owner);
-        await FirepowerController.Scorch(choiceContext, Owner);
+        await FirepowerController.Scorch(choiceContext, Owner, DynamicVars["Scorch"].IntValue);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Ignite"].UpgradeValueBy(4);
+        DynamicVars["Scorch"].UpgradeValueBy(1);
     }
 }

@@ -9,15 +9,15 @@ using TheWildfire.TheWildfireCode.Cards.Variables;
 using TheWildfire.TheWildfireCode.Firepower;
 using TheWildfire.TheWildfireCode.Powers;
 
-namespace TheWildfire.TheWildfireCode.Cards.Common;
+namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
 
 public class FlameConsuming() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(12, ValueProp.Move), new IgniteVar(6), new PowerVar<ConstitutionDownPower>(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(11, ValueProp.Move), new IgniteVar(6), new PowerVar<ConstitutionDownPower>(2)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<ConstitutionPower>()];
+        [HoverTipFactory.FromPower<ConstitutionPower>(),HoverTipFactory.Static(WildfireKeywords.Overheat)];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -25,7 +25,7 @@ public class FlameConsuming() : TheWildfireCard(1,
     {
         await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_slash").Execute(choiceContext);
         await FirepowerController.Ignite(choiceContext, DynamicVars["Ignite"].IntValue, Owner);
-        await CommonActions.ApplySelf<ConstitutionDownPower>(choiceContext, this);
+        await FirepowerController.DealOverheatDamage(choiceContext, Owner);
     }
 
     protected override void OnUpgrade()

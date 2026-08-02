@@ -7,13 +7,13 @@ using TheWildfire.TheWildfireCode.Cards;
 using TheWildfire.TheWildfireCode.Cards.Variables;
 using TheWildfire.TheWildfireCode.Firepower;
 
-namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
+namespace TheWildfire.TheWildfireCode.Cards.Common;
 
 public class TwoTalons() : TheWildfireCard(1,
-    CardType.Attack, CardRarity.Uncommon,
+    CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Move), new ExertVar(6)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(4, ValueProp.Move), new ExertVar(6)];
     
 
     protected override bool ShouldGlowGoldInternal
@@ -41,6 +41,6 @@ public class TwoTalons() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Exert"].UpgradeValueBy(-3);
+        DynamicVars.Damage.UpgradeValueBy(2);
     }
 }

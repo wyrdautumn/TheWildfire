@@ -1,6 +1,10 @@
-﻿namespace TheWildfire.TheWildfireCode.Nodes;
+﻿using Godot;
+using MegaCrit.Sts2.Core.Nodes.Combat;
 
-public class NDeshaVisuals
+namespace TheWildfire.TheWildfireCode.Nodes;
+
+[GlobalClass]
+public partial class NDeshaVisuals : NCreatureVisuals
 {
     
 }

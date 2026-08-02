@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using TheWildfire.TheWildfireCode.Cards;
 using TheWildfire.TheWildfireCode.Powers;
 
-namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
+namespace TheWildfire.TheWildfireCode.Cards.Rare;
 
 public class ThermalNimbus() : TheWildfireCard(1,
     CardType.Power, CardRarity.Rare,
@@ -14,7 +14,7 @@ public class ThermalNimbus() : TheWildfireCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<ThermalNimbusPower>(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(WildfireKeywords.Scorch)];
+        [HoverTipFactory.Static(WildfireKeywords.ExertStatic)];
     
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

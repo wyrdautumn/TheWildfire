@@ -28,14 +28,19 @@
         </Reference>
     </ItemGroup>
 
-    <ItemGroup Condition="False"> <!--Allows access to originally private/protected members but may (unlikely to) cause errors.-->
-        <Publicize Include="sts2" IncludeVirtualMembers="false" IncludeCompilerGeneratedMembers="false"/>
+    <ItemGroup Condition="True"> <!--Allows access to originally private/protected members but may (unlikely to) cause errors.-->
+        <Publicize Include="sts2:MegaCrit.Sts2.Core.Nodes.Combat.NEnergyCounter._player"/>
+		<Publicize Include="sts2:MegaCrit.Sts2.Core.Models.EventModel.Description"/>
+		<Publicize Include="sts2:MegaCrit.Sts2.Core.Models.EventModel.L10NLookup"/>
+		<Publicize Include="sts2:MegaCrit.Sts2.Core.Nodes.Combat.NHealthBar._creature"/>
+        <Publicize Include="sts2:MegaCrit.Sts2.Core.Nodes.Combat.NHealthBar._blockContainer"/>
+		<Publicize Include="sts2:MegaCrit.Sts2.Core.Nodes.Combat.NEnergyCounter.OnHovered"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="*" PrivateAssets="All"/>
-        <PackageReference Include="Krafs.Publicizer" Version="2.3.0" PrivateAssets="All"/>
-        <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="*"/>
+        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.4.0" PrivateAssets="All" />
+        <PackageReference Include="Krafs.Publicizer" Version="2.3.1" PrivateAssets="All" />
+        <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.9" />
         <!-- Generates a .pck file when building if only using simple assets. May not work on all setups. Uncomment to test. -->
         <!-- <PackageReference Include="BSchneppe.StS2.PckPacker" Version="0.1.1" PrivateAssets="All" /> -->
         <AdditionalFiles Include="TheWildfire/localization/**/*.json"/> <!-- Used by analyzer -->
@@ -76,6 +81,7 @@
         <Message Text="Copying .dll and manifest to mods folder." Importance="high"/>
         <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/"/>
         <Copy SourceFiles="$(AssemblyName).json" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/"/>
+		<Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/" />
     </Target>
 
     <Target Name="CopyQuickPck" AfterTargets="PackPck" Condition="Exists('$(PckPackerOutputPath)') And '$(PckPackerSkipped)' != 'true'">

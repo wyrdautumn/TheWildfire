@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using TheWildfire.TheWildfireCode.Cards;
 using TheWildfire.TheWildfireCode.Cards.Variables;
+using TheWildfire.TheWildfireCode.Firepower;
 using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
@@ -28,6 +29,7 @@ public class SwelteringStrike() : TheWildfireCard(1,
         if (play.Target == null)
             return;
         await CommonActions.Apply<HeatExhaustionPower>(choiceContext, play.Target, this, exert);
+        await FirepowerController.Exert(choiceContext, exert, Owner);
     }
 
     protected override void OnUpgrade()

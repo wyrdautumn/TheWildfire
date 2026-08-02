@@ -7,7 +7,7 @@ public class FlareVar : DynamicVar
 {
     public const string Key = "Flare";
 
-    public FlareVar(decimal Flare) : base(Key, Flare)
+    public FlareVar(decimal flare) : base(Key, flare)
     {
         this.WithTooltip();
     }

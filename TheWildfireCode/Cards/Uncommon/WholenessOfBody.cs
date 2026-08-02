@@ -6,10 +6,10 @@ using TheWildfire.TheWildfireCode.Cards;
 using TheWildfire.TheWildfireCode.Cards.Variables;
 using TheWildfire.TheWildfireCode.Firepower;
 
-namespace TheWildfire.TheWildfireCode.Cards.Rare;
+namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
 
 public class WholenessOfBody() : TheWildfireCard(0,
-    CardType.Skill, CardRarity.Rare,
+    CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(8)];

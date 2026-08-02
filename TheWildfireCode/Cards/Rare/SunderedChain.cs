@@ -11,19 +11,19 @@ using TheWildfire.TheWildfireCode.Cards;
 using TheWildfire.TheWildfireCode.Cards.Variables;
 using TheWildfire.TheWildfireCode.Firepower;
 
-namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
+namespace TheWildfire.TheWildfireCode.Cards.Rare;
 
 public class SunderedChain() : TheWildfireCard(0,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new OverflowVar(4)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new FlareVar(6)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<WeakPower>(),HoverTipFactory.FromPower<VulnerablePower>(),HoverTipFactory.FromPower<FrailPower>()];
     protected override HashSet<CardTag> CanonicalTags
     {
-        get => new HashSet<CardTag>() { WildfireKeywords.OverflowTag };
+        get => new HashSet<CardTag>() { WildfireKeywords.FlareTag };
     }
 
     protected override bool IsPlayable
@@ -33,7 +33,7 @@ public class SunderedChain() : TheWildfireCard(0,
             var ownerPlayerCombatState = this.Owner.PlayerCombatState;
             return ownerPlayerCombatState != null &&
                    FirepowerController.Firepower.Get(ownerPlayerCombatState) >=
-                   this.DynamicVars["Overflow"].IntValue;
+                   this.DynamicVars["Flare"].IntValue;
         }
     }
 
@@ -54,19 +54,17 @@ public class SunderedChain() : TheWildfireCard(0,
             await PowerCmd.Remove(vulnerable);
         if (frail != null)
             await PowerCmd.Remove(frail);
-        foreach (CardModel status in Owner.PlayerCombatState.AllCards.Where(c =>
-                     c.Type == CardType.Status && c.Pile != null && c.Pile.Type != PileType.Exhaust))
+        List<CardModel> list = Owner.PlayerCombatState.AllCards.Where(c =>
+            c.Type == CardType.Status && c.Pile != null && c.Pile.Type != PileType.Exhaust).ToList();
+        foreach (CardModel status in list)
         {
             await CardCmd.Exhaust(choiceContext, status);
         }
-        await FirepowerController.Overflow(choiceContext, DynamicVars["Overflow"].IntValue, Owner);
+        await FirepowerController.Flare(choiceContext, DynamicVars["Flare"].IntValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        RemoveKeyword(CardKeyword.Exhaust);
-        List<IHoverTip> hoverTips = new List<IHoverTip>();
-        hoverTips.Add(HoverTipFactory.FromKeyword(CardKeyword.Exhaust));
-        ExtraTooltips.AddTips(hoverTips, this);
+        
     }
 }

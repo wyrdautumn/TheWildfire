@@ -13,7 +13,7 @@ using TheWildfire.TheWildfireCode.Cards;
 using TheWildfire.TheWildfireCode.Cards.Token;
 using TheWildfire.TheWildfireCode.Firepower;
 
-namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
+namespace TheWildfire.TheWildfireCode.Cards.Rare;
 
 public class GoAllOut() : TheWildfireCard(0,
     CardType.Attack, CardRarity.Rare,
@@ -23,8 +23,6 @@ public class GoAllOut() : TheWildfireCard(0,
     new CalculationBaseVar(0),
     new ExtraDamageVar(1),
     new CalculatedDamageVar(ValueProp.Move).WithMultiplier(Calc).WithTooltip("THEWILDFIRE-EXERT-X")];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<Burn>()];
 
     protected override bool HasEnergyCostX => true;
 
@@ -39,8 +37,7 @@ public class GoAllOut() : TheWildfireCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        int energy = ResolveEnergyXValue();
-        int hits = energy;
+        int hits = ResolveEnergyXValue();
         if (IsUpgraded)
         {
             hits += 1;
@@ -49,13 +46,7 @@ public class GoAllOut() : TheWildfireCard(0,
         int exert = 0;
         if (Owner.PlayerCombatState != null)
             exert = FirepowerController.Firepower.Get(Owner.PlayerCombatState);
-        await FirepowerController.Exert(choiceContext, exert, Owner);
-        if (CombatState == null)
-            return;
-        List<CardModel> burns = new List<CardModel>();
-        for (int index = 0; index < energy; ++index)
-            burns.Add(CombatState.CreateCard<Burn>(Owner));
-        CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardsToCombat(burns, PileType.Draw, Owner, CardPilePosition.Random), 1.5f);
+        await FirepowerController.Exert(choiceContext, exert, Owner); 
     }
 
     protected override void OnUpgrade()

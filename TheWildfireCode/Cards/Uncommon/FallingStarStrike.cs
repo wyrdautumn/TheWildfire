@@ -6,13 +6,13 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using TheWildfire.TheWildfireCode.Cards;
 
-namespace TheWildfire.TheWildfireCode.Cards.Rare;
+namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
 
 public class FallingStarStrike() : TheWildfireCard(0,
-    CardType.Attack, CardRarity.Rare,
+    CardType.Attack, CardRarity.Uncommon,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(4, ValueProp.Move), new PowerVar<WeakPower>(1), new PowerVar<VulnerablePower>(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(5, ValueProp.Move), new PowerVar<WeakPower>(1), new PowerVar<VulnerablePower>(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.Afterburn];
     protected override HashSet<CardTag> CanonicalTags
     {
@@ -30,6 +30,6 @@ public class FallingStarStrike() : TheWildfireCard(0,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(4);
+        DynamicVars.Damage.UpgradeValueBy(3);
     }
 }

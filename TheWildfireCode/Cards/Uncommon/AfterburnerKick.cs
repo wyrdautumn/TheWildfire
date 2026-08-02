@@ -1,9 +1,11 @@
 ﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using TheWildfire.TheWildfireCode.Cards;
+using TheWildfire.TheWildfireCode.Cards.Status;
 using TheWildfire.TheWildfireCode.Cards.Variables;
 using TheWildfire.TheWildfireCode.Firepower;
 
@@ -13,8 +15,11 @@ public class AfterburnerKick() : TheWildfireCard(2,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(26, ValueProp.Move), new IgniteVar(5)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(20, ValueProp.Move), new IgniteVar(6)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.Afterburn];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromCard<Afterburn>()];
+
     
 
     protected override async Task OnPlay(

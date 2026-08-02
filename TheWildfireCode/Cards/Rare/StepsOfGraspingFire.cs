@@ -11,7 +11,7 @@ public class StepsOfGraspingFire() : TheWildfireCard(1,
     CardType.Power, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<StepsOfGraspingFirePower>(4)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<StepsOfGraspingFirePower>(1)];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

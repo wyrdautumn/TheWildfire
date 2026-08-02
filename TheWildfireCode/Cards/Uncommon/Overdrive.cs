@@ -15,7 +15,7 @@ public class Overdrive() : TheWildfireCard(2,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(14, ValueProp.Move), new PowerVar<OverdrivePower>(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.OverflowStatic)];
+        [HoverTipFactory.Static(WildfireKeywords.FlareStatic)];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -27,6 +27,6 @@ public class Overdrive() : TheWildfireCard(2,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["OverdrivePower"].UpgradeValueBy(1);
+        DynamicVars.Damage.UpgradeValueBy(6);
     }
 }

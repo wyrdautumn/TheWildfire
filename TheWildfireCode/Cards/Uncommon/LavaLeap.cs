@@ -15,10 +15,14 @@ public class LavaLeap() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(11, ValueProp.Move), new PowerVar<VulnerablePower>(2),
-    new OverflowVar(6)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Move), new PowerVar<VulnerablePower>(2),
+    new FlareVar(7)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<VulnerablePower>()];
+    protected override HashSet<CardTag> CanonicalTags
+    {
+        get => new HashSet<CardTag>() { WildfireKeywords.FlareTag };
+    }
     
     protected override bool IsPlayable
     {
@@ -27,7 +31,7 @@ public class LavaLeap() : TheWildfireCard(1,
             var ownerPlayerCombatState = this.Owner.PlayerCombatState;
             return ownerPlayerCombatState != null &&
                    FirepowerController.Firepower.Get(ownerPlayerCombatState) >=
-                   this.DynamicVars["Overflow"].IntValue;
+                   this.DynamicVars["Flare"].IntValue;
         }
     }
 
@@ -39,7 +43,7 @@ public class LavaLeap() : TheWildfireCard(1,
     {
         await CommonActions.CardAttack(this, play, vfx:"vfx/vfx_attack_slash").Execute(choiceContext);
         await CommonActions.Apply<VulnerablePower>(choiceContext, this, play);
-        await FirepowerController.Overflow(choiceContext, DynamicVars["Overflow"].IntValue, Owner);
+        await FirepowerController.Flare(choiceContext, DynamicVars["Flare"].IntValue, Owner);
     }
 
     protected override void OnUpgrade()

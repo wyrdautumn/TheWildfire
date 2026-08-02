@@ -11,8 +11,9 @@ public class CrashingWave() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Move), new BlockVar(8, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7, ValueProp.Move), new BlockVar(7, ValueProp.Move)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.Discipline];
+    public override bool GainsBlock => true;
     
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
