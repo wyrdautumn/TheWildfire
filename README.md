@@ -1,0 +1,1 @@
+Hey there. This mod's very in development and this is an early initial playtest build mostly meant to figure out where my mechanics are working and where they're terrible and broken. So I'm not gonna write an extensive readme just yet. But we'll get there.
