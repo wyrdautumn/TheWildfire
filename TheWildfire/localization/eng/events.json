@@ -1,0 +1,8 @@
+﻿{
+  "COLORFUL_PHILOSOPHERS.pages.INITIAL.options.CARD_POOL∴THEWILDFIRE-THE_WILDFIRE_CARD_POOL.description": "Obtain [blue]{Cards}[/blue] Wildfire {Cards:plural:card|cards}.",
+  "COLORFUL_PHILOSOPHERS.pages.INITIAL.options.CARD_POOL∴THEWILDFIRE-THE_WILDFIRE_CARD_POOL.title": "Magenta",
+  "BYRDONIS_NEST.pages.INITIAL.wildfireDescription": "You spot an enormous [jitter][red]Shambling Beast[/red][/jitter] chase off an injured [green][sine]Green Byrd[/sine][/green].\n\nIn the alcove the byrd fled from, a [gold]single unguarded egg[/gold] lies abandoned.\n\n[sine]You feel...[/sine]\n\nAwkward.",
+  "BYRDONIS_NEST.pages.TAKE.wildfireDescription": "You gently scoop up the egg and stow it.\n\nIt... feels unkind, to never let this byrd [green]hatch[/green]. Being responsible for yourself is a full-time job, but what's another beak to feed, right?\n\n...Right?",
+  "BYRDONIS_NEST.pages.EAT.wildfireDescription": "You crack the egg open and cook it with your flame.\n\nYou're not proud of it, but you're filled with an overwhelming feeling of relief. You are [jitter]not[/jitter] ready to be a mother."
+
+}

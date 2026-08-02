@@ -1,0 +1,8 @@
+{
+  "THEWILDFIRE-SCORCH.description": "ALL enemies lose HP equal to your [gold]Firepower[/gold]. Then you [gold]Overheat[/gold].",
+  "THEWILDFIRE-SCORCH.title": "Scorch",
+  "THEWILDFIRE-AFTERBURN.description": "When you play this card, shuffle an [gold]Afterburn[/gold] into your [gold]Draw Pile[/gold].",
+  "THEWILDFIRE-AFTERBURN.title": "Afterburn",
+  "THEWILDFIRE-DISCIPLINE.description": "This card's power is reduced by your [gold]Firepower[/gold].",
+  "THEWILDFIRE-DISCIPLINE.title": "Discipline"
+}

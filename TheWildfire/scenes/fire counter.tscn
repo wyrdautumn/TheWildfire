@@ -1,0 +1,250 @@
+[gd_scene load_steps=24 format=3 uid="uid://b5ogbgt51dpqn"]
+
+[ext_resource type="Texture2D" uid="uid://dqprsi50mvv5u" path="res://TheWildfire/images/charui/FireCounter/Fire Layer 5.png" id="1_vo0ch"]
+[ext_resource type="Script" uid="uid://detf6caanmfrf" path="res://TheWildfireCode/Nodes/WildfireParticles.cs" id="1_ydqys"]
+[ext_resource type="Shader" uid="uid://is4bykc2x0ba" path="res://TheWildfire/images/shaders/speck_particle.gdshader" id="2_jqic6"]
+[ext_resource type="Texture2D" uid="uid://btotwa24j5vtm" path="res://TheWildfire/images/charui/FireCounter/Fire Layer 4.png" id="2_w5slr"]
+[ext_resource type="Texture2D" uid="uid://xucq7cq4w0u1" path="res://TheWildfire/images/shaders/light.png" id="3_5uavl"]
+[ext_resource type="Texture2D" uid="uid://cfphvmublrfeh" path="res://TheWildfire/images/charui/FireCounter/Fire Layer 3.png" id="3_uom7b"]
+[ext_resource type="Texture2D" uid="uid://cbd6xbgk1l51l" path="res://TheWildfire/images/charui/FireCounter/Fire Layer 2.png" id="4_2nofq"]
+[ext_resource type="Shader" uid="uid://dgwg3p8sdq6q3" path="res://TheWildfire/images/shaders/char_select_wildfire_eyes.gdshader" id="4_xc1ld"]
+[ext_resource type="Texture2D" uid="uid://bxo01g2ikrg4e" path="res://TheWildfire/images/charui/FireCounter/Fire Layer 6.png" id="5_4gwkt"]
+[ext_resource type="Texture2D" uid="uid://b7e1ujb5g80ct" path="res://TheWildfire/images/charui/FireCounter/Fire Layer 1.png" id="5_ikykv"]
+[ext_resource type="Texture2D" uid="uid://cl5qhir1skf0c" path="res://TheWildfire/images/charui/FireCounter/damage counter layer.png" id="6_w5slr"]
+[ext_resource type="Texture2D" uid="uid://spvsoqcf5n4x" path="res://TheWildfire/images/shaders/fire frames/sprite_sheet.png" id="12_xc1ld"]
+
+[sub_resource type="Gradient" id="Gradient_4o16r"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_k01jx"]
+gradient = SubResource("Gradient_4o16r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8l0ph"]
+shader = ExtResource("2_jqic6")
+shader_parameter/pivot_offset = Vector2(0, 0)
+shader_parameter/lut = SubResource("GradientTexture1D_k01jx")
+
+[sub_resource type="Curve" id="Curve_hflys"]
+_data = [Vector2(0, 0.34831464), 0.0, -0.76549476, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_sad8n"]
+curve = SubResource("Curve_hflys")
+
+[sub_resource type="Curve" id="Curve_lneof"]
+_data = [Vector2(0, 0), 0.0, 11.229536, 0, 0, Vector2(0.19696969, 0.84269667), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.20356902, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cdt35"]
+curve = SubResource("Curve_lneof")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_choni"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_cdt35")
+alpha_curve = SubResource("CurveTexture_sad8n")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cf7nv"]
+shader = ExtResource("4_xc1ld")
+shader_parameter/maxLineWidth = 15.7470007479825
+shader_parameter/minLineWidth = 1.150000054625
+shader_parameter/speed = 3.7590001785525002
+shader_parameter/blockSize = 5.058000240255
+shader_parameter/color = Color(0.6784314, 0.37254903, 0.89411765, 0.5137255)
+shader_parameter/tolerance = 0.54000002565
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4gwkt"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 2
+particles_anim_loop = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cq7y3"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.39999998
+scale_max = 0.39999998
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="FireCounter" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+pivot_offset = Vector2(64, 64)
+mouse_filter = 2
+
+[node name="FireVfxBack" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(128, 128)
+script = ExtResource("1_ydqys")
+
+[node name="BackLight" type="GPUParticles2D" parent="FireVfxBack"]
+self_modulate = Color(0.5019608, 0.23137255, 0.69803923, 1)
+material = SubResource("ShaderMaterial_8l0ph")
+position = Vector2(1, -1)
+emitting = false
+amount = 1
+texture = ExtResource("3_5uavl")
+one_shot = true
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_choni")
+
+[node name="FireLayers" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 176.0
+offset_bottom = 176.0
+pivot_offset = Vector2(48, 48)
+mouse_filter = 2
+
+[node name="Layer6" type="TextureRect" parent="FireLayers"]
+visible = false
+material = SubResource("ShaderMaterial_cf7nv")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -6.0
+offset_right = -8.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(48, 48)
+texture = ExtResource("5_4gwkt")
+expand_mode = 1
+
+[node name="Layer5" type="TextureRect" parent="FireLayers"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(48, 48)
+texture = ExtResource("1_vo0ch")
+expand_mode = 1
+
+[node name="Layer4" type="TextureRect" parent="FireLayers"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(48, 48)
+texture = ExtResource("2_w5slr")
+expand_mode = 1
+
+[node name="Layer3" type="TextureRect" parent="FireLayers"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(48, 48)
+texture = ExtResource("3_uom7b")
+expand_mode = 1
+
+[node name="Layer2" type="TextureRect" parent="FireLayers"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(48, 48)
+texture = ExtResource("4_2nofq")
+expand_mode = 1
+
+[node name="Layer1" type="TextureRect" parent="FireLayers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(48, 48)
+texture = ExtResource("5_ikykv")
+expand_mode = 1
+
+[node name="Layer1" type="TextureRect" parent="FireLayers/Layer1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(48, 48)
+texture = ExtResource("6_w5slr")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 48.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(48, 48)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.43137255)
+theme_override_colors/font_outline_color = Color(0.2521148, 0.042442836, 0.3592946, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 11
+theme_override_constants/shadow_outline_size = 11
+theme_override_font_sizes/font_size = 36
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="10PercentLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 135.0
+offset_top = 76.0
+offset_right = 47.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 20)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.43137255)
+theme_override_colors/font_outline_color = Color(0.2521148, 0.042442836, 0.3592946, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FireVfxFront" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(128, 128)
+script = ExtResource("1_ydqys")
+
+[node name="fire" type="GPUParticles2D" parent="FireVfxFront"]
+material = SubResource("CanvasItemMaterial_4gwkt")
+position = Vector2(-3, -16)
+emitting = false
+amount = 1
+texture = ExtResource("12_xc1ld")
+lifetime = 0.36
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_cq7y3")

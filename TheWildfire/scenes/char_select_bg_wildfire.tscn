@@ -1,0 +1,323 @@
+[gd_scene load_steps=25 format=3 uid="uid://dktced0ogs1sg"]
+
+[ext_resource type="Texture2D" uid="uid://cp6f4rtso500" path="res://TheWildfire/images/charui/deshaselectscreenbackground.png" id="1_fw2bf"]
+[ext_resource type="Shader" uid="uid://bhgesf4mb4f8a" path="res://TheWildfire/images/shaders/flame_animated.gdshader" id="2_8v6b8"]
+[ext_resource type="Shader" uid="uid://ctldrl1p0r0tk" path="res://TheWildfire/images/shaders/bg_select_flame.gdshader" id="2_dcco4"]
+[ext_resource type="Texture2D" uid="uid://cmgxhbii87rc2" path="res://TheWildfire/images/shaders/tileable_noise_2.png" id="3_j5nmo"]
+[ext_resource type="Texture2D" uid="uid://wc7ct681fa8o" path="res://TheWildfire/images/relics/heart_of_sorcery.png" id="3_yj5ro"]
+[ext_resource type="Texture2D" uid="uid://df2rtu3cwsw3m" path="res://TheWildfire/images/charui/deshaselectscreen.png" id="4_5wd20"]
+[ext_resource type="Shader" uid="uid://bpi3rhiu7q227" path="res://TheWildfire/images/shaders/char_select_fog.gdshader" id="4_6dr5r"]
+[ext_resource type="Texture2D" uid="uid://bewbmbsve6w8i" path="res://TheWildfire/images/shaders/tileable_noise_1.png" id="4_j5nmo"]
+[ext_resource type="Texture2D" uid="uid://07wn3jt8vpll" path="res://TheWildfire/images/charui/deshaselectscreenflair.png" id="4_yj5ro"]
+[ext_resource type="Texture2D" uid="uid://ns0l1ql85xfk" path="res://TheWildfire/images/shaders/desha_fire_fleck.png" id="6_2s3k5"]
+[ext_resource type="Material" path="res://TheWildfire/images/shaders/canvas_item_material_additive_shared.tres" id="6_noehk"]
+[ext_resource type="Texture2D" uid="uid://dv7xfptpcgfo4" path="res://TheWildfire/images/shaders/desha_fire_fleck4.png" id="9_6lulo"]
+[ext_resource type="Texture2D" uid="uid://w5o7f1s6ob38" path="res://TheWildfire/images/shaders/desha_fire_surrounds.png" id="10_6dr5r"]
+[ext_resource type="Texture2D" uid="uid://dcpj3hvcpph5a" path="res://TheWildfire/images/shaders/desha_fire_fleck3.png" id="10_kpjuo"]
+[ext_resource type="Texture2D" uid="uid://vlvjengki8hj" path="res://TheWildfire/images/shaders/desha_fire_surrounds_2.png" id="11_8v6b8"]
+[ext_resource type="Shader" uid="uid://dgwg3p8sdq6q3" path="res://TheWildfire/images/shaders/char_select_wildfire_eyes.gdshader" id="12_2s3k5"]
+[ext_resource type="Texture2D" uid="uid://bawikk8piqo7m" path="res://TheWildfire/images/charui/desha_eye_sparks.png" id="12_5wd20"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i3t7q"]
+shader = ExtResource("2_8v6b8")
+shader_parameter/color1 = Color(0.78736037, 0.5983608, 0.9385272, 1)
+shader_parameter/color2 = Color(0.6910814, 0.12701273, 0.7464367, 1)
+shader_parameter/brightness = 0.15
+shader_parameter/noise = ExtResource("3_yj5ro")
+shader_parameter/timeOffset = 0.0
+shader_parameter/timeRate = 1.0
+shader_parameter/noiseAmmount = 0.51
+shader_parameter/offsetX = 11.495
+shader_parameter/flickerT = 10.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kpjuo"]
+shader = ExtResource("4_6dr5r")
+shader_parameter/camera_position = Vector2(0, 0)
+shader_parameter/camera_offset = Vector2(0, 0)
+shader_parameter/camera_position_speed = 0.025
+shader_parameter/camera_offset_speed = 0.025
+shader_parameter/noise_texture_1 = ExtResource("4_j5nmo")
+shader_parameter/noise_texture_2 = ExtResource("3_j5nmo")
+shader_parameter/noise_blend = 1.0
+shader_parameter/noise_speed_1 = 1.0
+shader_parameter/noise_speed_2 = 1.0
+shader_parameter/noise_dir_1 = Vector2(-1, 1)
+shader_parameter/noise_dir_2 = Vector2(-1, 1)
+shader_parameter/smoke_color = Color(0.21364848, 0.12666893, 0.22767012, 1)
+shader_parameter/density = 1.0
+
+[sub_resource type="Curve" id="Curve_ggjij"]
+_data = [Vector2(0.023255825, 0.26966298), 0.0, 0.0, 0, 0, Vector2(0.4941861, 0.6741574), 0.0, 0.0, 0, 0, Vector2(1, 0.25842702), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_x1bhr"]
+_data = [Vector2(0, 0.6516854), 0.0, 0.0, 0, 0, Vector2(0.4941861, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.55056185), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6lulo"]
+shader = ExtResource("2_dcco4")
+shader_parameter/OuterColor = Color(0, 0, 0, 1)
+shader_parameter/InnerColorStep = Vector2(0.3, 0.4)
+shader_parameter/Noise2Strength = 1.0
+shader_parameter/Noise2Scaling = Vector2(1, 1)
+shader_parameter/Noise2Panning = Vector2(1, 1)
+shader_parameter/Noise1Strength = 1.0
+shader_parameter/Noise1Scaling = Vector2(1, 1)
+shader_parameter/Noise1Panning = Vector2(1, 1)
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 1)
+shader_parameter/NoiseMaskOffset = Vector2(0, 0)
+shader_parameter/NoiseMask = ExtResource("10_6dr5r")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(1, 1)
+shader_parameter/Distortion2Texture = ExtResource("4_j5nmo")
+shader_parameter/Distortion2Strength = 0.006
+shader_parameter/Distortion1Scale = Vector2(1, 1)
+shader_parameter/Distortion1Panning = Vector2(1, 1)
+shader_parameter/Distortion1Texture = ExtResource("3_j5nmo")
+shader_parameter/Distortion1Strength = 0.005
+shader_parameter/DistortionMaskScale = Vector2(1, 1)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0)
+shader_parameter/InnerColor = Color(0.34619856, 0.096776135, 0.3555932, 1)
+shader_parameter/OuterStep = Vector2(0.1, 0.2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2s3k5"]
+shader = ExtResource("12_2s3k5")
+shader_parameter/maxLineWidth = 18.0450008571375
+shader_parameter/minLineWidth = 1.1490000545775
+shader_parameter/speed = 8.35600039691
+shader_parameter/blockSize = 11.494000545965
+shader_parameter/color = Color(0.5665165, 0.15090674, 0.7502542, 1)
+shader_parameter/tolerance = 0.9990000128746
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yj5ro"]
+shader = ExtResource("2_dcco4")
+shader_parameter/OuterColor = Color(0, 0, 0, 1)
+shader_parameter/InnerColorStep = Vector2(0.3, 0.4)
+shader_parameter/Noise2Strength = 1.0
+shader_parameter/Noise2Scaling = Vector2(1, 1)
+shader_parameter/Noise2Panning = Vector2(1, 1)
+shader_parameter/Noise1Strength = 1.0
+shader_parameter/Noise1Scaling = Vector2(1, 1)
+shader_parameter/Noise1Panning = Vector2(1, 1)
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 1)
+shader_parameter/NoiseMaskOffset = Vector2(0, 0)
+shader_parameter/NoiseMask = ExtResource("10_6dr5r")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(1, 1)
+shader_parameter/Distortion2Texture = ExtResource("4_j5nmo")
+shader_parameter/Distortion2Strength = 0.05
+shader_parameter/Distortion1Scale = Vector2(1, 1)
+shader_parameter/Distortion1Panning = Vector2(1, 1)
+shader_parameter/Distortion1Texture = ExtResource("3_j5nmo")
+shader_parameter/Distortion1Strength = 0.04
+shader_parameter/DistortionMaskScale = Vector2(1, 1)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0)
+shader_parameter/InnerColor = Color(0.34509805, 0.09803922, 0.35686275, 1)
+shader_parameter/OuterStep = Vector2(0.1, 0.2)
+
+[node name="CharSelectBgSorceress" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 446.0
+offset_top = 136.0
+offset_right = 446.0
+offset_bottom = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Deshaselectbackground2" type="Sprite2D" parent="."]
+position = Vector2(1167.1749, 635.37494)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("1_fw2bf")
+
+[node name="Deshaselectbackground1" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_i3t7q")
+position = Vector2(1168.1749, 632.37494)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("1_fw2bf")
+
+[node name="Deshaselectbackground3" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.2)
+material = SubResource("ShaderMaterial_kpjuo")
+position = Vector2(1168.1749, 632.37494)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("1_fw2bf")
+
+[node name="Deshaselectextra flair" type="Sprite2D" parent="."]
+position = Vector2(38, 479)
+rotation = -3.1415925
+scale = Vector2(0.56, -0.56)
+texture = ExtResource("4_yj5ro")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+material = ExtResource("6_noehk")
+position = Vector2(458, 694)
+amount = 30
+texture = ExtResource("9_6lulo")
+lifetime = 9.53
+preprocess = 15.0
+speed_scale = 0.4
+randomness = 0.57
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 128.0
+direction = Vector2(20, 10)
+spread = 118.76
+gravity = Vector2(300, -800)
+initial_velocity_min = 10.31
+initial_velocity_max = 546.39
+angular_velocity_min = -682.89
+angular_velocity_max = 578.96
+orbit_velocity_min = 0.07
+orbit_velocity_max = 0.21
+orbit_velocity_curve = SubResource("Curve_ggjij")
+linear_accel_min = -6.19
+linear_accel_max = 30.93
+radial_accel_min = -28.87
+radial_accel_max = 72.16
+tangential_accel_min = -31.95
+tangential_accel_max = 67.01
+damping_min = 30.928
+damping_max = 100.0
+angle_max = 279.4
+scale_amount_min = 0.3
+scale_amount_max = 0.6
+scale_amount_curve = SubResource("Curve_x1bhr")
+color = Color(0.64705884, 0.3529412, 0.8509804, 0.7411765)
+
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
+material = ExtResource("6_noehk")
+position = Vector2(836, 691)
+amount = 30
+texture = ExtResource("10_kpjuo")
+lifetime = 9.53
+preprocess = 15.0
+speed_scale = 0.4
+randomness = 0.57
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 128.0
+direction = Vector2(20, 10)
+spread = 118.76
+gravity = Vector2(100, -800)
+initial_velocity_min = 10.31
+initial_velocity_max = 546.39
+angular_velocity_min = -682.89
+angular_velocity_max = 578.96
+orbit_velocity_min = 0.07
+orbit_velocity_max = 0.21
+orbit_velocity_curve = SubResource("Curve_ggjij")
+linear_accel_min = -6.19
+linear_accel_max = 30.93
+radial_accel_min = -28.87
+radial_accel_max = 72.16
+tangential_accel_min = -31.95
+tangential_accel_max = 67.01
+damping_min = 30.928
+damping_max = 100.0
+angle_max = 279.4
+scale_amount_min = 0.3
+scale_amount_max = 0.6
+scale_amount_curve = SubResource("Curve_x1bhr")
+color = Color(0.64705884, 0.3529412, 0.8509804, 0.7411765)
+
+[node name="Deshaselectbackground" type="Sprite2D" parent="."]
+position = Vector2(1769, 430)
+scale = Vector2(0.56, 0.56)
+texture = ExtResource("4_5wd20")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = ExtResource("6_noehk")
+position = Vector2(443, 1662)
+amount = 60
+texture = ExtResource("6_2s3k5")
+lifetime = 9.53
+preprocess = 15.0
+speed_scale = 0.4
+randomness = 0.57
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 128.0
+direction = Vector2(20, 10)
+spread = 131.75
+gravity = Vector2(500, -800)
+initial_velocity_min = 10.31
+initial_velocity_max = 546.39
+angular_velocity_min = -682.89
+angular_velocity_max = 578.96
+orbit_velocity_min = 0.07
+orbit_velocity_max = 0.21
+orbit_velocity_curve = SubResource("Curve_ggjij")
+linear_accel_min = -6.19
+linear_accel_max = 30.93
+radial_accel_min = -28.87
+radial_accel_max = 72.16
+tangential_accel_min = -31.95
+tangential_accel_max = 67.01
+damping_min = 30.928
+damping_max = 100.0
+angle_max = 279.4
+scale_amount_min = 0.3
+scale_amount_max = 0.6
+scale_amount_curve = SubResource("Curve_x1bhr")
+color = Color(0.64705884, 0.3529412, 0.8509804, 0.7411765)
+
+[node name="CPUParticles2D4" type="CPUParticles2D" parent="."]
+material = ExtResource("6_noehk")
+position = Vector2(1367, 1691)
+amount = 30
+texture = ExtResource("9_6lulo")
+lifetime = 9.53
+preprocess = 15.0
+speed_scale = 0.4
+randomness = 0.57
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 128.0
+direction = Vector2(0, 10)
+spread = 100.2
+gravity = Vector2(100, -800)
+initial_velocity_min = 10.31
+initial_velocity_max = 546.39
+angular_velocity_min = -682.89
+angular_velocity_max = 578.96
+orbit_velocity_min = 0.07
+orbit_velocity_max = 0.21
+orbit_velocity_curve = SubResource("Curve_ggjij")
+linear_accel_min = -6.19
+linear_accel_max = 30.93
+radial_accel_min = -28.87
+radial_accel_max = 72.16
+tangential_accel_min = -31.95
+tangential_accel_max = 67.01
+damping_min = 30.928
+damping_max = 100.0
+angle_max = 279.4
+scale_amount_min = 0.3
+scale_amount_max = 0.6
+scale_amount_curve = SubResource("Curve_x1bhr")
+color = Color(0.64705884, 0.3529412, 0.8509804, 0.7411765)
+
+[node name="fireshader" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_6lulo")
+position = Vector2(1263.7499, 379.25006)
+scale = Vector2(0.5634662, 0.5783469)
+texture = ExtResource("10_6dr5r")
+
+[node name="fireshader3" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_2s3k5")
+position = Vector2(1231, 284)
+scale = Vector2(0.56, 0.56)
+texture = ExtResource("12_5wd20")
+
+[node name="fireshader2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_yj5ro")
+position = Vector2(963.99994, 999.00006)
+scale = Vector2(0.619318, 0.5778722)
+texture = ExtResource("11_8v6b8")

@@ -1,0 +1,16 @@
+{
+  "THEWILDFIRE-THE_WILDFIRE.aromaPrinciple": "[sine][color=803bb2]I control the fire. Nothing controls me.[/color][/sine]",
+  "THEWILDFIRE-THE_WILDFIRE.banter.alive.endTurnPing": "Got better things to burn than time!",
+  "THEWILDFIRE-THE_WILDFIRE.banter.dead.endTurnPing": "...",
+  "THEWILDFIRE-THE_WILDFIRE.cardsModifierDescription": "Wildfire cards will now appear in rewards and shops.",
+  "THEWILDFIRE-THE_WILDFIRE.cardsModifierTitle": "Wildfire Cards",
+  "THEWILDFIRE-THE_WILDFIRE.description": "The daughter of a wayward spark.\nControl the flame or be consumed by it.",
+  "THEWILDFIRE-THE_WILDFIRE.eventDeathPrevention": "They're gonna have to try harder than [jitter]that[/jitter].",
+  "THEWILDFIRE-THE_WILDFIRE.goldMonologue": "[sine]The monks can repair the prayer hall I burned...[/sine]",
+  "THEWILDFIRE-THE_WILDFIRE.possessiveAdjective": "her",
+  "THEWILDFIRE-THE_WILDFIRE.pronounObject": "her",
+  "THEWILDFIRE-THE_WILDFIRE.pronounPossessive": "hers",
+  "THEWILDFIRE-THE_WILDFIRE.pronounSubject": "she",
+  "THEWILDFIRE-THE_WILDFIRE.title": "The Wildfire",
+  "THEWILDFIRE-THE_WILDFIRE.titleObject": "The Wildfire"
+}

@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsypbaxmtvhby"]
+
+[ext_resource type="Texture2D" uid="uid://dqu8p757jss83" path="res://TheWildfire/images/character/desha.png" id="1_po6yp"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ywtfl"]
+blend_mode = 1
+
+[node name="Desha" type="Node2D"]
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_ywtfl")
+layout_mode = 3
+anchors_preset = 0
+offset_left = -97.0
+offset_top = -282.0
+offset_right = 96.0
+offset_bottom = 2.0
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -137)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -320)
+
+[node name="TalkPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(183, -287)
+
+[node name="OrbPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -302)
+
+[node name="Visuals" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1.9073486e-06, -137)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("1_po6yp")
