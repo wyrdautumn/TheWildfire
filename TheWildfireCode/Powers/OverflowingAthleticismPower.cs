@@ -23,7 +23,7 @@ public class OverflowingAthleticismPower : TheWildfirePower
     {
         if (flarer != Owner.Player)
             return;
-        int power = CombatState.RunState.Rng.Niche.NextInt(0, 299);
+        int power = CombatState.RunState.Rng.Niche.NextInt(0, 300);
         if (power <= 99)
             await PowerCmd.Apply<StrengthPower>(choiceContext, Owner, 1, Owner, null);
         else if (power <= 199)

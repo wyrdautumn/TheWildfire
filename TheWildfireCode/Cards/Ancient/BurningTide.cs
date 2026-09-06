@@ -17,7 +17,7 @@ namespace TheWildfire.TheWildfireCode.Cards.Ancient;
 
 public class BurningTide() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Ancient,
-    TargetType.AllEnemies), ITranscendenceCard
+    TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(5), new PowerVar<WeakPower>(1), new PowerVar<VulnerablePower>(1),
         new CalculationBaseVar(4),
@@ -63,10 +63,5 @@ public class BurningTide() : TheWildfireCard(1,
     protected override void OnUpgrade()
     {
         EnergyCost.UpgradeBy(-1);
-    }
-
-    public CardModel GetTranscendenceTransformedCard()
-    {
-        return ModelDb.Card<BlazingWave>();
     }
 }

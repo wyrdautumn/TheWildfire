@@ -18,4 +18,5 @@ public class WildfireKeywords
     [CustomEnum] public static CardTag FlareTag;
     [CustomEnum] public static StaticHoverTip Overheat;
     [CustomEnum] public static StaticHoverTip Rekindle;
+    [CustomEnum] public static StaticHoverTip Held;
 }

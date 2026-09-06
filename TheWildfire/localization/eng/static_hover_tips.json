@@ -24,5 +24,7 @@
   "THEWILDFIRE_OVERHEAT_COUNTER.title": "Overheat",
   "THEWILDFIRE_OVERHEAT_COUNTER.description": "When you [gold]Overheat[/gold], you will take [blue]{overheat}[/blue] damage.",
   "THEWILDFIRE_ABSORB_COUNTER.title": "Constitution",
-  "THEWILDFIRE_ABSORB_COUNTER.description": "Absorb the first [blue]{absorb}[/blue] HP you lose this turn."
+  "THEWILDFIRE_ABSORB_COUNTER.description": "Absorb the first [blue]{absorb}[/blue] HP you lose this turn.",
+  "THEWILDFIRE-HELD.title": "Held",
+  "THEWILDFIRE-HELD.description": "A card is Held when you end your turn with it in your [gold]Hand[/gold]."
 }

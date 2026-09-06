@@ -1,4 +1,5 @@
-﻿using BaseLib.Utils;
+﻿using BaseLib.Abstracts;
+using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -7,6 +8,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using TheWildfire.TheWildfireCode.Cards;
+using TheWildfire.TheWildfireCode.Cards.Ancient;
 using TheWildfire.TheWildfireCode.Cards.Variables;
 using TheWildfire.TheWildfireCode.Firepower;
 
@@ -14,7 +16,7 @@ namespace TheWildfire.TheWildfireCode.Cards.Basic;
 
 public class BlazingWave() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Basic,
-    TargetType.AnyEnemy)
+    TargetType.AnyEnemy), ITranscendenceCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(10),
     new CalculationBaseVar(4),
@@ -44,5 +46,10 @@ public class BlazingWave() : TheWildfireCard(1,
     protected override void OnUpgrade()
     {
         EnergyCost.UpgradeBy(-1);
+    }
+    
+    public CardModel GetTranscendenceTransformedCard()
+    {
+        return ModelDb.Card<BurningTide>();
     }
 }

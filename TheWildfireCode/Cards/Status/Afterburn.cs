@@ -6,12 +6,16 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Combat;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using TheWildfire.TheWildfireCode.Cards;
 using TheWildfire.TheWildfireCode.Firepower;
@@ -20,7 +24,7 @@ using TheWildfire.TheWildfireCode.Nodes;
 namespace TheWildfire.TheWildfireCode.Cards.Status;
 
 [Pool(typeof(StatusCardPool))]
-public class Afterburn() : TheWildfireCard(-1,
+public class Afterburn() : TheWildfireCard(2,
     CardType.Status, CardRarity.Status,
     TargetType.None)
 {
@@ -57,9 +61,8 @@ public class Afterburn() : TheWildfireCard(-1,
     new CalculationBaseVar(0),
     new CalculationExtraVar(1),
     new CalculatedVar("Ignite").WithMultiplier(Calc)];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Unplayable];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.IgniteStatic),HoverTipFactory.Static(WildfireKeywords.Overheat)];
+        [HoverTipFactory.Static(WildfireKeywords.Held)];
     public override int MaxUpgradeLevel => 0;
     
     private static decimal Calc(CardModel card, Creature? arg2)
@@ -67,16 +70,15 @@ public class Afterburn() : TheWildfireCard(-1,
         return CombatManager.Instance.History.Entries.OfType<CardDrawnEntry>()
             .Count<CardDrawnEntry>((Func<CardDrawnEntry, bool>)(e => e.Actor == card.Owner.Creature && e.Card is Afterburn));
     }
-
-    public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
+    
+    protected override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
     {
-        if (card != this || Owner.Creature.CombatState == null)
-            return;
-        await Cmd.Wait(0.25f);
-        int ignite = (int)((CalculatedVar)DynamicVars["Ignite"]).Calculate(Owner.Creature);
-        await FirepowerController.Ignite(choiceContext, ignite, Owner);
-        await FirepowerController.DealOverheatDamage(choiceContext, Owner);
-        await FirepowerHooks.AfterBurnStatusTrigger(Owner.Creature.CombatState, choiceContext, Owner);
+        NCombatRoom? instance = NCombatRoom.Instance;
+        if (instance != null)
+            instance.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(Owner.Creature, VfxColor.Purple));
+        SfxCmd.Play("event:/sfx/characters/attack_fire");
+        await CreatureCmd.Damage(choiceContext, Owner.Creature, ((CalculatedVar)DynamicVars["Ignite"]).Calculate(Owner.Creature),
+            ValueProp.Unpowered | ValueProp.Move, this, null);
     }
 
     protected override void OnUpgrade()

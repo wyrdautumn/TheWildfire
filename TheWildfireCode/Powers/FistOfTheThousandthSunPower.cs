@@ -22,8 +22,8 @@ public class FistOfTheThousandthSunPower : TheWildfirePower
 
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        List<DamageResult> results = CombatManager.Instance.History.Entries.OfType<CreatureAttackedEntry>().Where(c => c.Actor == Owner)
-            .SelectMany(r => r.DamageResults.Where(r => r.UnblockedDamage > 0)).ToList();
+        List<DamageResult> results = CombatManager.Instance.History.Entries.Where(e => e.HappenedThisTurn(CombatState)).OfType<CreatureAttackedEntry>().Where(c => c.Actor == Owner)
+            .SelectMany(r => r.DamageResults.Where(d => d.UnblockedDamage > 0)).ToList();
         GetInternalData<Data>().creaturesHit.AddRange(results.Select(r => r.Receiver).Distinct().ToList());
         return Task.CompletedTask;
     }
