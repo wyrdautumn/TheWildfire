@@ -1,5 +1,4 @@
-﻿using BaseLib.Abstracts;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -9,24 +8,27 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using TheWildfire.TheWildfireCode.Cards;
-using TheWildfire.TheWildfireCode.Cards.Basic;
 using TheWildfire.TheWildfireCode.Cards.Variables;
 using TheWildfire.TheWildfireCode.Firepower;
 
 namespace TheWildfire.TheWildfireCode.Cards.Ancient;
 
-public class BurningTide() : TheWildfireCard(1,
+public class BurningTide() : TheWildfireCard(0,
     CardType.Attack, CardRarity.Ancient,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(5), new PowerVar<WeakPower>(1), new PowerVar<VulnerablePower>(1),
-        new CalculationBaseVar(4),
-        new ExtraDamageVar(2),
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(10),
+        new CalculationBaseVar(10),
+        new ExtraDamageVar(1),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier(Calc)];
-    
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.SkillFlow];
+    protected override HashSet<CardTag> CanonicalTags
+    {
+        get => new HashSet<CardTag>() { WildfireKeywords.ExertTag };
+    }
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.Firepower),HoverTipFactory.FromPower<WeakPower>(),HoverTipFactory.FromPower<VulnerablePower>()];
-
+        [HoverTipFactory.Static(WildfireKeywords.Firepower)];
+    
     private static decimal Calc(CardModel card, Creature? arg2)
     {
         if (card is not TheWildfireCard)
@@ -34,34 +36,21 @@ public class BurningTide() : TheWildfireCard(1,
         TheWildfireCard thisCard = (TheWildfireCard) card;
         return thisCard.ResolveExert();
     }
-    
-    protected override bool ShouldGlowGoldInternal
-    {
-        get
-        {
-            var ownerPlayerCombatState = this.Owner.PlayerCombatState;
-            return ownerPlayerCombatState != null &&
-                   FirepowerController.Firepower.Get(ownerPlayerCombatState) >=
-                   this.DynamicVars["Exert"].IntValue;
-        }
-    }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CommonActions.CardAttack(this, play, vfx:"vfx/vfx_attack_slash").Execute(choiceContext);
         int exert = ResolveExert();
+        bool fullExert = false;
+        await CommonActions.CardAttack(this, play, vfx:"vfx/vfx_attack_slash").Execute(choiceContext);
         if (exert >= DynamicVars["Exert"].IntValue)
-        {
-            await CommonActions.Apply<WeakPower>(choiceContext, this, play);
-            await CommonActions.Apply<VulnerablePower>(choiceContext, this, play);
-        }
-        await FirepowerController.Exert(choiceContext, exert, Owner);
+            fullExert = true;
+        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert);
     }
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        DynamicVars.ExtraDamage.UpgradeValueBy(1);
     }
 }

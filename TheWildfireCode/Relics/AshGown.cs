@@ -1,25 +1,26 @@
-﻿using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
-using TheWildfire.TheWildfireCode.Cards;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using TheWildfire.TheWildfireCode.Powers;
+using TheWildfire.TheWildfireCode.Relics;
 
 namespace TheWildfire.TheWildfireCode.Relics;
 
-public class AshGown : TheWildfireRelic
+public class AshGown() : TheWildfireRelic
 {
     public override RelicRarity Rarity =>
-        RelicRarity.Rare;
+        RelicRarity.Uncommon;
+    
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<RagingFirePower>(5)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(WildfireKeywords.Scorch),HoverTipFactory.FromPower<HeatExhaustionPower>()];
+        [HoverTipFactory.FromPower<RagingFirePower>()];
 
-    public override async Task AfterScorch(PlayerChoiceContext choiceContext, int amount, Player scorcher)
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        if (scorcher == Owner && Owner.Creature.CombatState != null)
-            await PowerCmd.Apply<HeatExhaustionPower>(choiceContext, Owner.Creature.CombatState.HittableEnemies, 1,
-                Owner.Creature, null);
+        if (player == Owner)
+            await PowerCmd.Apply<RagingFirePower>(choiceContext, Owner.Creature, DynamicVars["RagingFirePower"].BaseValue, Owner.Creature, null);
     }
 }

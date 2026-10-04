@@ -29,12 +29,12 @@ public class TheWildfire : PlaceholderCharacterModel
         ModelDb.Card<StrikeWildfire>(),
         ModelDb.Card<StrikeWildfire>(),
         ModelDb.Card<StrikeWildfire>(),
+        ModelDb.Card<StrikeWildfire>(),
         ModelDb.Card<DefendWildfire>(),
         ModelDb.Card<DefendWildfire>(),
         ModelDb.Card<DefendWildfire>(),
         ModelDb.Card<DefendWildfire>(),
-        ModelDb.Card<DefendWildfire>(),
-        ModelDb.Card<Combustion>(),
+        ModelDb.Card<EternalTorch>(),
         ModelDb.Card<BlazingWave>()
     ];
 

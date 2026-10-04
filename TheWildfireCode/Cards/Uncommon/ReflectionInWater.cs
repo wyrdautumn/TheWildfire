@@ -1,46 +1,34 @@
 ﻿using BaseLib.Utils;
-using MegaCrit.Sts2.Core.CardSelection;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using TheWildfire.TheWildfireCode.Cards;
-using TheWildfire.TheWildfireCode.Cards.Variables;
-using TheWildfire.TheWildfireCode.Firepower;
 using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
 
-public class ReflectionInWater() : TheWildfireCard(1,
-    CardType.Skill, CardRarity.Uncommon,
+public class ReflectionInWater() : TheWildfireCard(2,
+    CardType.Power, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust, CardKeyword.Retain];
-    protected override HashSet<CardTag> CanonicalTags
-    {
-        get => new HashSet<CardTag>() { WildfireKeywords.FlareTag };
-    }
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<StrengthPower>(2), new PowerVar<DexterityPower>(2), new PowerVar<ReflectionInWaterPower>(4)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<RagingFirePower>(),HoverTipFactory.FromPower<ConstitutionPower>()];
+        [HoverTipFactory.FromPower<StrengthPower>(),HoverTipFactory.FromPower<DexterityPower>(),HoverTipFactory.Static(WildfireKeywords.ExertStatic)];
     
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        PowerModel? power = Owner.Creature.GetPower<RagingFirePower>();
-        if (power != null)
-        {
-            decimal constitution = power.Amount;
-            await PowerCmd.Remove(power);
-            await PowerCmd.Apply<ConstitutionPower>(choiceContext, Owner.Creature, constitution, Owner.Creature, this);
-        }
+        await CommonActions.ApplySelf<StrengthPower>(choiceContext, this);
+        await CommonActions.ApplySelf<DexterityPower>(choiceContext, this);
+        await CommonActions.ApplySelf<ReflectionInWaterPower>(choiceContext, this);
     }
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        DynamicVars.Strength.UpgradeValueBy(1);
+        DynamicVars.Dexterity.UpgradeValueBy(1);
     }
 }

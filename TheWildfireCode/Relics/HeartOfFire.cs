@@ -24,7 +24,7 @@ public class HeartOfFire() : TheWildfireRelic
 
     public override async Task AfterEnergyReset(Player player)
     {
-        await FirepowerController.Ignite(new ThrowingPlayerChoiceContext(), DynamicVars["Ignite"].IntValue, Owner);
+        await FirepowerController.Ignite(new BlockingPlayerChoiceContext(), DynamicVars["Ignite"].IntValue, Owner);
     }
     
     public override RelicModel? GetUpgradeReplacement()

@@ -18,7 +18,7 @@ public class HeartOfSorcery() : TheWildfireRelic
     public override RelicRarity Rarity =>
         RelicRarity.Starter;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Ignite",3), new PowerVar<ConstitutionPower>(4)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Ignite",3), new PowerVar<ConstitutionPower>(6)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Firepower),HoverTipFactory.Static(WildfireKeywords.IgniteStatic),HoverTipFactory.FromPower<ConstitutionPower>()];
 
@@ -33,6 +33,6 @@ public class HeartOfSorcery() : TheWildfireRelic
 
     public override async Task AfterEnergyReset(Player player)
     {
-        await FirepowerController.Ignite(new ThrowingPlayerChoiceContext(), DynamicVars["Ignite"].IntValue, Owner);
+        await FirepowerController.Ignite(new BlockingPlayerChoiceContext(), DynamicVars["Ignite"].IntValue, Owner);
     }
 }

@@ -1,70 +1,58 @@
-﻿using BaseLib.Patches.Localization;
+﻿using BaseLib.Utils;
+using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.ValueProps;
 using TheWildfire.TheWildfireCode.Cards;
-using TheWildfire.TheWildfireCode.Cards.Variables;
-using TheWildfire.TheWildfireCode.Firepower;
+using TheWildfire.TheWildfireCode.Cards.Status;
 
 namespace TheWildfire.TheWildfireCode.Cards.Rare;
 
-public class SunderedChain() : TheWildfireCard(0,
+public class SunderedChain() : TheWildfireCard(1,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new FlareVar(6)];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new CalculationBaseVar(0),
+        new CalculationExtraVar(1),
+        new CalculatedBlockVar(ValueProp.Move).WithMultiplier(Calc)];
+    public override bool GainsBlock => true;
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<WeakPower>(),HoverTipFactory.FromPower<VulnerablePower>(),HoverTipFactory.FromPower<FrailPower>()];
+        [HoverTipFactory.Static(WildfireKeywords.AfterburnStatic),HoverTipFactory.FromCard<Afterburn>(),HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override HashSet<CardTag> CanonicalTags
     {
-        get => new HashSet<CardTag>() { WildfireKeywords.FlareTag };
+        get => new HashSet<CardTag>() { WildfireKeywords.ShowAfterburn };
     }
-
-    protected override bool IsPlayable
-    {
-        get
-        {
-            var ownerPlayerCombatState = this.Owner.PlayerCombatState;
-            return ownerPlayerCombatState != null &&
-                   FirepowerController.Firepower.Get(ownerPlayerCombatState) >=
-                   this.DynamicVars["Flare"].IntValue;
-        }
-    }
-
-    protected override bool ShouldGlowGoldInternal => IsPlayable;
     
+    private static decimal Calc(CardModel card, Creature? arg2)
+    {
+        if (card.Owner.PlayerCombatState == null)
+            return 0;
+        return Afterburn.AfterburnCount.Get(card.Owner.PlayerCombatState);
+    }
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
+        await CommonActions.CardBlock(this, play);
+        var hand = CardPile.Get(PileType.Hand, Owner);
         if (Owner.PlayerCombatState == null)
             return;
-        PowerModel? weak = Owner.Creature.GetPower<WeakPower>();
-        PowerModel? vulnerable = Owner.Creature.GetPower<VulnerablePower>();
-        PowerModel? frail = Owner.Creature.GetPower<FrailPower>();
-        if (weak != null)
-            await PowerCmd.Remove(weak);
-        if (vulnerable != null)
-            await PowerCmd.Remove(vulnerable);
-        if (frail != null)
-            await PowerCmd.Remove(frail);
-        List<CardModel> list = Owner.PlayerCombatState.AllCards.Where(c =>
-            c.Type == CardType.Status && c.Pile != null && c.Pile.Type != PileType.Exhaust).ToList();
-        foreach (CardModel status in list)
+        foreach (CardModel card in Owner.PlayerCombatState.AllCards.Where(c => c.Type == CardType.Status).ToList())
         {
-            await CardCmd.Exhaust(choiceContext, status);
+            await CardCmd.Exhaust(choiceContext, card);
         }
-        await FirepowerController.Flare(choiceContext, DynamicVars["Flare"].IntValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        
+        RemoveKeyword(CardKeyword.Exhaust);
     }
 }

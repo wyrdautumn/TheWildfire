@@ -16,15 +16,14 @@ public class ArchitectOfFlame() : TheWildfireCard(1,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-    new CalculationBaseVar(0),
-    new CalculationExtraVar(1),
-    new CalculatedBlockVar(ValueProp.Move).WithMultiplier(Calc)];
+        new CalculationBaseVar(0),
+        new CalculationExtraVar(1),
+        new CalculatedBlockVar(ValueProp.Move).WithMultiplier(Calc)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Firepower)];
+    
     public override bool GainsBlock => true;
-    
-    
     private static decimal Calc(CardModel card, Creature? arg2)
     {
         if (card.Owner.PlayerCombatState == null)

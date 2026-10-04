@@ -16,11 +16,15 @@ public class PyricResilience() : TheWildfireCard(1,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(5),
-    new CalculationBaseVar(0),
-    new CalculationExtraVar(3),
-    new CalculatedBlockVar(ValueProp.Move).WithMultiplier(Calc)];
-    public override bool GainsBlock => true;
+        new CalculationBaseVar(0),
+        new CalculationExtraVar(1),
+        new CalculatedBlockVar(ValueProp.Move).WithMultiplier(Calc)];
     
+    protected override HashSet<CardTag> CanonicalTags
+    {
+        get => new HashSet<CardTag>() { WildfireKeywords.ExertTag };
+    }
+    public override bool GainsBlock => true;
     private static decimal Calc(CardModel card, Creature? arg2)
     {
         if (card is not TheWildfireCard)
@@ -34,12 +38,17 @@ public class PyricResilience() : TheWildfireCard(1,
         CardPlay play)
     {
         int exert = ResolveExert();
+        bool fullExert = false;
         await CommonActions.CardBlock(this, play);
-        await FirepowerController.Exert(choiceContext, exert, Owner);
+        await CommonActions.CardBlock(this, play);
+        await CommonActions.CardBlock(this, play);
+        if (exert >= DynamicVars["Exert"].IntValue)
+            fullExert = true;
+        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.CalculationExtra.UpgradeValueBy(1);
+        DynamicVars["Exert"].UpgradeValueBy(2);
     }
 }

@@ -1,32 +1,23 @@
-﻿using BaseLib.Extensions;
-using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Creatures;
+﻿using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Rooms;
-using MegaCrit.Sts2.Core.ValueProps;
 using TheWildfire.TheWildfireCode.Cards;
-using TheWildfire.TheWildfireCode.Powers;
+using TheWildfire.TheWildfireCode.Relics;
 
 namespace TheWildfire.TheWildfireCode.Relics;
 
-public class ElementalInfuser : TheWildfireRelic
+public class ElementalInfuser() : TheWildfireRelic
 {
     public override RelicRarity Rarity =>
-        RelicRarity.Rare;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<ConstitutionPower>(3)];
+        RelicRarity.Uncommon;
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<ConstitutionPower>()];
+        [HoverTipFactory.Static(WildfireKeywords.FullExert)];
 
-    public override async Task AfterRoomEntered(AbstractRoom room)
+    public override async Task AfterExert(PlayerChoiceContext choiceContext, int amount, Player exerter, bool fullExert)
     {
-        if (!(room is CombatRoom))
-            return;
-        Flash();
-        await PowerCmd.Apply<ConstitutionPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, DynamicVars["ConstitutionPower"].BaseValue, Owner.Creature,
-            null);
+        if (exerter == Owner && fullExert)
+            await CardPileCmd.Draw(choiceContext, Owner);
     }
 }

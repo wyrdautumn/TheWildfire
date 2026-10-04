@@ -1,8 +1,8 @@
 {
-  "THEWILDFIRE-SCORCH.description": "ALL enemies lose HP equal to your [gold]Firepower[/gold]. Then you [gold]Overheat[/gold].",
-  "THEWILDFIRE-SCORCH.title": "Scorch",
-  "THEWILDFIRE-AFTERBURN.description": "When you play this card, shuffle an [gold]Afterburn[/gold] into your [gold]Draw Pile[/gold].",
-  "THEWILDFIRE-AFTERBURN.title": "Afterburn",
-  "THEWILDFIRE-DISCIPLINE.description": "This card's power is reduced by your [gold]Firepower[/gold].",
-  "THEWILDFIRE-DISCIPLINE.title": "Discipline"
+  "THEWILDFIRE-ATTACKFLOW.description": "If the last card played this turn was an Attack, gain {energyPrefix:energyIcons(1)} and draw a card. Attack Flow can be triggered once per turn.",
+  "THEWILDFIRE-ATTACKFLOW.title": "Attack Flow",
+  "THEWILDFIRE-SKILLFLOW.description": "If the last card played this turn was a Skill, gain {energyPrefix:energyIcons(1)} and draw a card. Skill Flow can be triggered once per turn.",
+  "THEWILDFIRE-SKILLFLOW.title": "Skill Flow",
+  "THEWILDFIRE-POWERFLOW.description": "If the last card played this turn was a Power, gain {energyPrefix:energyIcons(1)} and draw a card. Power Flow can be triggered once per turn.",
+  "THEWILDFIRE-POWERFLOW.title": "Power Flow"
 }

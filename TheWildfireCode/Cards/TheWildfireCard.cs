@@ -1,13 +1,16 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Context;
 using TheWildfire.TheWildfireCode.Character;
 using TheWildfire.TheWildfireCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using TheWildfire.TheWildfireCode.Cards.Status;
 using TheWildfire.TheWildfireCode.Firepower;
+using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards;
 
@@ -34,24 +37,29 @@ public abstract class TheWildfireCard(int cost, CardType type, CardRarity rarity
             return 0;
         int fire = FirepowerController.Firepower.Get(Owner.PlayerCombatState);
         int exert = DynamicVars["Exert"].IntValue;
-        if (fire > exert)
+        if (Owner.HasPower<OverdrivePower>() || fire > exert)
         {
             return exert;
         }
         return fire;
     }
 
+    public int ResolveExertAll()
+    {
+        if (Owner.PlayerCombatState == null)
+            return 0;
+        int fire = FirepowerController.Firepower.Get(Owner.PlayerCombatState);
+        return fire;
+    }
+    
     public virtual Task AfterIgnite(PlayerChoiceContext choiceContext, int amount, Player igniter) => Task.CompletedTask;
 
     public virtual Task AfterScorch(PlayerChoiceContext choiceContext, int amount, Player scorcher) => Task.CompletedTask;
 
-    public virtual Task AfterExert(PlayerChoiceContext choiceContext, int amount, Player exerter)  => Task.CompletedTask;
-
-    public virtual Task AfterFlare(PlayerChoiceContext choiceContext, int amount, Player flarer)  => Task.CompletedTask;
-
-    public virtual Task AfterburnPlayed(PlayerChoiceContext choiceContext, Player afterburner)  => Task.CompletedTask;
-
+    public virtual Task AfterExert(PlayerChoiceContext choiceContext, int amount, Player exerter, bool fullExert)  => Task.CompletedTask;
+    
     public virtual Task AfterBurnStatusTrigger(PlayerChoiceContext choiceContext, Player burnee)  => Task.CompletedTask;
     public virtual Task AfterOverheatDamage(PlayerChoiceContext choiceContext, int damage, int damageMitigated,
         Player overheater) => Task.CompletedTask;
+    public virtual Task FlowAchieved(PlayerChoiceContext choiceContext, Player achiever, CardType type) => Task.CompletedTask;
 }

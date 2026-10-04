@@ -6,17 +6,18 @@ namespace TheWildfire.TheWildfireCode.Cards;
 
 public class WildfireKeywords
 {
-    [CustomEnum] public static CardKeyword Scorch;
-    [CustomEnum, KeywordProperties(AutoKeywordPosition.After)] public static CardKeyword Afterburn;
-    [CustomEnum, KeywordProperties(AutoKeywordPosition.Before)] public static CardKeyword Discipline;
-    [CustomEnum] public static StaticHoverTip Firepower;
-    [CustomEnum] public static StaticHoverTip Ignite;
     [CustomEnum] public static StaticHoverTip IgniteStatic;
-    [CustomEnum] public static StaticHoverTip Exert;
+    [CustomEnum] public static StaticHoverTip Firepower;
+    [CustomEnum] public static StaticHoverTip Scorch;
+    [CustomEnum] public static StaticHoverTip ExertAll;
+    [CustomEnum] public static StaticHoverTip FullExert;
     [CustomEnum] public static StaticHoverTip ExertStatic;
-    [CustomEnum] public static StaticHoverTip FlareStatic;
-    [CustomEnum] public static CardTag FlareTag;
-    [CustomEnum] public static StaticHoverTip Overheat;
     [CustomEnum] public static StaticHoverTip Rekindle;
-    [CustomEnum] public static StaticHoverTip Held;
+    [CustomEnum] public static StaticHoverTip AfterburnStatic;
+    [CustomEnum] public static StaticHoverTip FlowStatic;
+    [CustomEnum] public static CardTag ExertTag;
+    [CustomEnum] public static CardTag ShowAfterburn;
+    [CustomEnum] public static CardKeyword AttackFlow;
+    [CustomEnum] public static CardKeyword SkillFlow;
+    [CustomEnum] public static CardKeyword PowerFlow;
 }

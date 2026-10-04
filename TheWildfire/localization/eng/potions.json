@@ -1,8 +1,8 @@
 ﻿{
   "THEWILDFIRE-BURNING_ELIXIR.description": "[gold]Ignite[/gold] [blue]{Ignite}[/blue].",
   "THEWILDFIRE-BURNING_ELIXIR.title": "Burning Elixir",
-  "THEWILDFIRE-FIREBREATH_POTION.description": "Gain [blue]2[/blue] [gold]Constitution[/gold].",
-  "THEWILDFIRE-FIREBREATH_POTION.title": "Warming Potion",
+  "THEWILDFIRE-FLOW_POTION.description": "Achieve a random [gold]Flow[/gold] you haven't achieved this turn.",
+  "THEWILDFIRE-FLOW_POTION.title": "Flow Potion",
   "THEWILDFIRE-SOOTHING_TONIC.description": "Gain [blue]{RegenPower}[/blue] [gold]Regen[/gold].",
   "THEWILDFIRE-SOOTHING_TONIC.title": "Soothing Tonic"
 }

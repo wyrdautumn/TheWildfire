@@ -4,6 +4,7 @@ using BaseLib.Utils;
 using TheWildfire.TheWildfireCode.Character;
 using TheWildfire.TheWildfireCode.Extensions;
 using Godot;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using TheWildfire.TheWildfireCode.Firepower;
@@ -22,10 +23,9 @@ public abstract class TheWildfireRelic : CustomRelicModel, IFirepowerListener
     
     public virtual Task AfterIgnite(PlayerChoiceContext choiceContext, int amount, Player igniter) => Task.CompletedTask;
     public virtual Task AfterScorch(PlayerChoiceContext choiceContext, int amount, Player scorcher) => Task.CompletedTask;
-    public virtual Task AfterExert(PlayerChoiceContext choiceContext, int amount, Player exerter)  => Task.CompletedTask;
-    public virtual Task AfterFlare(PlayerChoiceContext choiceContext, int amount, Player flarer)  => Task.CompletedTask;
-    public virtual Task AfterburnPlayed(PlayerChoiceContext choiceContext, Player afterburner)  => Task.CompletedTask;
+    public virtual Task AfterExert(PlayerChoiceContext choiceContext, int amount, Player exerter, bool fullExert)  => Task.CompletedTask;
     public virtual Task AfterBurnStatusTrigger(PlayerChoiceContext choiceContext, Player burnee)  => Task.CompletedTask;
     public virtual Task AfterOverheatDamage(PlayerChoiceContext choiceContext, int damage, int damageMitigated,
         Player overheater) => Task.CompletedTask;
+    public virtual Task FlowAchieved(PlayerChoiceContext choiceContext, Player achiever, CardType type) => Task.CompletedTask;
 }

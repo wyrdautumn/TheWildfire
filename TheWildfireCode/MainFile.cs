@@ -25,7 +25,6 @@ public partial class MainFile : Node
         var assembly = Assembly.GetExecutingAssembly();
         Godot.Bridge.ScriptManagerBridge.LookupScriptsInAssembly(assembly);
 
-        HealthBarForecastRegistry.Register<FirepowerController>(ModId);
-        HealthBarForecastRegistry.Register<FirepowerConstitutionHealthBarSegmentSingleton>(ModId);
+        HealthBarForecastRegistry.Register<FirepowerHealthForecast>(ModId);
     }
 }

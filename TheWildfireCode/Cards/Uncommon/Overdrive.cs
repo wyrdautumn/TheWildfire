@@ -15,13 +15,13 @@ public class Overdrive() : TheWildfireCard(2,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(14, ValueProp.Move), new PowerVar<OverdrivePower>(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.FlareStatic)];
+        [HoverTipFactory.Static(WildfireKeywords.FullExert),HoverTipFactory.Static(WildfireKeywords.ExertStatic)];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CommonActions.CardAttack(this, play, vfx:"vfx/vfx_attack_slash").Execute(choiceContext);
+        await CommonActions.CardAttack(this, play,vfx:"vfx/vfx_attack_slash").Execute(choiceContext);
         await CommonActions.ApplySelf<OverdrivePower>(choiceContext, this);
     }
 

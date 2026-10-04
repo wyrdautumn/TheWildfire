@@ -13,8 +13,6 @@ namespace TheWildfire.TheWildfireCode.Nodes;
 
 public partial class WildfireHpTrackers : Control
 {
-	private Control? _constitution;
-	private Label? _constitutionLabel;
 	private Control? _overheat;
 	private Label? _overheatLabel;
 
@@ -22,18 +20,14 @@ public partial class WildfireHpTrackers : Control
 	private Creature? _creature;
 
 	private int _overheatCount;
-	private int _absorbCount;
 	
 	private bool _wasMouseOverOverheatCounter;
-	private bool _wasMouseOverConstitutionCounter;
 	private bool _tooltipShown;
 
 	public override void _Ready()
 	{
 		SetMouseFilterRecursive(this, MouseFilterEnum.Ignore);
-
-		_constitution = GetNodeOrNull<Control>("ConstitutionContainer");
-		_constitutionLabel = GetNodeOrNull<Label>("ConstitutionContainer/ConstitutionLabel");
+		
 		_overheat = GetNodeOrNull<Control>("OverheatContainer");
 		_overheatLabel = GetNodeOrNull<Label>("OverheatContainer/OverheatLabel");
 
@@ -46,7 +40,6 @@ public partial class WildfireHpTrackers : Control
 		}
 
 		this.Visible = true;
-		_constitution.Visible = false;
 		if (_creature != null && _creature.Player != null && _creature.Player.Character is Character.TheWildfire)
 		{
 			_overheat.Visible = true;
@@ -60,8 +53,6 @@ public partial class WildfireHpTrackers : Control
 		GD.Print("hp bar counters initialized");
 		if (_creature != null)
 			GD.Print("creature found");
-		if (_constitution != null)
-			GD.Print("constitution counter found");
 		if (_overheat != null)
 			GD.Print("overheat counter found");
 	}
@@ -70,11 +61,6 @@ public partial class WildfireHpTrackers : Control
 	{
 		if (_creature == null || _creature.Player == null)
 			return;
-		if (_constitution != null && _creature.HasPower<ConstitutionPower>() && _constitution.Visible == false)
-		{
-			_constitution.Visible = true;
-			GD.Print("constitution visible");
-		}
 
 		if (_overheat != null && _overheat.Visible == false && _creature.Player != null &&
 			_creature.Player.PlayerCombatState != null &&
@@ -83,21 +69,7 @@ public partial class WildfireHpTrackers : Control
 			_overheat.Visible = true;
 			GD.Print("overheat visible");
 		}
-
-		if (_constitution != null && _constitution.Visible && _constitutionLabel != null)
-		{
-			ConstitutionPower? constitution = _creature.GetPower<ConstitutionPower>();
-			if (constitution != null)
-			{
-				_absorbCount = constitution.GetAbsorbRemaining();
-				_constitutionLabel.Text = _absorbCount.ToString();
-			}
-			else
-			{
-				_constitutionLabel.Text = "0";
-			}
-		}
-
+		
 		if (_overheat != null && _overheatLabel != null && _overheat.Visible && _creature.Player != null)
 		{
 			_overheatCount = FirepowerController.CalculateOverheatDamage(_creature.Player);
@@ -109,21 +81,16 @@ public partial class WildfireHpTrackers : Control
 
 	public void AdjustBarPositions()
 	{
-		Control? constitution = GetNodeOrNull<Control>("%ConstitutionContainer");
 		Control? overheat = GetNodeOrNull<Control>("%OverheatContainer");
 		Control? block;
 		if (_healthBar != null)
 			block = _healthBar.GetNodeOrNull<Control>("%BlockContainer");
 		else
 			block = null;
-		if (constitution != null && overheat != null && block != null && _healthBar != null)
+		if (overheat != null && block != null && _healthBar != null)
 		{
-			constitution.Size = block.Size;
 			overheat.Size = block.Size;
-			float adjust1 = constitution.Size.X * 0.70f;
 			float adjust2 = overheat.Size.X * 0.8f;
-			constitution.GlobalPosition =
-				new Vector2(block.GlobalPosition.X - adjust1, block.GlobalPosition.Y);
 			overheat.GlobalPosition =
 				new Vector2(block.GlobalPosition.X + _healthBar.HpBarContainer.Size.X - adjust2,
 					block.GlobalPosition.Y);
@@ -133,18 +100,14 @@ public partial class WildfireHpTrackers : Control
 	private void UpdateCounterHover()
 	{
 		bool isMouseOverOverheat = IsMouseOverOverheatCounter();
-		bool isMouseOverConstitution = IsMouseOverConstitutionCounter();
 
-		if (isMouseOverOverheat == _wasMouseOverOverheatCounter && isMouseOverConstitution == _wasMouseOverConstitutionCounter)
+		if (isMouseOverOverheat == _wasMouseOverOverheatCounter)
 			return;
 
 		_wasMouseOverOverheatCounter = isMouseOverOverheat;
-		_wasMouseOverConstitutionCounter = isMouseOverConstitution;
 		
 		if (isMouseOverOverheat)
 			ShowOverheatTooltip();
-		else if (isMouseOverConstitution)
-			ShowConstitutionTooltip();
 		else
 			HideTooltips();
 	}
@@ -157,16 +120,6 @@ public partial class WildfireHpTrackers : Control
 			return false;
 		
 		return _overheat.GetGlobalRect().Grow(4f).HasPoint(mouse);
-	}
-	
-	private bool IsMouseOverConstitutionCounter()
-	{
-		Vector2 mouse = GetGlobalMousePosition();
-		
-		if (_constitution == null || !_constitution.Visible || !GodotObject.IsInstanceValid(_constitution))
-			return false;
-
-		return _constitution.GetGlobalRect().Grow(4f).HasPoint(mouse);
 	}
 	
 	private static void SetMouseFilterRecursive(Node node, MouseFilterEnum mouseFilter)
@@ -201,29 +154,6 @@ public partial class WildfireHpTrackers : Control
 			?.SetGlobalPosition(_overheat.GlobalPosition + new Vector2(0, _overheat.Size.Y));
 	}
 	
-	private void ShowConstitutionTooltip()
-	{
-		if (_creature == null || _constitution == null)
-			return;
-
-		if (!_constitution.Visible)
-			return;
-
-		if (_tooltipShown)
-			return;
-
-		_tooltipShown = true;
-
-		// Important:
-		// Clean stale entry for this owner before showing.
-		NHoverTipSet.Remove(this);
-
-		HoverTip hoverTip = BuildConstitutionHoverTip();
-
-		NHoverTipSet.CreateAndShow(this, hoverTip)
-			?.SetGlobalPosition(_constitution.GlobalPosition + new Vector2(0, _constitution.Size.Y));
-	}
-	
 	private void HideTooltips()
 	{
 		_tooltipShown = false;
@@ -242,21 +172,6 @@ public partial class WildfireHpTrackers : Control
 			"THEWILDFIRE_OVERHEAT_COUNTER.description");
 		
 		description.Add("overheat", _overheatCount.ToString());
-
-		return new HoverTip(title, description);
-	}
-	
-	private HoverTip BuildConstitutionHoverTip()
-	{
-		LocString title = new(
-			"static_hover_tips",
-			"THEWILDFIRE_ABSORB_COUNTER.title");
-
-		LocString description = new(
-			"static_hover_tips",
-			"THEWILDFIRE_ABSORB_COUNTER.description");
-		
-		description.Add("absorb", _absorbCount.ToString());
 
 		return new HoverTip(title, description);
 	}

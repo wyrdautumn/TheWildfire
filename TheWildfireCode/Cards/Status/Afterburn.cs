@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -24,10 +25,11 @@ using TheWildfire.TheWildfireCode.Nodes;
 namespace TheWildfire.TheWildfireCode.Cards.Status;
 
 [Pool(typeof(StatusCardPool))]
-public class Afterburn() : TheWildfireCard(2,
+public class Afterburn() : TheWildfireCard(1,
     CardType.Status, CardRarity.Status,
     TargetType.None)
 {
+    public static readonly SpireField<PlayerCombatState, int> AfterburnCount = new(() => 0);
     public static readonly AddedNode<NCard, AfterburnCounter> FireCounterNode =
         new((card) =>
         {
@@ -51,7 +53,9 @@ public class Afterburn() : TheWildfireCard(2,
 
             counter.AddChild(visual);
             
-            var cardContainer = card.GetChild(0)!;
+            var cardContainer = card.GetChild(0);
+            if (cardContainer == null)
+                return counter;
             cardContainer.AddChild(counter);
             
             return counter;
@@ -61,14 +65,23 @@ public class Afterburn() : TheWildfireCard(2,
     new CalculationBaseVar(0),
     new CalculationExtraVar(1),
     new CalculatedVar("Ignite").WithMultiplier(Calc)];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.Held)];
+        [];
+    protected override HashSet<CardTag> CanonicalTags
+    {
+        get => new HashSet<CardTag>() { WildfireKeywords.ShowAfterburn };
+    }
+    
+    public override bool HasTurnEndInHandEffect => true;
+    
     public override int MaxUpgradeLevel => 0;
     
     private static decimal Calc(CardModel card, Creature? arg2)
     {
-        return CombatManager.Instance.History.Entries.OfType<CardDrawnEntry>()
-            .Count<CardDrawnEntry>((Func<CardDrawnEntry, bool>)(e => e.Actor == card.Owner.Creature && e.Card is Afterburn));
+        if (card.Owner.PlayerCombatState == null)
+            return 0;
+        return AfterburnCount.Get(card.Owner.PlayerCombatState);
     }
     
     protected override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
@@ -81,8 +94,13 @@ public class Afterburn() : TheWildfireCard(2,
             ValueProp.Unpowered | ValueProp.Move, this, null);
     }
 
-    protected override void OnUpgrade()
+    public static async Task CreateAfterburn(int afterburn, Player owner, ICombatState combatState)
     {
-
+        if (owner.PlayerCombatState == null)
+            return;
+        int val = AfterburnCount.Get(owner.PlayerCombatState);
+        AfterburnCount.Set(owner.PlayerCombatState, val + afterburn);
+        CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(combatState.CreateCard<Afterburn>(owner), PileType.Discard, owner));
+        await Cmd.Wait(0.5f);
     }
 }

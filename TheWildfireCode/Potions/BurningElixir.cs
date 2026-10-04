@@ -11,10 +11,10 @@ namespace TheWildfire.TheWildfireCode.Potions;
 
 public class BurningElixir : TheWildfirePotion
 {
-    public override PotionRarity Rarity => PotionRarity.Common;
+    public override PotionRarity Rarity => PotionRarity.Uncommon;
     public override PotionUsage Usage => PotionUsage.CombatOnly;
     public override TargetType TargetType => TargetType.AnyPlayer;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(6)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(5)];
 
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {

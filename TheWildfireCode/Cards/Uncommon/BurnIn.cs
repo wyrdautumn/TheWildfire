@@ -1,9 +1,7 @@
-﻿using BaseLib.Cards.Variables;
-using BaseLib.Utils;
+﻿using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -18,33 +16,59 @@ namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
 
 public class BurnIn() : TheWildfireCard(1,
     CardType.Skill, CardRarity.Uncommon,
-    TargetType.Self)
+    TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Unblockable | ValueProp.Unpowered), new ExertVar(6)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.Overheat),HoverTipFactory.FromPower<RagingFirePower>(),HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
-
+        [HoverTipFactory.Static(WildfireKeywords.FullExert), HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
+    protected override HashSet<CardTag> CanonicalTags
+    {
+        get => new HashSet<CardTag>() { WildfireKeywords.ExertTag };
+    }
+    
+    protected override bool ShouldGlowGoldInternal
+    {
+        get
+        {
+            var ownerPlayerCombatState = this.Owner.PlayerCombatState;
+            if (ownerPlayerCombatState != null &&
+                FirepowerController.Firepower.Get(ownerPlayerCombatState) >=
+                this.DynamicVars["Exert"].IntValue)
+                return true;
+            if (Owner.HasPower<OverdrivePower>())
+                return true;
+            return false;
+        }
+    }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        int overheat = FirepowerController.CalculateOverheatDamageWithoutMitigation(Owner);
-        await FirepowerController.DealOverheatDamage(choiceContext, Owner);
-        if (overheat > 0)
+        if (play.Target == null)
+            return;
+        int exert = ResolveExert();
+        bool fullExert = false;
+        BurnInPower? burnInPower = await PowerCmd.Apply<BurnInPower>(choiceContext, play.Target, exert, Owner.Creature, this);
+        if (burnInPower != null)
         {
-            await CommonActions.ApplySelf<RagingFirePower>(choiceContext, this, overheat);
-            var prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 0, overheat);
-            var selected = await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this);
-            foreach (CardModel card in selected)
-            {
-                await CardCmd.Exhaust(choiceContext, card);
-            }
+            burnInPower.SetDamage(DynamicVars.Damage.PreviewValue);
+            burnInPower.InvokeSecondAmountChanged();
         }
+        if (exert >= DynamicVars["Exert"].IntValue)
+        {
+            CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1);
+            CardModel? card = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this)).FirstOrDefault();
+            if (card == null)
+                return;
+            await CardCmd.Exhaust(choiceContext, card);
+            fullExert = true;
+        }
+        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert);
     }
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        DynamicVars.Damage.UpgradeValueBy(2);
     }
 }

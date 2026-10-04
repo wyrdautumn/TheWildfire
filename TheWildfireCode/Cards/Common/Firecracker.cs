@@ -1,46 +1,42 @@
-﻿using BaseLib.Extensions;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.Models.Powers;
 using TheWildfire.TheWildfireCode.Cards;
+using TheWildfire.TheWildfireCode.Cards.Status;
 using TheWildfire.TheWildfireCode.Cards.Variables;
-using TheWildfire.TheWildfireCode.Firepower;
 
 namespace TheWildfire.TheWildfireCode.Cards.Common;
 
 public class Firecracker() : TheWildfireCard(0,
-    CardType.Attack, CardRarity.Common,
+    CardType.Skill, CardRarity.Common,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7, ValueProp.Move),
-        new CalculationBaseVar(0),
-        new CalculationExtraVar(4),
-        new CalculatedVar("Ignite").WithMultiplier(Calc).WithTooltip("THEWILDFIRE-IGNITE_STATIC")];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<WeakPower>(1), new PowerVar<VulnerablePower>(1), new AfterburnVar(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    
-    
-    private static decimal Calc(CardModel card, Creature? arg2)
+    protected override HashSet<CardTag> CanonicalTags
     {
-        if (card.CombatState == null)
-            return 0;
-        return card.CombatState.HittableEnemies.Count;
+        get => new HashSet<CardTag>() { WildfireKeywords.ShowAfterburn };
     }
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromPower<WeakPower>(), HoverTipFactory.FromPower<VulnerablePower>(), HoverTipFactory.FromCard<Afterburn>()];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_slash").Execute(choiceContext);
-        await FirepowerController.Ignite(choiceContext, (int) ((CalculatedVar) DynamicVars["Ignite"]).Calculate(null), Owner);
+        if (CombatState == null)
+            return;
+        await CommonActions.Apply<WeakPower>(choiceContext, CombatState.HittableEnemies, this);
+        await CommonActions.Apply<VulnerablePower>(choiceContext, CombatState.HittableEnemies, this);
+        await Afterburn.CreateAfterburn(DynamicVars["Afterburn"].IntValue, Owner, CombatState);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2);
-        DynamicVars.CalculationExtra.UpgradeValueBy(1);
+        DynamicVars.Weak.UpgradeValueBy(1);
+        DynamicVars.Vulnerable.UpgradeValueBy(1);
     }
 }

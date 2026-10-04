@@ -12,7 +12,7 @@ public class FirmStance() : TheWildfireCard(1,
     CardType.Power, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<ConstitutionPower>(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<ConstitutionPower>(4)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<ConstitutionPower>()];
 
@@ -25,6 +25,6 @@ public class FirmStance() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["ConstitutionPower"].UpgradeValueBy(1);
+        DynamicVars["ConstitutionPower"].UpgradeValueBy(2);
     }
 }

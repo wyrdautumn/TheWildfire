@@ -1,6 +1,7 @@
 ﻿using Godot;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Nodes.Cards;
+using TheWildfire.TheWildfireCode.Cards;
 using TheWildfire.TheWildfireCode.Cards.Status;
 
 namespace TheWildfire.TheWildfireCode.Nodes;
@@ -30,24 +31,24 @@ public partial class AfterburnCounter : Control
     
     public override void _Process(double delta)
     {
-        if (_card == null || _card.Model is not Afterburn || _label == null)
+        if (_card == null || _card.Model == null || !_card.Model.Tags.Contains(WildfireKeywords.ShowAfterburn) || _label == null)
         {
             this.Visible = false;
             return;
         }
 
-        if (_card.Model is Afterburn)
+        if (_card.Model.Tags.Contains(WildfireKeywords.ShowAfterburn))
         {
             this.Visible = _card.Visible;
         }
 
-        if (!_card.Model.IsInCombat)
+        if (!_card.Model.IsInCombat || _card.Model.Owner.PlayerCombatState == null)
         {
             _label.Text = "0";
             return;
         }
         
-        int ignite = (int)((CalculatedVar)_card.Model.DynamicVars["Ignite"]).Calculate(_card.Model.Owner.Creature);
+        int ignite = Afterburn.AfterburnCount.Get(_card.Model.Owner.PlayerCombatState);
         _label.Text = ignite.ToString();
     }
 }

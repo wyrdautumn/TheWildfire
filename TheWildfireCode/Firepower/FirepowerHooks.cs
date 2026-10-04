@@ -1,4 +1,5 @@
 ﻿using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -31,37 +32,13 @@ public class FirepowerHooks
         }
     }
     
-    public static async Task AfterExert(ICombatState combatState, PlayerChoiceContext choiceContext, int amount, Player exerter)
+    public static async Task AfterExert(ICombatState combatState, PlayerChoiceContext choiceContext, int amount, Player exerter, bool fullExert)
     {
         foreach (var model in combatState.IterateHookListeners().ToList())
         {
             if (model is IFirepowerListener listener)
             {
-                await listener.AfterExert(choiceContext, amount, exerter);
-                model.InvokeExecutionFinished();
-            }
-        }
-    }
-
-    public static async Task AfterFlare(ICombatState combatState, PlayerChoiceContext choiceContext, Player flarer, int amount)
-    {
-        foreach (var model in combatState.IterateHookListeners().ToList())
-        {
-            if (model is IFirepowerListener listener)
-            {
-                await listener.AfterFlare(choiceContext, amount, flarer);
-                model.InvokeExecutionFinished();
-            }
-        }
-    }
-    
-    public static async Task AfterburnPlayed(ICombatState combatState, PlayerChoiceContext choiceContext, Player afterburner)
-    {
-        foreach (var model in combatState.IterateHookListeners().ToList())
-        {
-            if (model is IFirepowerListener listener)
-            {
-                await listener.AfterburnPlayed(choiceContext, afterburner);
+                await listener.AfterExert(choiceContext, amount, exerter, fullExert);
                 model.InvokeExecutionFinished();
             }
         }
@@ -87,6 +64,19 @@ public class FirepowerHooks
             if (model is IFirepowerListener listener)
             {
                 await listener.AfterOverheatDamage(choiceContext,  damage,  damageMitigated, overheater);
+                model.InvokeExecutionFinished();
+            }
+        }
+    }
+
+    public static async Task FlowAchieved(ICombatState combatState, PlayerChoiceContext choiceContext, Player achiever,
+        CardType type)
+    {
+        foreach (var model in combatState.IterateHookListeners().ToList())
+        {
+            if (model is IFirepowerListener listener)
+            {
+                await listener.FlowAchieved(choiceContext,  achiever,  type);
                 model.InvokeExecutionFinished();
             }
         }

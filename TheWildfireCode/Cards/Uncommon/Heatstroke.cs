@@ -11,28 +11,38 @@ using TheWildfire.TheWildfireCode.Firepower;
 namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
 
 public class Heatstroke() : TheWildfireCard(1,
-    CardType.Skill, CardRarity.Uncommon,
+    CardType.Attack, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.Scorch];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
+        [HoverTipFactory.Static(WildfireKeywords.Scorch), HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1);
-        CardModel? card = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this)).FirstOrDefault();
-        if (card == null)
-            return;
-        await CardCmd.Exhaust(choiceContext, card);
+        CardSelectorPrefs prefs1 = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, DynamicVars.Cards.IntValue);
+        CardSelectorPrefs prefs2 = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 0, DynamicVars.Cards.IntValue);
+        if (!IsUpgraded)
+        {
+            CardModel? card = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs1, null, this)).FirstOrDefault();
+            if (card == null)
+                return;
+            await CardCmd.Exhaust(choiceContext, card);
+        }
+        else
+        {
+            CardModel? card = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs2, null, this)).FirstOrDefault();
+            if (card == null)
+                return;
+            await CardCmd.Exhaust(choiceContext, card);
+        }
         await FirepowerController.Scorch(choiceContext, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

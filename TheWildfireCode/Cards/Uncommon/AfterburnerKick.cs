@@ -15,19 +15,23 @@ public class AfterburnerKick() : TheWildfireCard(2,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(20, ValueProp.Move), new IgniteVar(6)];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.Afterburn];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(18, ValueProp.Move), new IgniteVar(5), new AfterburnVar(2)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<Afterburn>()];
-
-    
+    protected override HashSet<CardTag> CanonicalTags
+    {
+        get => new HashSet<CardTag>() { WildfireKeywords.ShowAfterburn };
+    }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_slash").Execute(choiceContext);
+        if (CombatState == null)
+            return;
+        await CommonActions.CardAttack(this, play,vfx:"vfx/vfx_heavy_blunt", tmpSfx: "heavy_attack.mp3").Execute(choiceContext);
         await FirepowerController.Ignite(choiceContext, DynamicVars["Ignite"].IntValue, Owner);
+        await Afterburn.CreateAfterburn(DynamicVars["Afterburn"].IntValue, Owner, CombatState);
     }
 
     protected override void OnUpgrade()

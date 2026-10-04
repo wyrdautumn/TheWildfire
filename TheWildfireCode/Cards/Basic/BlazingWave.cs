@@ -16,16 +16,19 @@ namespace TheWildfire.TheWildfireCode.Cards.Basic;
 
 public class BlazingWave() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Basic,
-    TargetType.AnyEnemy), ITranscendenceCard
+    TargetType.AllEnemies), ITranscendenceCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(10),
-    new CalculationBaseVar(4),
-    new ExtraDamageVar(1),
-    new CalculatedDamageVar(ValueProp.Move).WithMultiplier(Calc)];
-    
+        new CalculationBaseVar(4),
+        new ExtraDamageVar(1),
+        new CalculatedDamageVar(ValueProp.Move).WithMultiplier(Calc)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Firepower)];
-
+    protected override HashSet<CardTag> CanonicalTags
+    {
+        get => new HashSet<CardTag>() { WildfireKeywords.ExertTag };
+    }
+    
     private static decimal Calc(CardModel card, Creature? arg2)
     {
         if (card is not TheWildfireCard)
@@ -38,16 +41,19 @@ public class BlazingWave() : TheWildfireCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CommonActions.CardAttack(this, play, vfx:"vfx/vfx_attack_slash").Execute(choiceContext);
         int exert = ResolveExert();
-        await FirepowerController.Exert(choiceContext, exert, Owner);
+        bool fullExert = false;
+        await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_slash").Execute(choiceContext);
+        if (exert >= DynamicVars["Exert"].IntValue)
+            fullExert = true;
+        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert);
     }
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        DynamicVars.CalculationBase.UpgradeValueBy(3);
     }
-    
+
     public CardModel GetTranscendenceTransformedCard()
     {
         return ModelDb.Card<BurningTide>();
