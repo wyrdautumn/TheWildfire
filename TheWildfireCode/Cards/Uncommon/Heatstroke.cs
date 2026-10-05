@@ -11,7 +11,7 @@ using TheWildfire.TheWildfireCode.Firepower;
 namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
 
 public class Heatstroke() : TheWildfireCard(1,
-    CardType.Attack, CardRarity.Uncommon,
+    CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)];

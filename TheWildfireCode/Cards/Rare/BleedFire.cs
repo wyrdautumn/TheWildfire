@@ -1,5 +1,6 @@
 ﻿using BaseLib.Extensions;
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -16,7 +17,6 @@ public class BleedFire() : TheWildfireCard(0,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
-    private bool _shouldExhaust = false;
     private int _currentExhaust = 0;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(6), new PowerVar<StrengthPower>(2), new PowerVar<ConstitutionPower>(2)];
@@ -31,9 +31,11 @@ public class BleedFire() : TheWildfireCard(0,
     protected override CardLocation GetResultLocationForCardPlay()
     {
         CardLocation locationForCardPlay = base.GetResultLocationForCardPlay();
-        if (_shouldExhaust)
+        int exert = ResolveExert();
+        if (exert < DynamicVars["Exert"].IntValue)
+        {
             locationForCardPlay.pileType = PileType.Exhaust;
-        _shouldExhaust = false;
+        }
         return locationForCardPlay;
     }
     
@@ -60,12 +62,10 @@ public class BleedFire() : TheWildfireCard(0,
         bool fullExert;
         if (exert >= DynamicVars["Exert"].IntValue)
         {
-            _shouldExhaust = false;
             fullExert = true;
         }
         else
         {
-            _shouldExhaust = true;
             fullExert = false;
         }
         await FirepowerController.Exert(choiceContext, exert, Owner, fullExert);
