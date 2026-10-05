@@ -24,7 +24,7 @@ public class AllShallEndInFlames() : TheWildfireCard(2,
     CardType.Attack, CardRarity.Rare,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(24, ValueProp.Move), new IgniteVar(24), new CardsVar(5)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(32, ValueProp.Move), new IgniteVar(24), new CardsVar(5)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<Burn>()];

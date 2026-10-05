@@ -5,6 +5,8 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using TheWildfire.TheWildfireCode.Cards;
+using TheWildfire.TheWildfireCode.Cards.Token;
+using TheWildfire.TheWildfireCode.Cards.Variables;
 using TheWildfire.TheWildfireCode.Firepower;
 using TheWildfire.TheWildfireCode.Powers;
 
@@ -15,9 +17,9 @@ public class CrowsMomentum() : TheWildfireCard(1,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<CrowsMomentumPower>(1), new PowerVar<CrowsMomentumUpgradePower>(1),
-        new DynamicVar("Flare", 10)];
+        new ExertVar(10)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.ExertAll), HoverTipFactory.FromCard<CrowsMomentum>(IsUpgraded)];
+        [HoverTipFactory.FromCard<SolarPower>(IsUpgraded)];
     protected override HashSet<CardTag> CanonicalTags
     {
         get => new HashSet<CardTag>() { WildfireKeywords.ExertTag };
@@ -30,7 +32,7 @@ public class CrowsMomentum() : TheWildfireCard(1,
             var ownerPlayerCombatState = this.Owner.PlayerCombatState;
             if (ownerPlayerCombatState != null &&
                 FirepowerController.Firepower.Get(ownerPlayerCombatState) >=
-                this.DynamicVars["Flare"].IntValue)
+                this.DynamicVars["Exert"].IntValue)
                 return true;
             if (Owner.HasPower<OverdrivePower>())
                 return true;
@@ -44,11 +46,12 @@ public class CrowsMomentum() : TheWildfireCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await FirepowerController.ExertAll(choiceContext, Owner, true);
+        int exert = ResolveExert();
         if (IsUpgraded)
             await CommonActions.ApplySelf<CrowsMomentumUpgradePower>(choiceContext, this);
         else
             await CommonActions.ApplySelf<CrowsMomentumPower>(choiceContext, this);
+        await FirepowerController.Exert(choiceContext, exert, Owner, true);
     }
 
     protected override void OnUpgrade()

@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using TheWildfire.TheWildfireCode.Cards;
+using TheWildfire.TheWildfireCode.Cards.Variables;
 using TheWildfire.TheWildfireCode.Firepower;
 using TheWildfire.TheWildfireCode.Powers;
 
@@ -22,9 +23,9 @@ public class LavaLeap() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(9, ValueProp.Move), new DynamicVar("Flare", 8), new PowerVar<VulnerablePower>(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(11, ValueProp.Move), new ExertVar(8), new PowerVar<VulnerablePower>(2)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.ExertAll), HoverTipFactory.FromPower<VulnerablePower>()];
+        [HoverTipFactory.Static(WildfireKeywords.FullExert), HoverTipFactory.FromPower<VulnerablePower>()];
     protected override HashSet<CardTag> CanonicalTags
     {
         get => new HashSet<CardTag>() { WildfireKeywords.ExertTag };
@@ -37,7 +38,7 @@ public class LavaLeap() : TheWildfireCard(1,
             var ownerPlayerCombatState = this.Owner.PlayerCombatState;
             if (ownerPlayerCombatState != null &&
                 FirepowerController.Firepower.Get(ownerPlayerCombatState) >=
-                this.DynamicVars["Flare"].IntValue)
+                this.DynamicVars["Exert"].IntValue)
                 return true;
             if (Owner.HasPower<OverdrivePower>())
                 return true;
@@ -51,7 +52,7 @@ public class LavaLeap() : TheWildfireCard(1,
     {
         if (CombatState == null)
             return;
-        int exert = ResolveExertAll();
+        int exert = ResolveExert();
         bool hasOverdrive = Owner.HasPower<OverdrivePower>();
         bool fullExert = false;
         float scale = 0.8f;
@@ -71,12 +72,12 @@ public class LavaLeap() : TheWildfireCard(1,
             }
             return Task.CompletedTask;
         }).Execute(choiceContext);
-        if (exert >= DynamicVars["Flare"].IntValue || hasOverdrive)
+        if (exert >= DynamicVars["Exert"].IntValue || hasOverdrive)
         {
             await CommonActions.Apply<VulnerablePower>(choiceContext, CombatState.HittableEnemies, this);
             fullExert = true;
         }
-        await FirepowerController.ExertAll(choiceContext, Owner, fullExert);
+        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert);
     }
 
     protected override void OnUpgrade()

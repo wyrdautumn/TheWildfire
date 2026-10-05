@@ -31,6 +31,8 @@ public class FistOfTheThousandthSun() : TheWildfireCard(2,
         if (CombatState == null)
             return;
         var solarPowers = await SolarPower.CreateInHand(Owner, 1, CombatState);
+        if (!IsUpgraded)
+            return;
         foreach (CardModel card in solarPowers)
             CardCmd.Upgrade(card);
     }

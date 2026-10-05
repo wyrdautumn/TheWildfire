@@ -15,6 +15,11 @@ public class Combustion() : TheWildfireCard(1,
     protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(2)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Scorch)];
+    
+    protected override HashSet<CardTag> CanonicalTags
+    {
+        get => new HashSet<CardTag>() { WildfireKeywords.ScorchTag };
+    }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

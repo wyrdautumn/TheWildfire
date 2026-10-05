@@ -16,6 +16,7 @@ public class WildfireKeywords
     [CustomEnum] public static StaticHoverTip AfterburnStatic;
     [CustomEnum] public static StaticHoverTip FlowStatic;
     [CustomEnum] public static CardTag ExertTag;
+    [CustomEnum] public static CardTag ScorchTag;
     [CustomEnum] public static CardTag ShowAfterburn;
     [CustomEnum] public static CardKeyword AttackFlow;
     [CustomEnum] public static CardKeyword SkillFlow;

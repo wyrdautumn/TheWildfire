@@ -53,7 +53,15 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
             
             return counter;
         });
-    
+
+    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource,
+        CardPlay? cardPlay)
+    {
+        if (cardSource != null && cardSource.Tags.Contains(WildfireKeywords.ShowAfterburn) && cardSource.Owner.PlayerCombatState != null && (props.IsPoweredAttack() || cardSource.Type == CardType.Skill))
+            return Afterburn.AfterburnCount.Get(cardSource.Owner.PlayerCombatState);
+        return 0;
+    }
+
     public static async Task Ignite(PlayerChoiceContext choiceContext, int ignite, Player player)
     {
         if (player.PlayerCombatState == null || player.Creature.CombatState == null || ignite <= 0)

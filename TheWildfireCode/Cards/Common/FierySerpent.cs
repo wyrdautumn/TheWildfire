@@ -21,9 +21,7 @@ public class FierySerpent() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(18, ValueProp.Move), new DynamicVar("Flare",7)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.ExertAll)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(18, ValueProp.Move), new ExertVar(6)];
     protected override HashSet<CardTag> CanonicalTags
     {
         get => new HashSet<CardTag>() { WildfireKeywords.ExertTag };
@@ -36,7 +34,7 @@ public class FierySerpent() : TheWildfireCard(1,
             var ownerPlayerCombatState = this.Owner.PlayerCombatState;
             if (ownerPlayerCombatState != null &&
                 FirepowerController.Firepower.Get(ownerPlayerCombatState) >=
-                this.DynamicVars["Flare"].IntValue)
+                this.DynamicVars["Exert"].IntValue)
                 return true;
             if (Owner.HasPower<OverdrivePower>())
                 return true;
@@ -45,13 +43,12 @@ public class FierySerpent() : TheWildfireCard(1,
     }
 
     protected override bool ShouldGlowGoldInternal => IsPlayable;
-
-
+    
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await FirepowerController.ExertAll(choiceContext, Owner, true);
+        int exert = ResolveExert();
         float scale = 0.6f;
         await CommonActions.CardAttack(this, play).BeforeDamage(() =>
         {
@@ -67,12 +64,12 @@ public class FierySerpent() : TheWildfireCard(1,
                 scale += 0.1f;
             }
             return Task.CompletedTask;
-        }).Execute(choiceContext); 
+        }).Execute(choiceContext);
+        await FirepowerController.Exert(choiceContext, exert, Owner, true);
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(4);
-        DynamicVars["Flare"].UpgradeValueBy(-1);
     }
 }

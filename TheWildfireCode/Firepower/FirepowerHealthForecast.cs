@@ -2,6 +2,7 @@
 using Godot;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Players;
+using TheWildfire.TheWildfireCode.Cards;
 
 namespace TheWildfire.TheWildfireCode.Firepower;
 
@@ -14,7 +15,8 @@ public class FirepowerHealthForecast : IHealthBarForecastSource
         {
             Player? localPlayer = LocalContext.GetMe(context.CombatState.RunState);
             if (localPlayer == null || localPlayer.PlayerCombatState == null ||
-                FirepowerController.Firepower.Get(localPlayer.PlayerCombatState) <= 0)
+                FirepowerController.Firepower.Get(localPlayer.PlayerCombatState) <= 0 ||
+                (!localPlayer.PlayerCombatState.Hand.Cards.Any(c => c.Tags.Contains(WildfireKeywords.ScorchTag)) && !localPlayer.PlayerCombatState.PlayPile.Cards.Any(c => c.Tags.Contains(WildfireKeywords.ScorchTag))))
                 amount = 0;
             else if (context.Creature.IsEnemy)
                 amount = Math.Max(0, FirepowerController.Firepower.Get(localPlayer.PlayerCombatState) - context.Creature.Block);

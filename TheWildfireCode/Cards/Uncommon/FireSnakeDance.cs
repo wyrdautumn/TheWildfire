@@ -16,7 +16,7 @@ public class FireSnakeDance() : TheWildfireCard(0,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1), new CardsVar(1), new AfterburnVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2), new AfterburnVar(4)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<Afterburn>(),HoverTipFactory.ForEnergy(this), HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
     
@@ -30,17 +30,13 @@ public class FireSnakeDance() : TheWildfireCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
         await CommonActions.Draw(this, choiceContext);
-        CardModel? card = PileType.Draw.GetPile(Owner).Cards.FirstOrDefault();
-        if (card != null)
-            await CardCmd.Exhaust(choiceContext, card);
         if (CombatState != null)
             await Afterburn.CreateAfterburn(DynamicVars["Afterburn"].IntValue, Owner, CombatState);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Energy.UpgradeValueBy(1);
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

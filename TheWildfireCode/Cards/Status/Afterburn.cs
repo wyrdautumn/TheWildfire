@@ -25,7 +25,7 @@ using TheWildfire.TheWildfireCode.Nodes;
 namespace TheWildfire.TheWildfireCode.Cards.Status;
 
 [Pool(typeof(StatusCardPool))]
-public class Afterburn() : TheWildfireCard(1,
+public class Afterburn() : TheWildfireCard(2,
     CardType.Status, CardRarity.Status,
     TargetType.None)
 {
@@ -61,10 +61,37 @@ public class Afterburn() : TheWildfireCard(1,
             return counter;
         });
     
+    public static readonly AddedNode<NDiscardPileButton, AfterburnDiscard> DiscardCounterNode =
+        new((button) =>
+        {
+            var counter = new AfterburnDiscard
+            {
+                Name = "AfterburnDiscard",
+                MouseFilter = Control.MouseFilterEnum.Ignore
+            };
+
+            counter.SetAnchorsPreset(Control.LayoutPreset.TopLeft);
+            counter.Size = new Vector2(48, 48);
+            counter.ZIndex = 0;
+
+            var visualScene = ResourceLoader.Load<PackedScene>(
+                "res://TheWildfire/scenes/afterburn_discard_tracker.tscn");
+
+            var visual = visualScene.Instantiate<Control>();
+            visual.Name = "AfterburnDiscardVisual";
+            visual.MouseFilter = Control.MouseFilterEnum.Ignore;
+
+            counter.AddChild(visual);
+            
+            button.AddChild(counter);
+            
+            return counter;
+        });
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
     new CalculationBaseVar(0),
-    new CalculationExtraVar(1),
-    new CalculatedVar("Ignite").WithMultiplier(Calc)];
+    new ExtraDamageVar(1),
+    new CalculatedDamageVar(ValueProp.Unpowered | ValueProp.Move).WithMultiplier(Calc)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [];
@@ -90,7 +117,7 @@ public class Afterburn() : TheWildfireCard(1,
         if (instance != null)
             instance.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(Owner.Creature, VfxColor.Purple));
         SfxCmd.Play("event:/sfx/characters/attack_fire");
-        await CreatureCmd.Damage(choiceContext, Owner.Creature, ((CalculatedVar)DynamicVars["Ignite"]).Calculate(Owner.Creature),
+        await CreatureCmd.Damage(choiceContext, Owner.Creature, DynamicVars.CalculatedDamage.Calculate(Owner.Creature),
             ValueProp.Unpowered | ValueProp.Move, this, null);
     }
 
@@ -100,7 +127,12 @@ public class Afterburn() : TheWildfireCard(1,
             return;
         int val = AfterburnCount.Get(owner.PlayerCombatState);
         AfterburnCount.Set(owner.PlayerCombatState, val + afterburn);
-        CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(combatState.CreateCard<Afterburn>(owner), PileType.Discard, owner));
-        await Cmd.Wait(0.5f);
+        if (!owner.PlayerCombatState.DiscardPile.Cards.Any(c => c is Afterburn))
+        {
+            CardCmd.PreviewCardPileAdd(
+                await CardPileCmd.AddGeneratedCardToCombat(combatState.CreateCard<Afterburn>(owner), PileType.Discard,
+                    owner));
+            await Cmd.Wait(0.5f);
+        }
     }
 }

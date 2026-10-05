@@ -3,7 +3,7 @@
   "name": "The Wildfire",
   "author": "wyrdautumn",
   "description": "The daughter of a wayward flame fights to find her place in a world that never wanted her.",
-  "version": "v0.0.3",
+  "version": "v0.0.4",
   "has_pck": true,
   "has_dll": true,
   "dependencies": [{"id": "BaseLib", "min_version": "3.4.7"}],

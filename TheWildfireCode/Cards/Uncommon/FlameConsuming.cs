@@ -12,11 +12,11 @@ using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
 
-public class FlameConsuming() : TheWildfireCard(1,
+public class FlameConsuming() : TheWildfireCard(0,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(7), new PowerVar<RagingFirePower>(5), new AfterburnVar(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(7), new PowerVar<RagingFirePower>(5), new AfterburnVar(3)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<RagingFirePower>(), HoverTipFactory.FromCard<Afterburn>()];
     protected override HashSet<CardTag> CanonicalTags

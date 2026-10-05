@@ -8,7 +8,7 @@
   "THEWILDFIRE-IGNITE.title": "Ignite",
   "THEWILDFIRE-IGNITE.description": "Gain [blue]{Ignite}[/blue] [gold]Firepower[/gold].",
   "THEWILDFIRE-AFTERBURN.title": "Afterburn",
-  "THEWILDFIRE-AFTERBURN.description": "Increase the damage of your [gold]Afterburn[/gold] cards by [blue]{Afterburn}[/blue]. Shuffle an [gold]Afterburn[/gold] into your Discard Pile.",
+  "THEWILDFIRE-AFTERBURN.description": "Increase the damage of your [gold]Afterburn[/gold] Attacks and Statuses and the enemy HP loss from by your [gold]Afterburn[/gold] skills by [blue]{Afterburn}[/blue]. Shuffle an [gold]Afterburn[/gold] into your Discard Pile if there isn't one there already.",
   "THEWILDFIRE-IGNITE_STATIC.title": "Ignite",
   "THEWILDFIRE-IGNITE_STATIC.description": "Gain [gold]Firepower[/gold].",
   "THEWILDFIRE-EXERT_STATIC.title": "Exert",
@@ -24,7 +24,7 @@
   "THEWILDFIRE-FULL_EXERT.title": "FULL Exert",
   "THEWILDFIRE-FULL_EXERT.description": "Triggers when you [gold]Exert[/gold] for this card's full value.",
   "THEWILDFIRE-AFTERBURN_STATIC.title": "Afterburn",
-  "THEWILDFIRE-AFTERBURN_STATIC.description": "Some Wildfire cards will increase the damage dealt by the [gold]Afterburn[/gold] status.",
+  "THEWILDFIRE-AFTERBURN_STATIC.description": "Afterburn cards increase your Afterburn damage.",
   "THEWILDFIRE-FLOW_STATIC.title": "Flow",
   "THEWILDFIRE-FLOW_STATIC.description": "You can achieve [color=D74040]Attack Flow[/color], [color=12AF1A]Skill Flow[/color], and [color=5D76EA]Power Flow[/color] by playing cards in the correct sequence."
 }
