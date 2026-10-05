@@ -16,7 +16,7 @@ public class FlameConsuming() : TheWildfireCard(0,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(7), new PowerVar<RagingFirePower>(5), new AfterburnVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(8), new PowerVar<RagingFirePower>(5), new AfterburnVar(3)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<RagingFirePower>(), HoverTipFactory.FromCard<Afterburn>()];
     protected override HashSet<CardTag> CanonicalTags

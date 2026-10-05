@@ -17,7 +17,7 @@ public class SunGuard() : TheWildfireCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(8, ValueProp.Move)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<SolarPower>()];
+        [HoverTipFactory.FromCard<SolarPower>(IsUpgraded)];
     public override bool GainsBlock => true;
 
     
@@ -29,6 +29,8 @@ public class SunGuard() : TheWildfireCard(1,
         if (CombatState == null)
             return;
         CardModel firebolt = CombatState.CreateCard<SolarPower>(Owner);
+        if (IsUpgraded)
+            CardCmd.Upgrade(firebolt);
         CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(firebolt, PileType.Draw, Owner,
             CardPilePosition.Random));
     }

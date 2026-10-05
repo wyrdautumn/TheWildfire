@@ -17,7 +17,7 @@ public class FireflowWraps() : TheWildfireRelic
     public override RelicRarity Rarity =>
         RelicRarity.Shop;
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(4)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.FlowStatic)];

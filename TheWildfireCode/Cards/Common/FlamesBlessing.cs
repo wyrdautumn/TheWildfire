@@ -22,6 +22,6 @@ public class FlamesBlessing() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(1);
+        EnergyCost.UpgradeBy(-1);
     }
 }

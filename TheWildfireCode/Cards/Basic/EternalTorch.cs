@@ -14,7 +14,7 @@ public class EternalTorch() : TheWildfireCard(1,
     CardType.Skill, CardRarity.Basic,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(4, ValueProp.Move), new IgniteVar(4)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(4, ValueProp.Move), new IgniteVar(5)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Firepower)];
     public override bool GainsBlock => true;
@@ -29,7 +29,7 @@ public class EternalTorch() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(1);
-        DynamicVars["Ignite"].UpgradeValueBy(2);
+        DynamicVars.Block.UpgradeValueBy(2);
+        DynamicVars["Ignite"].UpgradeValueBy(1);
     }
 }

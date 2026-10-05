@@ -13,7 +13,7 @@ public class FireBlast() : TheWildfireCard(0,
     CardType.Skill, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(3, ValueProp.Move | ValueProp.Unpowered | ValueProp.Unblockable), new IgniteVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(3, ValueProp.Move | ValueProp.Unpowered | ValueProp.Unblockable), new IgniteVar(4)];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

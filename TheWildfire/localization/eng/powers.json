@@ -3,7 +3,7 @@
   "THEWILDFIRE-RAGING_FIRE_POWER.smartDescription": "Whenever you are attacked this turn, deal [blue]{Amount}[/blue] damage back.",
   "THEWILDFIRE-RAGING_FIRE_POWER.title": "Raging Fire",
   "THEWILDFIRE-CONSTITUTION_POWER.description": "At the start of your turn, gain [gold]Block[/gold].",
-  "THEWILDFIRE-CONSTITUTION_POWER.smartDescription": "At the start of your turn, gain [blue]Amount[/blue] [gold]Block[/gold].",
+  "THEWILDFIRE-CONSTITUTION_POWER.smartDescription": "At the start of your turn, gain [blue]{Amount}[/blue] [gold]Block[/gold].",
   "THEWILDFIRE-CONSTITUTION_POWER.title": "Constitution",
   "THEWILDFIRE-OVERDRIVE_POWER.description": "[gold]FULL Exert[/gold] your next [gold]Exert[/gold] card without spending [gold]Firepower[/gold].",
   "THEWILDFIRE-OVERDRIVE_POWER.smartDescription": "[gold]FULL Exert[/gold] your next {Amount:plural:[gold]Exert[/gold] card|{} [gold]Exert[/gold] cards} without spending [gold]Firepower[/gold].",

@@ -13,7 +13,7 @@ public class FlyingFlame() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7, ValueProp.Move), new IgniteVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7, ValueProp.Move), new IgniteVar(4)];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

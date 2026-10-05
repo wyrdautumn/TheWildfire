@@ -16,7 +16,7 @@ public class DeepBreath() : TheWildfireCard(0,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1), new IgniteVar(10)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1), new IgniteVar(12)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.ExertAll), HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
 
@@ -39,6 +39,6 @@ public class DeepBreath() : TheWildfireCard(0,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Ignite"].UpgradeValueBy(5);
+        DynamicVars["Ignite"].UpgradeValueBy(6);
     }
 }

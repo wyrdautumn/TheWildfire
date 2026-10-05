@@ -15,7 +15,7 @@ public class AfterburnerKick() : TheWildfireCard(2,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(18, ValueProp.Move), new IgniteVar(5), new AfterburnVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(18, ValueProp.Move), new IgniteVar(6), new AfterburnVar(3)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<Afterburn>()];
     protected override HashSet<CardTag> CanonicalTags

@@ -19,10 +19,10 @@ using TheWildfire.TheWildfireCode.Cards.Variables;
 namespace TheWildfire.TheWildfireCode.Cards.Rare;
 
 public class SolarDetonation() : TheWildfireCard(3,
-    CardType.Skill, CardRarity.Rare,
+    CardType.Attack, CardRarity.Rare,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(36, ValueProp.Move | ValueProp.Unpowered | ValueProp.Unblockable), new PowerVar<WeakPower>(2), new PowerVar<VulnerablePower>(2), new AfterburnVar(5)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(36, ValueProp.Move), new PowerVar<WeakPower>(2), new PowerVar<VulnerablePower>(2), new AfterburnVar(5)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<Afterburn>(),HoverTipFactory.FromPower<WeakPower>(),HoverTipFactory.FromPower<VulnerablePower>()];
     
@@ -39,24 +39,26 @@ public class SolarDetonation() : TheWildfireCard(3,
         {
             return;
         }
-        foreach (Creature target in CombatState.HittableEnemies)
+        await CommonActions.CardAttack(this, play).BeforeDamage(() =>
         {
-            NCreature? creatureNode = NCombatRoom.Instance?.GetCreatureNode(target);
-            if (creatureNode != null)
+            foreach (Creature target in CombatState.HittableEnemies)
             {
-                NFireBurningVfx? child =
-                    NFireBurningVfx.Create(creatureNode.GetBottomOfHitbox(), 1f, true, new Color("7a37a8"));
-                if (child != null)
+                NCreature? creatureNode = NCombatRoom.Instance?.GetCreatureNode(target);
+                if (creatureNode != null)
                 {
-                    SfxCmd.Play("event:/sfx/characters/attack_fire");
-                    NCombatRoom? instance = NCombatRoom.Instance;
-                    if (instance != null)
-                        instance.CombatVfxContainer.AddChildSafely((Godot.Node)child);
+                    NFireBurningVfx? child =
+                        NFireBurningVfx.Create(creatureNode.GetBottomOfHitbox(), 1f, true, new Color("7a37a8"));
+                    if (child != null)
+                    {
+                        SfxCmd.Play("event:/sfx/characters/attack_fire");
+                        NCombatRoom? instance = NCombatRoom.Instance;
+                        if (instance != null)
+                            instance.CombatVfxContainer.AddChildSafely((Godot.Node)child);
+                    }
                 }
             }
-        }
-        await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies, DynamicVars.Damage, Owner.Creature, this,
-            play);
+            return Task.CompletedTask;
+        }).Execute(choiceContext);
         await CommonActions.Apply<WeakPower>(choiceContext, CombatState.HittableEnemies, this);
         await CommonActions.Apply<VulnerablePower>(choiceContext, CombatState.HittableEnemies, this);
         await Afterburn.CreateAfterburn(DynamicVars["Afterburn"].IntValue, Owner, CombatState);
@@ -64,6 +66,6 @@ public class SolarDetonation() : TheWildfireCard(3,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(10);
+        DynamicVars.Damage.UpgradeValueBy(12);
     }
 }

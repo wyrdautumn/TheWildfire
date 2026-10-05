@@ -17,7 +17,7 @@ public class EmberDash() : TheWildfireCard(0,
     TargetType.RandomEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(5, ValueProp.Move),
-    new IgniteVar(4)];
+    new IgniteVar(5)];
 
     protected override bool HasEnergyCostX => true;
 

@@ -12,7 +12,7 @@ public class FurnaceForm() : TheWildfireCard(3,
     CardType.Power, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<FurnaceFormPower>(4)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<FurnaceFormPower>(5)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.IgniteStatic),HoverTipFactory.FromPower<RagingFirePower>()];
 
@@ -25,6 +25,6 @@ public class FurnaceForm() : TheWildfireCard(3,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["FurnaceFormPower"].UpgradeValueBy(2);
+        DynamicVars["FurnaceFormPower"].UpgradeValueBy(3);
     }
 }

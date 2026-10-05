@@ -8,7 +8,7 @@
   "THEWILDFIRE-IGNITE.title": "Ignite",
   "THEWILDFIRE-IGNITE.description": "Gain [blue]{Ignite}[/blue] [gold]Firepower[/gold].",
   "THEWILDFIRE-AFTERBURN.title": "Afterburn",
-  "THEWILDFIRE-AFTERBURN.description": "Increase the damage of your [gold]Afterburn[/gold] Attacks and Statuses and the enemy HP loss from by your [gold]Afterburn[/gold] skills by [blue]{Afterburn}[/blue]. Shuffle an [gold]Afterburn[/gold] into your Discard Pile if there isn't one there already.",
+  "THEWILDFIRE-AFTERBURN.description": "Increase the damage of your [gold]Afterburn[/gold] Attacks and Statuses by [blue]{Afterburn}[/blue]. Shuffle an [gold]Afterburn[/gold] into your Discard Pile if there isn't one there already.",
   "THEWILDFIRE-IGNITE_STATIC.title": "Ignite",
   "THEWILDFIRE-IGNITE_STATIC.description": "Gain [gold]Firepower[/gold].",
   "THEWILDFIRE-EXERT_STATIC.title": "Exert",

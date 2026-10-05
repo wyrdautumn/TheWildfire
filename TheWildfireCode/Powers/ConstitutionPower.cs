@@ -13,6 +13,7 @@ public class ConstitutionPower : TheWildfirePower
 
     public override async Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)
     {
-        await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Unpowered, null, true);
+        if (player.Creature == Owner)
+            await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Unpowered, null, true);
     }
 }

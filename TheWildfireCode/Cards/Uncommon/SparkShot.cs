@@ -24,7 +24,7 @@ public class SparkShot() : TheWildfireCard(0,
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier(Calc)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.AfterburnStatic),HoverTipFactory.FromCard<Afterburn>(),HoverTipFactory.FromCard<Firebolt>(),HoverTipFactory.FromCard<Burn>()];
+        [HoverTipFactory.Static(WildfireKeywords.AfterburnStatic),HoverTipFactory.FromCard<Afterburn>(),HoverTipFactory.FromCard<Firebolt>(IsUpgraded),HoverTipFactory.FromCard<Burn>()];
     protected override HashSet<CardTag> CanonicalTags
     {
         get => new HashSet<CardTag>() { WildfireKeywords.ShowAfterburn };
