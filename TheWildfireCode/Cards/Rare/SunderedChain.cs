@@ -42,10 +42,9 @@ public class SunderedChain() : TheWildfireCard(1,
         CardPlay play)
     {
         await CommonActions.CardBlock(this, play);
-        var hand = CardPile.Get(PileType.Hand, Owner);
         if (Owner.PlayerCombatState == null)
             return;
-        foreach (CardModel card in Owner.PlayerCombatState.AllCards.Where(c => c.Type == CardType.Status).ToList())
+        foreach (CardModel card in Owner.PlayerCombatState.AllCards.Where(c => c.Type == CardType.Status && c.Pile?.Type != PileType.Exhaust).ToList())
         {
             await CardCmd.Exhaust(choiceContext, card);
         }

@@ -22,7 +22,8 @@ public class PhoenixDance() : TheWildfireCard(0,
     {
         if (player != Owner || Pile == null || Pile.Type != PileType.Exhaust || Owner.PlayerCombatState == null ||
             FirepowerController.Firepower.Get(Owner.PlayerCombatState) < DynamicVars["Rekindle"].IntValue)
-            await CardPileCmd.Add(this, PileType.Hand);
+            return;
+        await CardPileCmd.Add(this, PileType.Hand);
     }
 
     protected override async Task OnPlay(

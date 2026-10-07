@@ -9,7 +9,7 @@ namespace TheWildfire.TheWildfireCode.Nodes;
 public partial class AfterburnDiscard : Control
 {
     private Label? _label;
-    private NDiscardPileButton? _button;
+    private NCombatCardPile? _button;
     
     public override void _Ready()
     {
@@ -17,7 +17,7 @@ public partial class AfterburnDiscard : Control
 
         _label = GetNodeOrNull<Label>("AfterburnDiscardVisual/Icon/Label");
         
-        if (GetParent() is NDiscardPileButton button)
+        if (GetParent() is NCombatCardPile button)
         {
             _button = button;
         }

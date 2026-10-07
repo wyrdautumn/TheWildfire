@@ -88,6 +88,34 @@ public class Afterburn() : TheWildfireCard(2,
             return counter;
         });
     
+    public static readonly AddedNode<NDrawPileButton, AfterburnDiscard> DrawCounterNode =
+        new((button) =>
+        {
+            var counter = new AfterburnDiscard
+            {
+                Name = "AfterburnDiscard",
+                MouseFilter = Control.MouseFilterEnum.Ignore
+            };
+
+            counter.SetAnchorsPreset(Control.LayoutPreset.TopLeft);
+            counter.Position = new Vector2(72, 0);
+            counter.Size = new Vector2(48, 48);
+            counter.ZIndex = 0;
+
+            var visualScene = ResourceLoader.Load<PackedScene>(
+                "res://TheWildfire/scenes/afterburn_discard_tracker.tscn");
+
+            var visual = visualScene.Instantiate<Control>();
+            visual.Name = "AfterburnDiscardVisual";
+            visual.MouseFilter = Control.MouseFilterEnum.Ignore;
+
+            counter.AddChild(visual);
+            
+            button.AddChild(counter);
+            
+            return counter;
+        });
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
     new CalculationBaseVar(0),
     new ExtraDamageVar(1),
