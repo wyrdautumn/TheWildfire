@@ -68,9 +68,9 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
             return;
         int val = Firepower.Get(player.PlayerCombatState);
         int increase = val + ignite;
-        SfxCmd.Play("event:/sfx/characters/ironclad/ironclad_select");
+        SfxCmd.Play("event:/sfx/characters/attack_fire");
         Firepower.Set(player.PlayerCombatState, increase);
-        await FirepowerHooks.AfterIgnite(player.Creature.CombatState, choiceContext, increase, player);
+        await FirepowerHooks.AfterIgnite(player.Creature.CombatState, choiceContext, ignite, player);
     }
 
     public static async Task Scorch(PlayerChoiceContext choiceContext, Player player, bool damage = true, int repeat = 1)
