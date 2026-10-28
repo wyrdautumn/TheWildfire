@@ -15,7 +15,7 @@ public class ToAsh() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8,ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7,ValueProp.Move)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
 
@@ -24,26 +24,15 @@ public class ToAsh() : TheWildfireCard(1,
         CardPlay play)
     {
         await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_slash").Execute(choiceContext);
-        if (IsUpgraded)
-        {
-            CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1);
-            CardModel? card = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this)).FirstOrDefault();
-            if (card == null)
-                return;
-            await CardCmd.Exhaust(choiceContext, card);
-        }
-        else
-        {
-            CardPile pile = PileType.Hand.GetPile(Owner);
-            CardModel? card = Owner.RunState.Rng.CombatCardSelection.NextItem(pile.Cards);
-            if (card == null)
-                return;
-            await CardCmd.Exhaust(choiceContext, card);
-        }
+        CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1);
+        CardModel? card = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this)).FirstOrDefault();
+        if (card == null)
+            return;
+        await CardCmd.Exhaust(choiceContext, card);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2);
+        DynamicVars.Damage.UpgradeValueBy(3);
     }
 }

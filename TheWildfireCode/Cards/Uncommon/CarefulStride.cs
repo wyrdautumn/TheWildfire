@@ -16,29 +16,36 @@ public class CarefulStride() : TheWildfireCard(1,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new CalculationBaseVar(12),
-        new CalculationExtraVar(1),
-        new CalculatedBlockVar(ValueProp.Move).WithMultiplier(Calc)];
+        new BlockVar(9, ValueProp.Move)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.SkillFlow];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Firepower)];
     public override bool GainsBlock => true;
-    private static decimal Calc(CardModel card, Creature? arg2)
+    
+    protected override bool ShouldGlowRedInternal
     {
-        if (card.Owner.PlayerCombatState == null)
-            return 0;
-        return -FirepowerController.Firepower.Get(card.Owner.PlayerCombatState);
+        get
+        {
+            if (Owner.PlayerCombatState == null)
+                return false;
+            int damage = FirepowerController.Firepower.Get(Owner.PlayerCombatState);
+            int health = Owner.Creature.CurrentHp + Owner.Creature.Block;
+            if (damage >= health)
+                return true;
+            return false;
+        }
     }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
+        await FirepowerController.DealFirepowerDamage(choiceContext, Owner);
         await CommonActions.CardBlock(this, play);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.CalculationBase.UpgradeValueBy(3);
+        DynamicVars.Block.UpgradeValueBy(3);
     }
 }

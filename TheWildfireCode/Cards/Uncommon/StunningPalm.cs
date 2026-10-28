@@ -35,7 +35,7 @@ public class StunningPalm() : TheWildfireCard(1,
             await CommonActions.Apply<WeakPower>(choiceContext, play.Target, this, exert);
         if (exert >= DynamicVars["Exert"].IntValue)
             fullExert = true;
-        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert);
+        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert, play);
     }
 
     protected override void OnUpgrade()

@@ -17,7 +17,7 @@ public class RisingPhoenix() : TheWildfireCard(0,
     CardType.Attack, CardRarity.Rare,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(4, ValueProp.Move)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust, WildfireKeywords.PowerFlow];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Rekindle)];
@@ -55,6 +55,6 @@ public class RisingPhoenix() : TheWildfireCard(0,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(3);
+        DynamicVars.Damage.UpgradeValueBy(2);
     }
 }

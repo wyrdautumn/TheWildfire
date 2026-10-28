@@ -68,7 +68,7 @@ public class BleedFire() : TheWildfireCard(0,
         {
             fullExert = false;
         }
-        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert);
+        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert, play);
         await CommonActions.ApplySelf<StrengthPower>(choiceContext, this);
         await CommonActions.ApplySelf<ConstitutionPower>(choiceContext, this);
         DynamicVars["Exert"].BaseValue += 1;

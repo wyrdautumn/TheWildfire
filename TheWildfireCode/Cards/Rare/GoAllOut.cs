@@ -44,7 +44,7 @@ public class GoAllOut() : TheWildfireCard(0,
         int exert = ResolveExertAll();
         await CommonActions.CardAttack(this, play, hits, vfx: "vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        await FirepowerController.ExertAll(choiceContext, Owner, false);
+        await FirepowerController.ExertAll(choiceContext, Owner, play, false);
     }
 
     protected override void OnUpgrade()

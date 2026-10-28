@@ -51,7 +51,7 @@ public class CrowsMomentum() : TheWildfireCard(1,
             await CommonActions.ApplySelf<CrowsMomentumUpgradePower>(choiceContext, this);
         else
             await CommonActions.ApplySelf<CrowsMomentumPower>(choiceContext, this);
-        await FirepowerController.Exert(choiceContext, exert, Owner, true);
+        await FirepowerController.Exert(choiceContext, exert, Owner, true, play);
     }
 
     protected override void OnUpgrade()

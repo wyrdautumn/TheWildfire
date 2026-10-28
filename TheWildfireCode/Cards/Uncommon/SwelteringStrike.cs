@@ -35,7 +35,7 @@ public class SwelteringStrike() : TheWildfireCard(2,
             await CommonActions.Apply<StrengthPower>(choiceContext, play.Target, this, -exert);
         if (exert >= DynamicVars["Exert"].IntValue)
             fullExert = true;
-        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert);
+        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert, play);
     }
 
     protected override void OnUpgrade()

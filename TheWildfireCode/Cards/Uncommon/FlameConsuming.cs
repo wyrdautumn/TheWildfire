@@ -16,12 +16,12 @@ public class FlameConsuming() : TheWildfireCard(0,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(8), new PowerVar<RagingFirePower>(5), new AfterburnVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(3), new PowerVar<RagingFirePower>(4), new AfterburnVar(3)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<RagingFirePower>(), HoverTipFactory.FromCard<Afterburn>()];
+        [HoverTipFactory.FromPower<RagingFirePower>(), HoverTipFactory.FromCard<Afterburn>(), HoverTipFactory.Static(WildfireKeywords.Scorch)];
     protected override HashSet<CardTag> CanonicalTags
     {
-        get => new HashSet<CardTag>() { WildfireKeywords.ShowAfterburn };
+        get => new HashSet<CardTag>() { WildfireKeywords.ShowAfterburn, WildfireKeywords.ScorchTag };
     }
    
     protected override async Task OnPlay(
@@ -30,12 +30,14 @@ public class FlameConsuming() : TheWildfireCard(0,
     {
         await FirepowerController.Ignite(choiceContext, DynamicVars["Ignite"].IntValue, Owner);
         await CommonActions.ApplySelf<RagingFirePower>(choiceContext, this);
+        await FirepowerController.Scorch(choiceContext, Owner);
         if (CombatState != null)
             await Afterburn.CreateAfterburn(DynamicVars["Afterburn"].IntValue, Owner, CombatState);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["RagingFirePower"].UpgradeValueBy(3);
+        DynamicVars["Ignite"].UpgradeValueBy(1);
+        DynamicVars["RagingFirePower"].UpgradeValueBy(2);
     }
 }

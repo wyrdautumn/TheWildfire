@@ -15,30 +15,26 @@ public class StalwartResolve() : TheWildfireCard(2,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new CalculationBaseVar(10),
-        new CalculationExtraVar(1),
-        new CalculatedBlockVar(ValueProp.Move).WithMultiplier(Calc)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(9, ValueProp.Move)];
+    
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
     public override bool GainsBlock => true;
-    
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
-    
-    private static decimal Calc(CardModel card, Creature? arg2)
-    {
-        return PileType.Exhaust.GetPile(card.Owner).Cards.Count;
-    }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
         await CommonActions.CardBlock(this, play);
+        List<CardModel> list = PileType.Hand.GetPile(Owner).Cards.ToList();
+        foreach (CardModel card in list)
+        {
+            await CardCmd.Exhaust(choiceContext, card);
+        }
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.CalculationBase.UpgradeValueBy(4);
+        DynamicVars.Block.UpgradeValueBy(4);
     }
 }

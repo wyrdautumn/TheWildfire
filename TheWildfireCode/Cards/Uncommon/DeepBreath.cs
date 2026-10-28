@@ -34,7 +34,7 @@ public class DeepBreath() : TheWildfireCard(0,
     {
         bool fullExert = false;
         await CommonActions.Draw(this, choiceContext);
-        await FirepowerController.ExertAll(choiceContext, Owner, fullExert);
+        await FirepowerController.ExertAll(choiceContext, Owner, play, fullExert);
     }
 
     protected override void OnUpgrade()

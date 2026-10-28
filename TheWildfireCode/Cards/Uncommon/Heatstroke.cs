@@ -38,10 +38,9 @@ public class Heatstroke() : TheWildfireCard(1,
         }
         else
         {
-            CardModel? card = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs2, null, this)).FirstOrDefault();
-            if (card == null)
-                return;
-            await CardCmd.Exhaust(choiceContext, card);
+            var cards = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs2, null, this)).ToList();
+            foreach (CardModel card in cards)
+                await CardCmd.Exhaust(choiceContext, card);
         }
         await FirepowerController.Scorch(choiceContext, Owner);
     }

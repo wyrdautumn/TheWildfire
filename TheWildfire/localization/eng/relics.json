@@ -17,7 +17,7 @@
   "THEWILDFIRE-MATCHBOOK.description": "Whenever you shuffle your [gold]Draw Pile[/gold], [gold]Scorch[/gold] without taking damage.",
   "THEWILDFIRE-MATCHBOOK.flavor": "It's not like you need it to start a fire.",
   "THEWILDFIRE-MATCHBOOK.title": "Matchbook",
-  "THEWILDFIRE-SPARK_GUARDS.description": "Whenever you create an [gold]Afterburn[/gold], deal your [gold]Afterburn[/gold] damage to ALL enemies.",
+  "THEWILDFIRE-SPARK_GUARDS.description": "Whenever you create an [gold]Afterburn[/gold], deal your [gold]Overheat[/gold] damage to ALL enemies.",
   "THEWILDFIRE-SPARK_GUARDS.flavor": "The fire doesn't spare you. You won't spare them.",
   "THEWILDFIRE-SPARK_GUARDS.title": "Spark Guards",
   "THEWILDFIRE-MARTIAL_ARTISTS_BELT.description": "Whenever you achieve [gold]Flow[/gold], gain [blue]{Block}[/blue] [gold]Block[/gold].",
@@ -25,5 +25,6 @@
   "THEWILDFIRE-MARTIAL_ARTISTS_BELT.title": "Disciplined Student's Belt",
   "THEWILDFIRE-FIREFLOW_WRAPS.description": "Whenever you achieve [gold]Flow[/gold], [gold]Ignite[/gold] [blue]{Ignite}[/blue].",
   "THEWILDFIRE-FIREFLOW_WRAPS.flavor": "Gloves crafted to keep the flame flowing freely.",
-  "THEWILDFIRE-FIREFLOW_WRAPS.title": "Fireflow Wraps"
+  "THEWILDFIRE-FIREFLOW_WRAPS.title": "Fireflow Wraps",
+  "SEA_GLASS.THEWILDFIRE-THE_SORCERESS_MOD.title": "Fiery Glass"
 }

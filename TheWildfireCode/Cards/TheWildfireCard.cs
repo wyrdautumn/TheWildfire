@@ -37,7 +37,7 @@ public abstract class TheWildfireCard(int cost, CardType type, CardRarity rarity
             return 0;
         int fire = FirepowerController.Firepower.Get(Owner.PlayerCombatState);
         int exert = DynamicVars["Exert"].IntValue;
-        if (Owner.HasPower<OverdrivePower>() || fire > exert)
+        if (Owner.HasPower<OverdrivePower>() || fire > exert || (TemporaryStarCost != null && TemporaryStarCost.Cost == 0))
         {
             return exert;
         }

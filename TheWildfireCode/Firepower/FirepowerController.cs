@@ -62,6 +62,23 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
         return 0;
     }
 
+    public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    {
+        if (side != CombatSide.Player)
+            return;
+        foreach (Creature creature in participants.Where(c => c.IsPlayer).ToList())
+        {
+            Player? player = creature.Player;
+            if (player == null || player.PlayerCombatState == null)
+                continue;
+            int val = CalculateOverheatDamage(player);
+            if (val >= 1)
+            {
+                await DealOverheatDamage(choiceContext, player);
+            }
+        }
+    }
+
     public static async Task Ignite(PlayerChoiceContext choiceContext, int ignite, Player player)
     {
         if (player.PlayerCombatState == null || player.Creature.CombatState == null || ignite <= 0)
@@ -95,32 +112,39 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
         }
     }
 
-    public static async Task Exert(PlayerChoiceContext choiceContext, int amount, Player player, bool fullExert, bool fromCard = true)
+    public static async Task Exert(PlayerChoiceContext choiceContext, int amount, Player player, bool fullExert, CardPlay? play)
     {
         if (player.PlayerCombatState == null || player.Creature.CombatState == null)
             return;
+        if (play != null && !play.IsLastInSeries)
+            return;
         int spent = amount;
         PowerModel? overdrive = player.Creature.GetPower<OverdrivePower>();
-        if (overdrive != null && fromCard)
-            await PowerCmd.Decrement(overdrive);
-        else
+        if (play == null || play.Card.TemporaryStarCost == null || play.Card.TemporaryStarCost.Cost != 0)
         {
-            int val = Firepower.Get(player.PlayerCombatState);
-            int result = val - amount;
-            if (result < 0)
+            if (overdrive != null && play != null)
+                await PowerCmd.Decrement(overdrive);
+            else
             {
-                result = 0;
-                spent = val;
+                int val = Firepower.Get(player.PlayerCombatState);
+                int result = val - amount;
+                if (result < 0)
+                {
+                    result = 0;
+                    spent = val;
+                }
+                Firepower.Set(player.PlayerCombatState, result);
             }
-            Firepower.Set(player.PlayerCombatState, result);
         }
         await FirepowerHooks.AfterExert(player.Creature.CombatState, choiceContext, spent, player, fullExert);
     }
 
-    public static async Task<int> ExertAll(PlayerChoiceContext choiceContext, Player player, bool fullExert)
+    public static async Task ExertAll(PlayerChoiceContext choiceContext, Player player, CardPlay? play, bool fullExert)
     {
         if (player.PlayerCombatState == null || player.Creature.CombatState == null)
-            return 0;
+            return;
+        if (play != null && !play.IsLastInSeries)
+            return;
         int val = Firepower.Get(player.PlayerCombatState);
         PowerModel? overdrive = player.Creature.GetPower<OverdrivePower>();
         if (overdrive != null)
@@ -128,7 +152,6 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
         else
             Firepower.Set(player.PlayerCombatState, 0);
         await FirepowerHooks.AfterExert(player.Creature.CombatState, choiceContext, val, player, fullExert);
-        return val;
     }
     
     public static async Task DealOverheatDamage(PlayerChoiceContext choiceContext, Player player, bool skipEffect = false)
@@ -151,6 +174,27 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
         }
         await FirepowerHooks.AfterOverheatDamage(player.Creature.CombatState, choiceContext, hpLoss,
             CalculateOverheatDamageWithoutMitigation(player), player);
+    }
+
+    public static async Task DealFirepowerDamage(PlayerChoiceContext choiceContext, Player player,
+        bool skipEffect = false)
+    {
+        if (player.PlayerCombatState == null || player.Creature.CombatState == null)
+            return;
+        int damage = Firepower.Get(player.PlayerCombatState);
+        if (damage > 0)
+        {
+            if (damage > 4 && skipEffect == false)
+            {
+                NCombatRoom? instance = NCombatRoom.Instance;
+                if (instance != null)
+                    instance.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(player.Creature,
+                        VfxColor.Purple));
+                SfxCmd.Play("event:/sfx/characters/attack_fire");
+            }
+            await CreatureCmd.Damage(choiceContext, player.Creature, damage, ValueProp.Unpowered,
+                player.Creature, null, null);
+        }
     }
 
     public static int CalculateOverheatDamage(Player player)

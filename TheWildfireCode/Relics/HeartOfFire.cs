@@ -18,7 +18,7 @@ public class HeartOfFire() : TheWildfireRelic
     public override RelicRarity Rarity =>
         RelicRarity.Starter;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(3)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Firepower)];
 

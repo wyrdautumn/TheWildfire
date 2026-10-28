@@ -74,6 +74,8 @@ public partial class WildfireHpTrackers : Control
 		{
 			_overheatCount = FirepowerController.CalculateOverheatDamage(_creature.Player);
 			_overheatLabel.Text = _overheatCount.ToString();
+			if (_healthBar != null && _healthBar.GetNode("MintyIncomingDamageText") is Label label)
+				AdjustMintyPreview(label);
 		}
 		
 		UpdateCounterHover();
@@ -84,7 +86,9 @@ public partial class WildfireHpTrackers : Control
 		Control? overheat = GetNodeOrNull<Control>("%OverheatContainer");
 		Control? block;
 		if (_healthBar != null)
+		{
 			block = _healthBar.GetNodeOrNull<Control>("%BlockContainer");
+		}
 		else
 			block = null;
 		if (overheat != null && block != null && _healthBar != null)
@@ -94,6 +98,23 @@ public partial class WildfireHpTrackers : Control
 			overheat.GlobalPosition =
 				new Vector2(block.GlobalPosition.X + _healthBar.HpBarContainer.Size.X - adjust2,
 					block.GlobalPosition.Y);
+		}
+	}
+	
+	public void AdjustMintyPreview(Label label)
+	{
+		Control? overheat = GetNodeOrNull<Control>("%OverheatContainer");
+		Control? block;
+		if (_healthBar != null)
+		{
+			block = _healthBar.GetNodeOrNull<Control>("%BlockContainer");
+		}
+		else
+			block = null;
+		if (overheat != null && block != null && _healthBar != null)
+		{
+			float modifier = overheat.Size.X * 0.8f;
+			label.GlobalPosition = new Vector2(overheat.GlobalPosition.X + modifier +6f, label.GlobalPosition.Y);
 		}
 	}
 

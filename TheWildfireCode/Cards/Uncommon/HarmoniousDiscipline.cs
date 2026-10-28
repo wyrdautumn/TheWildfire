@@ -15,33 +15,35 @@ public class HarmoniousDiscipline() : TheWildfireCard(0,
     CardType.Power, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new CalculationBaseVar(2),
-        new CalculationExtraVar(1),
-        new CalculatedVar("Strength").WithMultiplier(Calc)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<StrengthPower>(2)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<StrengthPower>(),HoverTipFactory.Static(WildfireKeywords.Firepower)];
     
-    private static decimal Calc(CardModel card, Creature? arg2)
+    protected override bool ShouldGlowRedInternal
     {
-        if (card.Owner.PlayerCombatState == null)
-            return 0;
-        int val = FirepowerController.Firepower.Get(card.Owner.PlayerCombatState);
-        if (val > card.DynamicVars.CalculationBase.IntValue)
-            return -card.DynamicVars.CalculationBase.IntValue;
-        return -val;
+        get
+        {
+            if (Owner.PlayerCombatState == null)
+                return false;
+            int damage = FirepowerController.Firepower.Get(Owner.PlayerCombatState);
+            int health = Owner.Creature.CurrentHp + Owner.Creature.Block;
+            if (damage >= health)
+                return true;
+            return false;
+        }
     }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
+        await FirepowerController.DealFirepowerDamage(choiceContext, Owner);
         await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature,
-            ((CalculatedVar)DynamicVars["Strength"]).Calculate(null), Owner.Creature, this);
+            DynamicVars.Strength.BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.CalculationBase.UpgradeValueBy(1);
+        DynamicVars.Strength.UpgradeValueBy(1);
     }
 }

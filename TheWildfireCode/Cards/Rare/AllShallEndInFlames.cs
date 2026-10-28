@@ -20,11 +20,11 @@ using TheWildfire.TheWildfireCode.Firepower;
 
 namespace TheWildfire.TheWildfireCode.Cards.Rare;
 
-public class AllShallEndInFlames() : TheWildfireCard(2,
+public class AllShallEndInFlames() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Rare,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(32, ValueProp.Move), new IgniteVar(24), new CardsVar(5)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(20, ValueProp.Move), new IgniteVar(20), new CardsVar(5)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<Burn>()];
@@ -63,7 +63,7 @@ public class AllShallEndInFlames() : TheWildfireCard(2,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(6);
-        DynamicVars["Ignite"].UpgradeValueBy(6);
+        DynamicVars.Damage.UpgradeValueBy(4);
+        DynamicVars["Ignite"].UpgradeValueBy(4);
     }
 }

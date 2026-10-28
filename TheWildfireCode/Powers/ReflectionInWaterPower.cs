@@ -19,6 +19,6 @@ public class ReflectionInWaterPower : TheWildfirePower
     {
         if (!participants.Contains(Owner) || Owner.Player == null)
             return;
-        await FirepowerController.Exert(choiceContext, Amount, Owner.Player, false, false);
+        await FirepowerController.Exert(choiceContext, Amount, Owner.Player, false, null);
     }
 }

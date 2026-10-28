@@ -77,7 +77,7 @@ public class LavaLeap() : TheWildfireCard(1,
             await CommonActions.Apply<VulnerablePower>(choiceContext, CombatState.HittableEnemies, this);
             fullExert = true;
         }
-        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert);
+        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert, play);
     }
 
     protected override void OnUpgrade()

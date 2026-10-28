@@ -51,7 +51,7 @@ public class MasterfulSpiral() : TheWildfireCard(1,
         await CommonActions.CardAttack(this, play,vfx:"vfx/vfx_attack_slash").Execute(choiceContext);
         if (exert >= DynamicVars["Exert"].IntValue)
             fullExert = true;
-        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert);
+        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert, play);
         if (exert >= DynamicVars["Exert"].IntValue && !Owner.HasPower<PowerFlowPower>())
             await FlowSingleton.AchieveFlow(choiceContext, Owner, this, CardType.Power);
     }

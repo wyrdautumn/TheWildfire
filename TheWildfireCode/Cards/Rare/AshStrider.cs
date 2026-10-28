@@ -15,7 +15,7 @@ public class AshStrider() : TheWildfireCard(3,
     CardType.Skill, CardRarity.Rare,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Move | ValueProp.Unblockable | ValueProp.Unpowered)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(5, ValueProp.Move | ValueProp.Unblockable | ValueProp.Unpowered)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<WeakPower>()];
@@ -42,6 +42,6 @@ public class AshStrider() : TheWildfireCard(3,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2);
+        EnergyCost.UpgradeBy(-1);
     }
 }

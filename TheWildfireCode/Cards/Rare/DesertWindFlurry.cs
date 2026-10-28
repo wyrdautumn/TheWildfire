@@ -23,21 +23,23 @@ public class DesertWindFlurry() : TheWildfireCard(2,
     CardType.Attack, CardRarity.Rare,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(5, ValueProp.Move),
-        new CalculationBaseVar(6),
-        new CalculationExtraVar(1),
-        new CalculatedVar("hits").WithMultiplier(Calc)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Move),
+        new DynamicVar("hits",4)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Firepower)];
     
-    private static decimal Calc(CardModel card, Creature? arg2)
+    protected override bool ShouldGlowRedInternal
     {
-        if (card.Owner.PlayerCombatState == null)
-            return 0;
-        int val = FirepowerController.Firepower.Get(card.Owner.PlayerCombatState);
-        if (val > card.DynamicVars.CalculationBase.IntValue)
-            return -card.DynamicVars.CalculationBase.IntValue;
-        return -val;
+        get
+        {
+            if (Owner.PlayerCombatState == null)
+                return false;
+            int damage = FirepowerController.Firepower.Get(Owner.PlayerCombatState);
+            int health = Owner.Creature.CurrentHp + Owner.Creature.Block;
+            if (damage >= health)
+                return true;
+            return false;
+        }
     }
 
     protected override async Task OnPlay(
@@ -46,7 +48,8 @@ public class DesertWindFlurry() : TheWildfireCard(2,
     {
         if (CombatState == null)
             return;
-        int num1 = (int) ((CalculatedVar)DynamicVars["hits"]).Calculate(null);
+        await FirepowerController.DealFirepowerDamage(choiceContext, Owner);
+        int num1 = DynamicVars["hits"].IntValue;
         Color color = new Color("a85bdd80");
         double num2 = SaveManager.Instance.PrefsSave.FastMode == FastModeType.Fast ? 0.2 : 0.3;
         NCombatRoom? instance1 = NCombatRoom.Instance;
@@ -61,6 +64,6 @@ public class DesertWindFlurry() : TheWildfireCard(2,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(1);
+        DynamicVars["hits"].UpgradeValueBy(1);
     }
 }

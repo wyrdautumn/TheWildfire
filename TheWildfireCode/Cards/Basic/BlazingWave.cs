@@ -46,7 +46,7 @@ public class BlazingWave() : TheWildfireCard(1,
         await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_slash").Execute(choiceContext);
         if (exert >= DynamicVars["Exert"].IntValue)
             fullExert = true;
-        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert);
+        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert, play);
     }
 
     protected override void OnUpgrade()

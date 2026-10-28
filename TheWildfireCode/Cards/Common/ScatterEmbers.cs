@@ -47,11 +47,12 @@ public class ScatterEmbers() : TheWildfireCard(0,
             ((CalculatedVar)DynamicVars["Debuff"]).Calculate(null), Owner.Creature, this);
         if (exert >= DynamicVars["Exert"].IntValue)
             fullExert = true;
-        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert);
+        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert, play);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Debuff"].UpgradeValueBy(1);
+        DynamicVars.Damage.UpgradeValueBy(2);
+        DynamicVars["Exert"].UpgradeValueBy(1);
     }
 }

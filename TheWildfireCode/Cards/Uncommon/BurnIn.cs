@@ -64,7 +64,7 @@ public class BurnIn() : TheWildfireCard(1,
             await CardCmd.Exhaust(choiceContext, card);
             fullExert = true;
         }
-        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert);
+        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert, play);
     }
 
     protected override void OnUpgrade()

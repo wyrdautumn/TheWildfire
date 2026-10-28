@@ -16,7 +16,7 @@ public class BurningJet() : TheWildfireCard(2,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(9),
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(12),
         new CalculationBaseVar(0),
         new CalculationExtraVar(1),
         new CalculatedBlockVar(ValueProp.Move).WithMultiplier(Calc)];
@@ -47,7 +47,7 @@ public class BurningJet() : TheWildfireCard(2,
         await PowerCmd.Apply<BlockNextTurnPower>(choiceContext, Owner.Creature, amount, Owner.Creature, this);
         if (exert >= DynamicVars["Exert"].IntValue)
             fullExert = true;
-        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert);
+        await FirepowerController.Exert(choiceContext, exert, Owner, fullExert, play);
     }
 
     protected override void OnUpgrade()

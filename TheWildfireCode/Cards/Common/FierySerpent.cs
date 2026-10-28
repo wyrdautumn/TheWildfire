@@ -65,7 +65,7 @@ public class FierySerpent() : TheWildfireCard(1,
             }
             return Task.CompletedTask;
         }).Execute(choiceContext);
-        await FirepowerController.Exert(choiceContext, exert, Owner, true);
+        await FirepowerController.Exert(choiceContext, exert, Owner, true, play);
     }
 
     protected override void OnUpgrade()

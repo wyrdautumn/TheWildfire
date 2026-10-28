@@ -11,7 +11,7 @@ public class ChanneledRage() : TheWildfireCard(2,
     CardType.Power, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<RagingFirePower>(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<ChanneledRagePower>(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<RagingFirePower>()];
@@ -20,7 +20,7 @@ public class ChanneledRage() : TheWildfireCard(2,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CommonActions.ApplySelf<RagingFirePower>(choiceContext, this);
+        await CommonActions.ApplySelf<ChanneledRagePower>(choiceContext, this);
     }
 
     protected override void OnUpgrade()
