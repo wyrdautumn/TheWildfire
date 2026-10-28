@@ -77,8 +77,8 @@ public class BleedFire() : TheWildfireCard(0,
     
     protected override void AfterDowngraded()
     {
-        if (_currentExhaust > DynamicVars["Exhaust"].IntValue)
-            DynamicVars["Exhaust"].BaseValue = _currentExhaust;
+        if (_currentExhaust > DynamicVars["Exert"].IntValue)
+            DynamicVars["Exert"].BaseValue = _currentExhaust;
     }
 
     protected override void OnUpgrade()
