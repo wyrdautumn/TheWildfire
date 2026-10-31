@@ -13,7 +13,7 @@ using TheWildfire.TheWildfireCode.Firepower;
 namespace TheWildfire.TheWildfireCode.Cards.Common;
 
 public class CrashingWave() : TheWildfireCard(1,
-    CardType.Attack, CardRarity.Uncommon,
+    CardType.Attack, CardRarity.Common,
     TargetType.RandomEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(8),

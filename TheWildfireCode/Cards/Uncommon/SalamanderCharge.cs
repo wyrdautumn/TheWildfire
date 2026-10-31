@@ -12,7 +12,7 @@ using TheWildfire.TheWildfireCode.Firepower;
 namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
 
 public class SalamanderCharge() : TheWildfireCard(1,
-    CardType.Attack, CardRarity.Common,
+    CardType.Attack, CardRarity.Uncommon,
     TargetType.RandomEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(9), new DynamicVar("hits", 3),
