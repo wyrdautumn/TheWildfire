@@ -18,7 +18,7 @@ public class BurnIn() : TheWildfireCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Unblockable | ValueProp.Unpowered), new ExertVar(6)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Unblockable | ValueProp.Unpowered), new ExertVar(4)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.FullExert), HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
     protected override HashSet<CardTag> CanonicalTags

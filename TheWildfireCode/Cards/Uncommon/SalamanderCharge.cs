@@ -9,13 +9,13 @@ using TheWildfire.TheWildfireCode.Cards;
 using TheWildfire.TheWildfireCode.Cards.Variables;
 using TheWildfire.TheWildfireCode.Firepower;
 
-namespace TheWildfire.TheWildfireCode.Cards.Common;
+namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
 
 public class SalamanderCharge() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Common,
-    TargetType.AllEnemies)
+    TargetType.RandomEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(7),
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(9), new DynamicVar("hits", 3),
         new CalculationBaseVar(0),
         new ExtraDamageVar(1),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier(Calc)];
@@ -38,7 +38,7 @@ public class SalamanderCharge() : TheWildfireCard(1,
     {
         int exert = ResolveExert();
         bool fullExert = false;
-        await CommonActions.CardAttack(this, play, 2, vfx:"vfx/vfx_attack_slash").Execute(choiceContext);
+        await CommonActions.CardAttack(this, play, DynamicVars["hits"].IntValue, vfx:"vfx/vfx_attack_slash").Execute(choiceContext);
         if (exert >= DynamicVars["Exert"].IntValue)
             fullExert = true;
         await FirepowerController.Exert(choiceContext, exert, Owner, fullExert, play);
@@ -46,6 +46,6 @@ public class SalamanderCharge() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Exert"].UpgradeValueBy(3);
+        DynamicVars["Exert"].UpgradeValueBy(2);
     }
 }

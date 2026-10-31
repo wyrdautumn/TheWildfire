@@ -10,11 +10,11 @@ using TheWildfire.TheWildfireCode.Cards;
 using TheWildfire.TheWildfireCode.Cards.Variables;
 using TheWildfire.TheWildfireCode.Firepower;
 
-namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
+namespace TheWildfire.TheWildfireCode.Cards.Common;
 
 public class CrashingWave() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Uncommon,
-    TargetType.AllEnemies)
+    TargetType.RandomEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(8),
         new CalculationBaseVar(0),
@@ -50,6 +50,6 @@ public class CrashingWave() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Exert"].UpgradeValueBy(2);
+        EnergyCost.UpgradeBy(-1);
     }
 }
