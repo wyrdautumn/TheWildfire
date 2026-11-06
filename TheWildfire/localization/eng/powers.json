@@ -59,8 +59,8 @@
   "THEWILDFIRE-CHANNELED_RAGE_POWER.description": "[gold]Raging Fire[/gold] increases attack damage.",
   "THEWILDFIRE-CHANNELED_RAGE_POWER.smartDescription": "[gold]Raging Fire[/gold] increases attack damage.",
   "THEWILDFIRE-CHANNELED_RAGE_POWER.title": "Channeled Rage",
-  "THEWILDFIRE-HEAT_VENT_POWER.description": "Whenever you [gold]Exhaust[/gold] a Status card, deal your [gold]Overheat[/gold] damage to a random enemy.",
-  "THEWILDFIRE-HEAT_VENT_POWER.smartDescription": "Whenever you [gold]Exhaust[/gold] a Status card, deal your [gold]Overheat[/gold] damage to a random enemy{Amount:plural:| [blue]{}[/blue] times}.",
+  "THEWILDFIRE-HEAT_VENT_POWER.description": "Whenever you [gold]Exhaust[/gold] a Status card, deal damage to a random enemy.",
+  "THEWILDFIRE-HEAT_VENT_POWER.smartDescription": "Whenever you [gold]Exhaust[/gold] a Status card, deal [blue]{Amount}[/blue] damage to a random enemy.",
   "THEWILDFIRE-HEAT_VENT_POWER.title": "Heat Vent",
   "THEWILDFIRE-MASTER_OF_FLOW_POWER.description": "Whenever playing a card would achieve [gold]Flow[/gold], reduce its cost by {energyPrefix:energyIcons(1)}.",
   "THEWILDFIRE-MASTER_OF_FLOW_POWER.smartDescription": "Whenever playing a card would achieve [gold]Flow[/gold], reduce its cost by {energyPrefix:energyIcons(1)}.",
@@ -70,5 +70,8 @@
   "THEWILDFIRE-STEPS_OF_GRASPING_FIRE_POWER.title": "Steps of Grasping Fire",
   "THEWILDFIRE-UNFORGIVING_FLAME_POWER.description": "At the end of your turn, [gold]Scorch[/gold] without taking damage.",
   "THEWILDFIRE-UNFORGIVING_FLAME_POWER.smartDescription": "At the end of your turn, [gold]Scorch[/gold] {Amount:plural:|[blue]{}[/blue] times }without taking damage.",
-  "THEWILDFIRE-UNFORGIVING_FLAME_POWER.title": "Unforgiving Flame"
+  "THEWILDFIRE-UNFORGIVING_FLAME_POWER.title": "Unforgiving Flame",
+  "THEWILDFIRE-SMOKE_COVER_POWER.description": "Whenever another player [gold]Exhausts[/gold] a card, gain [gold]Block[/gold].",
+  "THEWILDFIRE-SMOKE_COVER_POWER.smartDescription": "Whenever another player [gold]Exhausts[/gold] a card, gain [blue]{Amount}[/blue] [gold]Block[/gold].",
+  "THEWILDFIRE-SMOKE_COVER_POWER.title": "Smoke Bomb"
 }

@@ -21,7 +21,7 @@ public class DragonPunch() : TheWildfireCard(2,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(14, ValueProp.Move), new PowerVar<WeakPower>(2), new PowerVar<VulnerablePower>(2),
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(12, ValueProp.Move), new PowerVar<WeakPower>(2), new PowerVar<VulnerablePower>(2),
         new AfterburnVar(2)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -63,8 +63,6 @@ public class DragonPunch() : TheWildfireCard(2,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(3);
-        DynamicVars.Weak.UpgradeValueBy(1);
-        DynamicVars.Vulnerable.UpgradeValueBy(1);
+        DynamicVars.Damage.UpgradeValueBy(6);
     }
 }

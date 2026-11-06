@@ -16,7 +16,7 @@ public class BurningJet() : TheWildfireCard(2,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(12),
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(13),
         new CalculationBaseVar(0),
         new CalculationExtraVar(1),
         new CalculatedBlockVar(ValueProp.Move).WithMultiplier(Calc)];

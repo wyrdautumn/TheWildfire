@@ -27,26 +27,23 @@ public class HeatVentPower : TheWildfirePower
     {
         if (card.Owner.Creature == Owner && card.Type == CardType.Status && card.Owner.PlayerCombatState != null)
         {
-            for (int i = Amount; i > 0; i--)
+            Creature? target = card.Owner.RunState.Rng.CombatTargets.NextItem(CombatState.HittableEnemies);
+            if (target == null)
+                return;
+            NCreature? creatureNode = NCombatRoom.Instance?.GetCreatureNode(target);
+            if (creatureNode != null)
             {
-                int afterburn = Afterburn.AfterburnCount.Get(card.Owner.PlayerCombatState);
-                Creature? target = card.Owner.RunState.Rng.CombatTargets.NextItem(CombatState.HittableEnemies);
-                if (target == null)
-                    continue;
-                NCreature? creatureNode = NCombatRoom.Instance?.GetCreatureNode(target);
-                if (creatureNode != null)
+                NFireBurningVfx? child =
+                    NFireBurningVfx.Create(creatureNode.GetBottomOfHitbox(), 1f, true, new Color("7a37a8"));
+                if (child != null)
                 {
-                    NFireBurningVfx? child =
-                        NFireBurningVfx.Create(creatureNode.GetBottomOfHitbox(), 1f, true, new Color("7a37a8"));
-                    if (child == null)
-                        continue;
                     SfxCmd.Play("event:/sfx/characters/attack_fire");
                     NCombatRoom? instance = NCombatRoom.Instance;
                     if (instance != null)
                         instance.CombatVfxContainer.AddChildSafely((Godot.Node)child);
                 }
-                await CreatureCmd.Damage(choiceContext, target, afterburn, ValueProp.Unpowered, null, null);
             }
+            await CreatureCmd.Damage(choiceContext, target, Amount, ValueProp.Unpowered, null, null);
         }
     }
 }

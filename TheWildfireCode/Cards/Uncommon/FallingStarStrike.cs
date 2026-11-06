@@ -19,7 +19,7 @@ public class FallingStarStrike() : TheWildfireCard(0,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.RandomEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Move), new PowerVar<VulnerablePower>(2), new PowerVar<WeakPower>(2), new AfterburnVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Move), new PowerVar<VulnerablePower>(1), new PowerVar<WeakPower>(1), new AfterburnVar(3)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<Afterburn>(),HoverTipFactory.FromPower<WeakPower>(),HoverTipFactory.FromPower<VulnerablePower>()];
     protected override HashSet<CardTag> CanonicalTags
@@ -45,6 +45,6 @@ public class FallingStarStrike() : TheWildfireCard(0,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(4);
+        DynamicVars.Damage.UpgradeValueBy(3);
     }
 }

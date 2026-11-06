@@ -7,7 +7,7 @@ using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards.Rare;
 
-public class StepsOfGraspingFire() : TheWildfireCard(2,
+public class StepsOfGraspingFire() : TheWildfireCard(1,
     CardType.Power, CardRarity.Rare,
     TargetType.Self)
 {

@@ -13,7 +13,7 @@ using TheWildfire.TheWildfireCode.Cards.Status;
 
 namespace TheWildfire.TheWildfireCode.Cards.Rare;
 
-public class SunderedChain() : TheWildfireCard(1,
+public class SunderedChain() : TheWildfireCard(2,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {

@@ -14,7 +14,7 @@ public class KindleInnerFlames() : TheWildfireCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(5), new CardsVar(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(7), new CardsVar(2)];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -22,22 +22,13 @@ public class KindleInnerFlames() : TheWildfireCard(1,
     {
         await FirepowerController.Ignite(choiceContext, DynamicVars["Ignite"].IntValue, Owner);
         await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
-        await CardCmd.Discard(choiceContext, await CardSelectCmd.FromHandForDiscard(choiceContext, Owner, new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 1), null, this));
-    }
-    
-    protected override CardLocation GetResultLocationForCardPlay()
-    {
-        CardLocation locationForCardPlay = base.GetResultLocationForCardPlay();
-        if (locationForCardPlay.pileType == PileType.Discard)
-        {
-            locationForCardPlay.pileType = PileType.Draw;
-            locationForCardPlay.position = CardPilePosition.Top;
-        }
-        return locationForCardPlay;
+        CardSelectorPrefs prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1);
+        IReadOnlyList<CardPileAddResult> cardPileAddResultList = await CardPileCmd.Add(await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this), PileType.Draw, CardPilePosition.Top);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Ignite"].UpgradeValueBy(3);
+        DynamicVars["Ignite"].UpgradeValueBy(2);
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

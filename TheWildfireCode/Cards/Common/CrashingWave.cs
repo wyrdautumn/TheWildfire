@@ -16,7 +16,7 @@ public class CrashingWave() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.RandomEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(8),
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(9),
         new CalculationBaseVar(0),
         new CalculationExtraVar(1),
         new ExtraDamageVar(1),
