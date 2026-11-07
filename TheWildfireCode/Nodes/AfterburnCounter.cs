@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using TheWildfire.TheWildfireCode.Cards;
 using TheWildfire.TheWildfireCode.Cards.Status;
+using TheWildfire.TheWildfireCode.Firepower;
 
 namespace TheWildfire.TheWildfireCode.Nodes;
 
@@ -27,9 +28,11 @@ public partial class AfterburnCounter : Control
         {
             _card = card;
         }
+        
+        UpdateVisibility();
     }
-    
-    public override void _Process(double delta)
+
+    public void UpdateVisibility()
     {
         if (_card == null || _card.Model == null || !_card.Model.Tags.Contains(WildfireKeywords.ShowAfterburn) || _label == null)
         {
@@ -40,6 +43,14 @@ public partial class AfterburnCounter : Control
         if (_card.Model.Tags.Contains(WildfireKeywords.ShowAfterburn))
         {
             this.Visible = _card.Visible;
+        }
+        
+        if (!Visible)
+            return;
+        
+        if (_card == null || _card.Model == null || _label == null)
+        {
+            return;
         }
 
         if (!_card.Model.IsInCombat || _card.Model.Owner.PlayerCombatState == null)

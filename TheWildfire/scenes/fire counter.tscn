@@ -48,12 +48,13 @@ alpha_curve = SubResource("CurveTexture_sad8n")
 shader = ExtResource("4_xc1ld")
 shader_parameter/maxLineWidth = 15.7470007479825
 shader_parameter/minLineWidth = 1.150000054625
-shader_parameter/speed = 3.7590001785525002
+shader_parameter/speed = 3.7590001785525
 shader_parameter/blockSize = 5.058000240255
 shader_parameter/color = Color(0.6784314, 0.37254903, 0.89411765, 0.5137255)
 shader_parameter/tolerance = 0.54000002565
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4gwkt"]
+blend_mode = 1
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 2
@@ -240,6 +241,7 @@ position = Vector2(128, 128)
 script = ExtResource("1_ydqys")
 
 [node name="fire" type="GPUParticles2D" parent="FireVfxFront"]
+modulate = Color(0.46666667, 0.19607843, 0.64705884, 1)
 material = SubResource("CanvasItemMaterial_4gwkt")
 position = Vector2(-3, -16)
 emitting = false

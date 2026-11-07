@@ -7,7 +7,9 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Combat;
 using TheWildfire.TheWildfireCode.Cards;
+using TheWildfire.TheWildfireCode.Nodes;
 using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Firepower;
@@ -112,6 +114,27 @@ public class FlowSingleton() : CustomSingletonModel(HookType.Combat)
         }
         if (player.Creature.CombatState == null)
             return;
+        if (player.Character is Character.TheWildfire)
+            UpdateFlowVisuals(player.Creature);
         await FirepowerHooks.FlowAchieved(player.Creature.CombatState, choiceContext, player, cardType);
+    }
+
+    public async Task ClearFlow(Creature creature)
+    {
+        await PowerCmd.Remove<AttackFlowPower>(creature);
+        await PowerCmd.Remove<SkillFlowPower>(creature);
+        await PowerCmd.Remove<PowerFlowPower>(creature);
+        if (creature.Player != null && creature.Player.Character is Character.TheWildfire)
+            UpdateFlowVisuals(creature);
+    }
+    
+    public static void UpdateFlowVisuals(Creature player)
+    {
+        NCreature? creature = player.GetCreatureNode();
+        if (creature == null)
+            return;
+        NCreatureVisuals visuals = creature.Visuals;
+        if (visuals is NDeshaVisuals desha)
+            desha.CheckFlowShadows();
     }
 }

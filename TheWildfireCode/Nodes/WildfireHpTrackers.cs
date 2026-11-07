@@ -11,7 +11,7 @@ using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Nodes;
 
-public partial class WildfireHpTrackers : Control
+public partial class WildfireHpTrackers : Control, IFirepowerNode
 {
 	private Control? _overheat;
 	private Label? _overheatLabel;
@@ -43,37 +43,24 @@ public partial class WildfireHpTrackers : Control
 		if (_creature != null && _creature.Player != null && _creature.Player.Character is Character.TheWildfire)
 		{
 			_overheat.Visible = true;
-			GD.Print("overheat visible");
 		}
 		else
 		{
 			_overheat.Visible = false;
 		}
-
-		GD.Print("hp bar counters initialized");
-		if (_creature != null)
-			GD.Print("creature found");
-		if (_overheat != null)
-			GD.Print("overheat counter found");
+		
+		if (!FirepowerController.FirepowerNodes.Contains(this))
+		{
+			FirepowerController.FirepowerNodes.Add(this);
+		}
+		
+		UpdateFirepowerLabel();
 	}
 
 	public override void _Process(double delta)
 	{
-		if (_creature == null || _creature.Player == null)
-			return;
-
-		if (_overheat != null && _overheat.Visible == false && _creature.Player != null &&
-			_creature.Player.PlayerCombatState != null &&
-			FirepowerController.Firepower.Get(_creature.Player.PlayerCombatState) > 0)
+		if (_overheat != null && _overheatLabel != null && _overheat.Visible)
 		{
-			_overheat.Visible = true;
-			GD.Print("overheat visible");
-		}
-		
-		if (_overheat != null && _overheatLabel != null && _overheat.Visible && _creature.Player != null)
-		{
-			_overheatCount = FirepowerController.CalculateOverheatDamage(_creature.Player);
-			_overheatLabel.Text = _overheatCount.ToString();
 			if (_healthBar != null && _healthBar.GetNode("MintyIncomingDamageText") is Label label)
 				AdjustMintyPreview(label);
 		}
@@ -195,5 +182,29 @@ public partial class WildfireHpTrackers : Control
 		description.Add("overheat", _overheatCount.ToString());
 
 		return new HoverTip(title, description);
+	}
+
+	private void UpdateFirepowerLabel()
+	{
+		if (_creature == null || _creature.Player == null)
+			return;
+
+		if (_overheat != null && _overheat.Visible == false && _creature.Player != null &&
+			_creature.Player.PlayerCombatState != null &&
+			FirepowerController.Firepower.Get(_creature.Player.PlayerCombatState) > 0)
+		{
+			_overheat.Visible = true;
+		}
+
+		if (_overheat != null && _overheatLabel != null && _overheat.Visible && _creature.Player != null)
+		{
+			_overheatCount = FirepowerController.CalculateOverheatDamage(_creature.Player);
+			_overheatLabel.Text = _overheatCount.ToString();
+		}
+	}
+
+	public void AfterFirepowerUpdate()
+	{
+		UpdateFirepowerLabel();
 	}
 }

@@ -11,7 +11,7 @@ using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards.Rare;
 
-public class ThermalResistance() : TheWildfireCard(1,
+public class ThermalResistance() : TheWildfireCard(0,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
@@ -37,6 +37,6 @@ public class ThermalResistance() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        AddKeyword(CardKeyword.Retain);
     }
 }

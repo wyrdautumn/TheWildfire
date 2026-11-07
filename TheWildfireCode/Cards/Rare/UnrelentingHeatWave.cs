@@ -24,21 +24,21 @@ public class UnrelentingHeatWave() : TheWildfireCard(1,
         CardPlay play)
     {
         CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 0, 2);
-        CardModel? card = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this)).FirstOrDefault();
-        if (card == null)
-            return;
-        await CardCmd.Exhaust(choiceContext, card);
+        var cards = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this));
+        foreach (CardModel card in cards)
+            await CardCmd.Exhaust(choiceContext, card);
         CardPile? draw = CardPile.Get(PileType.Draw, Owner);
         CardPile? exhaust = CardPile.Get(PileType.Exhaust, Owner);
-        if (draw == null || exhaust == null || CombatState == null)
+        if (CombatState == null)
             return;
         var firebolt = await Firebolt.CreateInHand(Owner, 1, CombatState);
+        if (draw == null || exhaust == null)
+            return;
         if (draw.Cards.Count < exhaust.Cards.Count)
         {
             foreach (CardModel card2 in firebolt)
                 CardCmd.Upgrade(card2);
         }
-            
     }
 
     protected override void OnUpgrade()
