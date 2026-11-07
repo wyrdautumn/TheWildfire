@@ -1,11 +1,152 @@
-[gd_scene load_steps=3 format=3 uid="uid://dsypbaxmtvhby"]
+[gd_scene load_steps=30 format=3 uid="uid://dsypbaxmtvhby"]
 
 [ext_resource type="Texture2D" uid="uid://dqu8p757jss83" path="res://TheWildfire/images/character/desha.png" id="1_po6yp"]
+[ext_resource type="Script" uid="uid://cqspi2asgty4d" path="res://TheWildfireCode/Nodes/NDeshaVisuals.cs" id="1_xbonc"]
+[ext_resource type="Shader" uid="uid://dgwg3p8sdq6q3" path="res://TheWildfire/images/shaders/char_select_wildfire_eyes.gdshader" id="2_gkdwf"]
+[ext_resource type="Script" uid="uid://detf6caanmfrf" path="res://TheWildfireCode/Nodes/WildfireParticles.cs" id="3_x0ggx"]
+[ext_resource type="Shader" uid="uid://18nsq0wncvur" path="res://TheWildfire/images/shaders/ring_shader.gdshader" id="4_xbonc"]
+[ext_resource type="Texture2D" uid="uid://qskcylyyxc4g" path="res://TheWildfire/images/shaders/common_ring_polar_a.png" id="5_jv2ut"]
+[ext_resource type="Texture2D" uid="uid://iejosguidjhe" path="res://TheWildfire/images/shaders/desha_fire_fleck_sheet.png" id="7_xbonc"]
+[ext_resource type="Texture2D" uid="uid://bh8ew7iaflr5o" path="res://TheWildfire/images/shaders/ring_flame_a.png" id="8_dpvx4"]
+[ext_resource type="Texture2D" uid="uid://spvsoqcf5n4x" path="res://TheWildfire/images/shaders/fire frames/sprite_sheet.png" id="9_2ksc3"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ywtfl"]
 blend_mode = 1
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dpvx4"]
+shader = ExtResource("2_gkdwf")
+shader_parameter/maxLineWidth = 15.0000007125
+shader_parameter/minLineWidth = 9.0000004275
+shader_parameter/speed = 5.0000002375
+shader_parameter/blockSize = 20.0
+shader_parameter/color = Color(0.09803922, 0.56078434, 0.78039217, 1)
+shader_parameter/tolerance = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ksc3"]
+shader = ExtResource("2_gkdwf")
+shader_parameter/maxLineWidth = 12.00000057
+shader_parameter/minLineWidth = 6.000000285
+shader_parameter/speed = 5.0000002375
+shader_parameter/blockSize = 20.0
+shader_parameter/color = Color(0.23529412, 0.60784316, 0.15294118, 1)
+shader_parameter/tolerance = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g68w6"]
+shader = ExtResource("2_gkdwf")
+shader_parameter/maxLineWidth = 8.00000038
+shader_parameter/minLineWidth = 3.0000001425
+shader_parameter/speed = 5.0000002375
+shader_parameter/blockSize = 20.0
+shader_parameter/color = Color(0.7058824, 0.003921569, 0.015686275, 1)
+shader_parameter/tolerance = 0.0
+
+[sub_resource type="Curve" id="Curve_7xpmy"]
+_data = [Vector2(0, 0.49438208), 0.0, 1.1896893, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4eoar"]
+width = 64
+curve = SubResource("Curve_7xpmy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_extgv"]
+shader = ExtResource("4_xbonc")
+shader_parameter/erosion_curve = SubResource("CurveTexture_4eoar")
+shader_parameter/erosion_offset = 0.1
+
+[sub_resource type="Curve" id="Curve_vc4v3"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 3), 0.0, -8.750562, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pav16"]
+curve = SubResource("Curve_vc4v3")
+
+[sub_resource type="Curve" id="Curve_w5hie"]
+_data = [Vector2(0, 0.24719107), 0.0, 9.228465, 0, 0, Vector2(0.15151516, 0.8539326), 0.1853932, 0.1853932, 0, 0, Vector2(1, 1), 0.1612115, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_2ovd0"]
+curve = SubResource("Curve_w5hie")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e1j1a"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 1.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_2ovd0")
+emission_curve = SubResource("CurveTexture_pav16")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jv2ut"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_xbonc"]
+_limits = [-0.21, 0.21, 0.0, 1.0]
+_data = [Vector2(0, -0.07786515), 0.0, 0.0, 0, 0, Vector2(0.49999994, 0.08730337), 0.0, 0.0, 0, 0, Vector2(1, -0.08258426), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_dpvx4"]
+curve = SubResource("Curve_xbonc")
+
+[sub_resource type="Curve" id="Curve_jv2ut"]
+_data = [Vector2(0, 0.6292135), 0.0, -0.77303344, 0, 0, Vector2(0.50000006, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.48314613), -0.55216694, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_2ksc3"]
+curve = SubResource("Curve_jv2ut")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g68w6"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(80, 10, 1)
+angle_min = -254.09999
+angle_max = 254.10002
+direction = Vector3(0, -10, 0)
+spread = 29.444
+initial_velocity_min = 63.059998
+initial_velocity_max = 316.43
+angular_velocity_min = -194.82
+angular_velocity_max = 194.81998
+orbit_velocity_min = -0.20999992
+orbit_velocity_max = 0.2100001
+orbit_velocity_curve = SubResource("CurveTexture_dpvx4")
+radial_velocity_min = -7.900022
+radial_velocity_max = 7.8999777
+gravity = Vector3(0, -98, 0)
+linear_accel_min = -9.490002
+linear_accel_max = 6.319998
+radial_accel_min = -7.110002
+radial_accel_max = 10.279998
+tangential_accel_min = -15.020002
+tangential_accel_max = 15.019998
+damping_min = 9.8810005
+damping_max = 20.553001
+scale_min = 0.049999997
+scale_max = 0.14999999
+scale_curve = SubResource("CurveTexture_2ksc3")
+color = Color(1, 1, 1, 0.6901961)
+anim_offset_max = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g68w6"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 2
+particles_anim_loop = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7xpmy"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.59999996
+scale_max = 0.59999996
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
 [node name="Desha" type="Node2D"]
+script = ExtResource("1_xbonc")
 
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true
@@ -38,3 +179,130 @@ unique_name_in_owner = true
 position = Vector2(1.9073486e-06, -137)
 scale = Vector2(0.45, 0.45)
 texture = ExtResource("1_po6yp")
+
+[node name="PowerShadow" type="Sprite2D" parent="Visuals"]
+visible = false
+material = SubResource("ShaderMaterial_dpvx4")
+texture = ExtResource("1_po6yp")
+
+[node name="SkillShadow" type="Sprite2D" parent="Visuals"]
+visible = false
+material = SubResource("ShaderMaterial_2ksc3")
+texture = ExtResource("1_po6yp")
+
+[node name="AttackShadow" type="Sprite2D" parent="Visuals"]
+visible = false
+material = SubResource("ShaderMaterial_g68w6")
+texture = ExtResource("1_po6yp")
+
+[node name="AttackRing" type="Node2D" parent="Visuals"]
+script = ExtResource("3_x0ggx")
+
+[node name="Ring" type="GPUParticles2D" parent="Visuals/AttackRing"]
+self_modulate = Color(0.7058824, 0.003921569, 0.015686275, 1)
+material = SubResource("ShaderMaterial_extgv")
+scale = Vector2(2, 2)
+emitting = false
+amount = 1
+texture = ExtResource("5_jv2ut")
+lifetime = 0.4
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_e1j1a")
+
+[node name="SkillRing" type="Node2D" parent="Visuals"]
+script = ExtResource("3_x0ggx")
+
+[node name="Ring" type="GPUParticles2D" parent="Visuals/SkillRing"]
+self_modulate = Color(0.23529412, 0.60784316, 0.15294118, 1)
+material = SubResource("ShaderMaterial_extgv")
+scale = Vector2(2, 2)
+emitting = false
+amount = 1
+texture = ExtResource("5_jv2ut")
+lifetime = 0.4
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_e1j1a")
+
+[node name="PowerRing" type="Node2D" parent="Visuals"]
+script = ExtResource("3_x0ggx")
+
+[node name="Ring" type="GPUParticles2D" parent="Visuals/PowerRing"]
+self_modulate = Color(0.09803922, 0.56078434, 0.78039217, 1)
+material = SubResource("ShaderMaterial_extgv")
+scale = Vector2(2, 2)
+emitting = false
+amount = 1
+texture = ExtResource("5_jv2ut")
+lifetime = 0.4
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_e1j1a")
+
+[node name="FireParticlesFront" type="GPUParticles2D" parent="Visuals"]
+material = SubResource("CanvasItemMaterial_jv2ut")
+position = Vector2(-4.444449, 262.22223)
+scale = Vector2(2.2222223, 2.2222223)
+amount = 30
+amount_ratio = 0.0
+texture = ExtResource("7_xbonc")
+lifetime = 0.86
+preprocess = 1.65
+speed_scale = 0.2
+explosiveness = 0.14
+randomness = 0.57
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_g68w6")
+
+[node name="FireParticlesBack" type="GPUParticles2D" parent="Visuals"]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_jv2ut")
+position = Vector2(-4.444449, 262.22223)
+scale = Vector2(2.2222223, 2.2222223)
+amount = 30
+amount_ratio = 0.0
+texture = ExtResource("7_xbonc")
+lifetime = 0.86
+preprocess = 1.65
+speed_scale = 0.2
+explosiveness = 0.14
+randomness = 0.57
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_g68w6")
+
+[node name="ExertRing" type="Node2D" parent="Visuals"]
+script = ExtResource("3_x0ggx")
+
+[node name="Ring" type="GPUParticles2D" parent="Visuals/ExertRing"]
+self_modulate = Color(0.54901963, 0.25490198, 0.7529412, 1)
+material = SubResource("ShaderMaterial_extgv")
+scale = Vector2(2, 2)
+emitting = false
+amount = 1
+texture = ExtResource("8_dpvx4")
+lifetime = 0.4
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_e1j1a")
+
+[node name="IgniteEffect" type="Node2D" parent="Visuals"]
+position = Vector2(2.2222223, -51.111115)
+script = ExtResource("3_x0ggx")
+
+[node name="fire" type="GPUParticles2D" parent="Visuals/IgniteEffect"]
+modulate = Color(0.76145875, 0.31253675, 0.918278, 1)
+material = SubResource("CanvasItemMaterial_g68w6")
+position = Vector2(-3, -16)
+emitting = false
+amount = 1
+texture = ExtResource("9_2ksc3")
+lifetime = 0.36
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_7xpmy")

@@ -8,7 +8,7 @@ using TheWildfire.TheWildfireCode.Firepower;
 
 namespace TheWildfire.TheWildfireCode.Nodes;
 
-public partial class WildfireFireCounter : Control
+public partial class WildfireFireCounter : Control, IFirepowerNode
 {
 	private Label? _label;
 	private Label? _labelSmall;
@@ -67,16 +67,10 @@ public partial class WildfireFireCounter : Control
 			HideFirepowerTooltip();
 		}
 		
-		GD.Print(
-			$"Firepower Counter initialized.");
-		if (this.Visible == true)
-			GD.Print($"Firepower counter displayed.");
-		else
-			GD.Print($"Firepower counter not displayed.");
-		if (_label != null)
-			GD.Print($"Label found");
-		if (_fireLayers != null)
-			GD.Print($"Layers found");
+		if (!FirepowerController.FirepowerNodes.Contains(this))
+		{
+			FirepowerController.FirepowerNodes.Add(this);
+		}
 	}
 	
 	public override void _ExitTree()
@@ -88,10 +82,8 @@ public partial class WildfireFireCounter : Control
 	{
 		if (_player == null)
 			return;
-		RefreshVisibility();
 		if (this.Visible == false)
 			return;
-		UpdateFire();
 		UpdateCounterHover();
 	}
 
@@ -271,5 +263,11 @@ public partial class WildfireFireCounter : Control
 			"THEWILDFIRE_FIREPOWER_COUNTER.description");
 
 		return new HoverTip(title, description);
+	}
+
+	public void AfterFirepowerUpdate()
+	{
+		RefreshVisibility();
+		UpdateFire();
 	}
 }

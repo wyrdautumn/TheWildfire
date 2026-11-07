@@ -35,7 +35,7 @@ public class FallingStarStrike() : TheWildfireCard(0,
             return;
         Creature target = CombatState.HittableEnemies.TakeRandom(1, this.Owner.RunState.Rng.CombatTargets)
             .First();;
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this,play).Targeting(target).WithHitFx("vfx/vfx_starry_impact", "blunt_attack.mp3")
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this,play).Targeting(target).WithHitFx("vfx/vfx_starry_impact", tmpSfx:"blunt_attack.mp3")
             .Execute(choiceContext);
         await CommonActions.Apply<WeakPower>(choiceContext, target, this);
         await CommonActions.Apply<VulnerablePower>(choiceContext, target, this);
