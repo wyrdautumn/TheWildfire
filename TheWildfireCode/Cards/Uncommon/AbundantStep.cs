@@ -17,7 +17,7 @@ public class AbundantStep() : TheWildfireCard(0,
     protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(8, ValueProp.Move), new DynamicVar("Rekindle", 10)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.ExertStatic),HoverTipFactory.Static(WildfireKeywords.Rekindle)];
+        [HoverTipFactory.Static(WildfireKeywords.Rekindle)];
     
     public override bool GainsBlock => true;
 

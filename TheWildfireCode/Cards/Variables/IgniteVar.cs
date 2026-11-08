@@ -9,6 +9,5 @@ public class IgniteVar : DynamicVar
 
     public IgniteVar(decimal igniteCount) : base(Key, igniteCount)
     {
-        this.WithTooltip();
     }
 }

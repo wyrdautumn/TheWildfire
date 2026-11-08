@@ -12,7 +12,7 @@ using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
 
-public class StokeTheFire() : TheWildfireCard(6,
+public class StokeTheFire() : TheWildfireCard(5,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {

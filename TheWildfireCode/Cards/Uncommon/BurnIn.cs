@@ -2,6 +2,7 @@
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -18,12 +19,23 @@ public class BurnIn() : TheWildfireCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Unblockable | ValueProp.Unpowered), new ExertVar(4)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Unblockable | ValueProp.Unpowered), new ExertVar(4),
+        new CalculationBaseVar(0),
+        new CalculationExtraVar(1),
+        new CalculatedVar("Debuff").WithMultiplier(Calc)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.FullExert), HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
     protected override HashSet<CardTag> CanonicalTags
     {
         get => new HashSet<CardTag>() { WildfireKeywords.ExertTag };
+    }
+    
+    private static decimal Calc(CardModel card, Creature? arg2)
+    {
+        if (card is not TheWildfireCard)
+            return 0;
+        TheWildfireCard thisCard = (TheWildfireCard) card;
+        return thisCard.ResolveExert();
     }
     
     protected override bool ShouldGlowGoldInternal

@@ -70,7 +70,8 @@ public class TheWildfire : PlaceholderCharacterModel
     public override string CustomCharacterSelectBg => "res://TheWildfire/scenes/char_select_bg_wildfire.tscn";
     public override string CustomEnergyCounterPath => "res://TheWildfire/scenes/wildfire_energy_counter.tscn";
     public override string CustomVisualPath => "res://TheWildfire/scenes/desha.tscn";
-    
+    public override string CustomMerchantAnimPath => "res://TheWildfire/scenes/wildfire_merchant.tscn";
+
     public override Color EnergyLabelOutlineColor => new ("562F53");
     public override Color DialogueColor => new ("713980");
     public override VfxColor SpeechBubbleColor => VfxColor.Purple;

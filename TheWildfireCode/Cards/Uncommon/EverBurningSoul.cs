@@ -14,7 +14,7 @@ public class EverBurningSoul() : TheWildfireCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<EverBurningSoulPower>(3)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(CardKeyword.Exhaust),HoverTipFactory.Static(WildfireKeywords.IgniteStatic)];
+        [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

@@ -12,8 +12,6 @@ public class ReflectionInWaterPower : TheWildfirePower
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.ExertStatic)];
 
     public override async Task BeforeSideTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {

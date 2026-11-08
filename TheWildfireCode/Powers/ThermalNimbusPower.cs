@@ -20,7 +20,7 @@ public class ThermalNimbusPower : TheWildfirePower
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.IgniteStatic)];
+        [];
 
     public override async Task AfterIgnite(PlayerChoiceContext choiceContext, int amount, Player igniter)
     {

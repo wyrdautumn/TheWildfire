@@ -13,7 +13,7 @@ public class CrawlingFire() : TheWildfireCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<CrawlingFirePower>(2)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.IgniteStatic),HoverTipFactory.FromPower<RagingFirePower>()];
+        [HoverTipFactory.FromPower<RagingFirePower>()];
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)

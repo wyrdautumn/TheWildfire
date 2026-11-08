@@ -1,4 +1,5 @@
 using Godot;
+using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
@@ -262,7 +263,7 @@ public partial class WildfireFireCounter : Control, IFirepowerNode
 			"static_hover_tips",
 			"THEWILDFIRE_FIREPOWER_COUNTER.description");
 
-		return new HoverTip(title, description);
+		return new HoverTip(title, description, PreloadManager.Cache.GetTexture2D("res://TheWildfire/images/charui/firepower_text_icon.png"));
 	}
 
 	public void AfterFirepowerUpdate()

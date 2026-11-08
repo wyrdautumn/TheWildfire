@@ -57,12 +57,6 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
             return counter;
         });
 
-    public override Task BeforeRoomEntered(AbstractRoom room)
-    {
-        FirepowerNodes.Clear();
-        return Task.CompletedTask;
-    }
-
     public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource,
         CardPlay? cardPlay)
     {

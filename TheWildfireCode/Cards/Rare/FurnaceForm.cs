@@ -14,7 +14,7 @@ public class FurnaceForm() : TheWildfireCard(3,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<FurnaceFormPower>(5)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.IgniteStatic),HoverTipFactory.FromPower<RagingFirePower>()];
+        [HoverTipFactory.FromPower<RagingFirePower>()];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

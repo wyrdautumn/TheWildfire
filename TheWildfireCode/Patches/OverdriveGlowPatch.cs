@@ -24,11 +24,6 @@ public class OverdriveGlowPatch
             CardModel? card = __instance.CardNode.Model;
             if (card == null || !card.CanPlay() || card.ShouldGlowRed || card.ShouldGlowGold)
                 return;
-            if (card.Owner.HasPower<OverdrivePower>() && card.Tags.Contains(WildfireKeywords.ExertTag))
-            {
-                __instance.CardNode.CardHighlight.Modulate = new Color(1f, 0.608f, 1f, 0.98f);
-                return;
-            }
             if (card.Keywords.Contains(WildfireKeywords.AttackFlow) && CheckFlow(card, CardType.Attack))
             {
                 __instance.CardNode.CardHighlight.Modulate = new Color(0.99f, 0.56f, 0.56f, 0.98f);
@@ -58,11 +53,6 @@ public class OverdriveGlowPatch
             if (AccessTools.Field(typeof(NHandCardHolder), "_flash")?.GetValue(__instance) is not Control flash ||
                 !GodotObject.IsInstanceValid(flash) || card == null || !card.CanPlay() || card.ShouldGlowGold || card.ShouldGlowRed)
                 return;
-            if (card.Owner.HasPower<OverdrivePower>() && card.Tags.Contains(WildfireKeywords.ExertTag))
-            {
-                flash.Modulate = new Color(1f, 0.608f, 1f, 0.98f);
-                return;
-            }
             if (card.Keywords.Contains(WildfireKeywords.AttackFlow) && CheckFlow(card, CardType.Attack))
             {
                 flash.Modulate = new Color(0.99f, 0.56f, 0.56f, 0.98f);

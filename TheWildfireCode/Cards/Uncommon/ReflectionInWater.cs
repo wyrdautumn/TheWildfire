@@ -15,7 +15,7 @@ public class ReflectionInWater() : TheWildfireCard(2,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<StrengthPower>(2), new PowerVar<DexterityPower>(2), new PowerVar<ReflectionInWaterPower>(4)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<StrengthPower>(),HoverTipFactory.FromPower<DexterityPower>(),HoverTipFactory.Static(WildfireKeywords.ExertStatic)];
+        [HoverTipFactory.FromPower<StrengthPower>(),HoverTipFactory.FromPower<DexterityPower>()];
     
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

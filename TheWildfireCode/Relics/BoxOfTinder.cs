@@ -14,8 +14,6 @@ public class BoxOfTinder : TheWildfireRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Common;
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.ExertStatic)];
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(4, ValueProp.Unpowered)];
     

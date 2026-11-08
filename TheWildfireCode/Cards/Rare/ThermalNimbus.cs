@@ -14,7 +14,7 @@ public class ThermalNimbus() : TheWildfireCard(2,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<ThermalNimbusPower>(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.IgniteStatic)];
+        [];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

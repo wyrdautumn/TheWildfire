@@ -14,7 +14,7 @@ public class IgniteTheSun() : TheWildfireCard(2,
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.IgniteStatic),HoverTipFactory.Static(WildfireKeywords.Scorch)];
+        [HoverTipFactory.Static(WildfireKeywords.Scorch)];
     
     protected override HashSet<CardTag> CanonicalTags
     {

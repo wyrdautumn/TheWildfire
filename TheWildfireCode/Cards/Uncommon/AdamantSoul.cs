@@ -42,7 +42,7 @@ public class AdamantSoul() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.CalculationBase.UpgradeValueBy(2);
-        DynamicVars.CalculationExtra.UpgradeValueBy(2);
+        DynamicVars.CalculationBase.UpgradeValueBy(3);
+        DynamicVars.CalculationExtra.UpgradeValueBy(3);
     }
 }

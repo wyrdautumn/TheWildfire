@@ -1,5 +1,5 @@
 ﻿{
-  "THEWILDFIRE-BURNING_ELIXIR.description": "[gold]Ignite[/gold] [blue]{Ignite}[/blue].",
+  "THEWILDFIRE-BURNING_ELIXIR.description": "Gain [blue]{Ignite}[/blue] [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img].",
   "THEWILDFIRE-BURNING_ELIXIR.title": "Burning Elixir",
   "THEWILDFIRE-FLOW_POTION.description": "Achieve a random [gold]Flow[/gold] you haven't achieved this turn.",
   "THEWILDFIRE-FLOW_POTION.title": "Flow Potion",

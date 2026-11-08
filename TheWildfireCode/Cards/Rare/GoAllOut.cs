@@ -2,6 +2,7 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -18,6 +19,8 @@ public class GoAllOut() : TheWildfireCard(0,
         new CalculationBaseVar(0),
         new ExtraDamageVar(1),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier(Calc)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.Static(WildfireKeywords.ExertAll)];
     protected override bool HasEnergyCostX => true;
     protected override HashSet<CardTag> CanonicalTags
     {

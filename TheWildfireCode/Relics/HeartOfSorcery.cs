@@ -20,7 +20,7 @@ public class HeartOfSorcery() : TheWildfireRelic
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Ignite",4), new PowerVar<ConstitutionPower>(6)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.Firepower),HoverTipFactory.Static(WildfireKeywords.IgniteStatic),HoverTipFactory.FromPower<ConstitutionPower>()];
+        [HoverTipFactory.Static(WildfireKeywords.Firepower),HoverTipFactory.FromPower<ConstitutionPower>()];
 
     public override async Task AfterRoomEntered(AbstractRoom room)
     {

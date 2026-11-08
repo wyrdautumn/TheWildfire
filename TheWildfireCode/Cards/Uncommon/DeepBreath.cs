@@ -27,6 +27,11 @@ public class DeepBreath() : TheWildfireCard(0,
             await FirepowerController.Ignite(choiceContext, DynamicVars["Ignite"].IntValue, Owner);
         }
     }
+    
+    protected override HashSet<CardTag> CanonicalTags
+    {
+        get => new HashSet<CardTag>() { WildfireKeywords.ExertTag };
+    }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

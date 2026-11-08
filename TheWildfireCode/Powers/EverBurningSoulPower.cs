@@ -13,7 +13,7 @@ public class EverBurningSoulPower : TheWildfirePower
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(CardKeyword.Exhaust),HoverTipFactory.Static(WildfireKeywords.IgniteStatic)];
+        [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
 
     public override async Task AfterCardExhausted(PlayerChoiceContext choiceContext, CardModel card, bool causedByEthereal)
     {
