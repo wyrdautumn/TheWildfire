@@ -220,6 +220,10 @@ public partial class WildfireHpTrackers : Control
 	public void AfterFirepowerUpdate()
 	{
 		UpdateFirepowerLabel();
+		if (_overheat == null || !_overheat.Visible)
+		{
+			return;
+		}
 		if (_healthBar == null || _healthBar.GetNodeOrNull("MintyIncomingDamageText") is not Label label)
 		{
 			return;

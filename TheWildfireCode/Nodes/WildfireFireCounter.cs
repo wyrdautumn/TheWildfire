@@ -283,6 +283,7 @@ public partial class WildfireFireCounter : Control
 	public void AfterFirepowerUpdate()
 	{
 		RefreshVisibility();
-		UpdateFire();
+		if (Visible)
+			UpdateFire();
 	}
 }

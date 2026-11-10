@@ -13,7 +13,7 @@ public class MintyPatches
     [HarmonyPostfix]
     public static void IncomingDamagePostfix(ref int __result, Creature creature)
     {
-        if (creature.Player != null)
+        if (creature.Player != null && creature.Player.PlayerCombatState != null && !FirepowerController.FirepowerDamageHasHappened.Get(creature.Player.PlayerCombatState))
             __result += FirepowerController.CalculateOverheatDamage(creature.Player);
     }
     

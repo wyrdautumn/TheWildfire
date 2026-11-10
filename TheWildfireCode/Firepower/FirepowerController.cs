@@ -28,6 +28,7 @@ namespace TheWildfire.TheWildfireCode.Firepower;
 public class FirepowerController() : CustomSingletonModel(HookType.Combat)
 {
     public static readonly SpireField<PlayerCombatState, int> Firepower = new(() => 0);
+    public static readonly SpireField<PlayerCombatState, bool> FirepowerDamageHasHappened = new(() => false);
     
     public static readonly AddedNode<NEnergyCounter, WildfireFireCounter> FireCounterNode =
         new(parent =>
@@ -63,6 +64,16 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
         return 0;
     }
 
+    public override Task AfterEnergyResetLate(Player player)
+    {
+        if (player.PlayerCombatState != null)
+        {
+            FirepowerDamageHasHappened.Set(player.PlayerCombatState, false);
+        }
+
+        return Task.CompletedTask;
+    }
+
     public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side != CombatSide.Player)
@@ -77,6 +88,7 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
             {
                 await DealOverheatDamage(choiceContext, player);
             }
+            FirepowerDamageHasHappened.Set(player.PlayerCombatState, true);
         }
     }
 
