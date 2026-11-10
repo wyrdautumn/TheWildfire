@@ -36,6 +36,7 @@ public class WholenessOfBody() : TheWildfireCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
+        await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
         int exert = ResolveExert();
         bool fullExert = false;
         await CreatureCmd.Heal(Owner.Creature, exert);

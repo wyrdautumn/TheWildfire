@@ -30,6 +30,7 @@ public class PhoenixDance() : TheWildfireCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
+        await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
         await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
         await CommonActions.Draw(this, choiceContext);
     }

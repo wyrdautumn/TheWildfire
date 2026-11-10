@@ -49,6 +49,7 @@ public class KineticAura() : TheWildfireCard(0,
     {
         if (CombatState == null)
             return;
+        await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
         int exert = ResolveExert();
         bool fullExert = false;
         await PowerCmd.Apply<VigorPower>(choiceContext, CombatState.PlayerCreatures,

@@ -15,7 +15,7 @@ public class BurnTogether() : TheWildfireCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.AllAllies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(5)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(6)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [..HoverTipFactory.FromCardWithCardHoverTips<Incinerate>()];
@@ -31,6 +31,7 @@ public class BurnTogether() : TheWildfireCard(1,
     {
         if (CombatState == null)
             return;
+        await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
         await FirepowerController.Ignite(choiceContext, DynamicVars["Ignite"].IntValue, Owner);
         foreach (Creature teammate in CombatState.GetTeammatesOf(Owner.Creature)
                      .Where<Creature>((Func<Creature, bool>)(c => c != null && c.IsAlive && c.IsPlayer)))

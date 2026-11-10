@@ -19,6 +19,7 @@ public class FireBlast() : TheWildfireCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
+        await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
         if (play.Target != null)
             await CreatureCmd.Damage(choiceContext, play.Target, this.DynamicVars.Damage, this, play);
         await FirepowerController.Ignite(choiceContext, DynamicVars["Ignite"].IntValue, Owner);

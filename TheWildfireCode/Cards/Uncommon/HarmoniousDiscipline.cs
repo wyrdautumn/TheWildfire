@@ -37,6 +37,7 @@ public class HarmoniousDiscipline() : TheWildfireCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
+        await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
         await FirepowerController.DealFirepowerDamage(choiceContext, Owner);
         await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature,
             DynamicVars.Strength.BaseValue, Owner.Creature, this);

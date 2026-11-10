@@ -14,11 +14,13 @@ using TheWildfire.TheWildfireCode.Firepower;
 
 namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
 
-public class FlintStrike() : TheWildfireCard(2,
+public class FlintStrike() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(20, ValueProp.Move), new IgniteVar(9)];
+    private int _currentIgnite = 0;
+    
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(10, ValueProp.Move), new IgniteVar(5), new DynamicVar("Increase", 4)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
 
     protected override async Task OnPlay(
@@ -42,10 +44,18 @@ public class FlintStrike() : TheWildfireCard(2,
             return Task.CompletedTask;
         }).Execute(choiceContext);
         await FirepowerController.Ignite(choiceContext, DynamicVars["Ignite"].IntValue, Owner);
+        DynamicVars["Ignite"].BaseValue += DynamicVars["Increase"].IntValue;
+        _currentIgnite = DynamicVars["Ignite"].IntValue;
+    }
+    
+    protected override void AfterDowngraded()
+    {
+        if (_currentIgnite > DynamicVars["Ignite"].IntValue)
+            DynamicVars["Ignite"].BaseValue = _currentIgnite;
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(6);
+        DynamicVars.Damage.UpgradeValueBy(3);
     }
 }

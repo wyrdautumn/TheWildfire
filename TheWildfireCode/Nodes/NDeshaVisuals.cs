@@ -8,7 +8,7 @@ using TheWildfire.TheWildfireCode.Powers;
 namespace TheWildfire.TheWildfireCode.Nodes;
 
 [GlobalClass]
-public partial class NDeshaVisuals : NCreatureVisuals, IFirepowerNode
+public partial class NDeshaVisuals : NCreatureVisuals
 {
 	private Sprite2D? _attackShadow;
 	private Sprite2D? _skillShadow;
@@ -37,13 +37,20 @@ public partial class NDeshaVisuals : NCreatureVisuals, IFirepowerNode
 		_backFire = GetNodeOrNull<GpuParticles2D>("%Visuals/FireParticlesBack");
 		_firepower = 0;
 
-		if (!FirepowerController.FirepowerNodes.Contains(this))
-		{
-			FirepowerController.FirepowerNodes.Add(this);
-		}
-
 		UpdateFireParticles();
 		CheckFlowShadows();
+	}
+
+	public override void _EnterTree()
+	{
+		base._EnterTree();
+		FirepowerController.FirepowerUpdated += AfterFirepowerUpdate;
+	}
+
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		FirepowerController.FirepowerUpdated -= AfterFirepowerUpdate;
 	}
 
 	public void CheckFlowShadows()

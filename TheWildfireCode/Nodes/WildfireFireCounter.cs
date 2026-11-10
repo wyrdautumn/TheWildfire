@@ -9,7 +9,7 @@ using TheWildfire.TheWildfireCode.Firepower;
 
 namespace TheWildfire.TheWildfireCode.Nodes;
 
-public partial class WildfireFireCounter : Control, IFirepowerNode
+public partial class WildfireFireCounter : Control
 {
 	private Label? _label;
 	private Label? _labelSmall;
@@ -57,6 +57,7 @@ public partial class WildfireFireCounter : Control, IFirepowerNode
 		}
 
 		this.Visible = false;
+		this.SetProcess(false);
 		RefreshVisibility();
 
 		if (this.Visible == true)
@@ -67,24 +68,34 @@ public partial class WildfireFireCounter : Control, IFirepowerNode
 		{
 			HideFirepowerTooltip();
 		}
-		
-		if (!FirepowerController.FirepowerNodes.Contains(this))
-		{
-			FirepowerController.FirepowerNodes.Add(this);
-		}
 	}
 	
+	public override void _EnterTree()
+	{
+		base._EnterTree();
+		FirepowerController.FirepowerUpdated += AfterFirepowerUpdate;
+	}
+
 	public override void _ExitTree()
 	{
+		base._ExitTree();
+		FirepowerController.FirepowerUpdated -= AfterFirepowerUpdate;
 		HideFirepowerTooltip();
 	}
 
 	public override void _Process(double delta)
 	{
 		if (_player == null)
+		{
 			return;
+		}
+
 		if (this.Visible == false)
+		{
+			SetProcess(false);
 			return;
+		}
+
 		UpdateCounterHover();
 	}
 
@@ -98,6 +109,8 @@ public partial class WildfireFireCounter : Control, IFirepowerNode
 		{
 			int fire = FirepowerController.Firepower.Get(_player.PlayerCombatState);
 			this.Visible = this.Visible || _player.Character is Character.TheWildfire || fire > 0;
+			if (this.Visible)
+				this.SetProcess(true);
 		}
 	}
 
@@ -242,7 +255,8 @@ public partial class WildfireFireCounter : Control, IFirepowerNode
 			return;
 
 		// Let Material fully unregister first, then let Energy try to show again.
-		_energyCounter.CallDeferred(nameof(NEnergyCounter.OnHovered));
+		if (!NHoverTipSet._activeHoverTips.ContainsKey(_energyCounter))
+			_energyCounter.CallDeferred(nameof(NEnergyCounter.OnHovered));
 	}
 
 	private bool IsMouseOverEnergyCounter()

@@ -1,4 +1,5 @@
 ﻿using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -29,6 +30,7 @@ public class Firecracker() : TheWildfireCard(0,
     {
         if (CombatState == null)
             return;
+        await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
         await CommonActions.Apply<WeakPower>(choiceContext, CombatState.HittableEnemies, this);
         await CommonActions.Apply<VulnerablePower>(choiceContext, CombatState.HittableEnemies, this);
         await Afterburn.CreateAfterburn(DynamicVars["Afterburn"].IntValue, Owner, CombatState);

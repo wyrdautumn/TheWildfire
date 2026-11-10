@@ -13,7 +13,7 @@ using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards.Rare;
 
-public class BleedFire() : TheWildfireCard(0,
+public class BleedFire() : TheWildfireCard(1,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
@@ -58,6 +58,7 @@ public class BleedFire() : TheWildfireCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
+        await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
         int exert = ResolveExert();
         bool fullExert;
         if (exert >= DynamicVars["Exert"].IntValue)

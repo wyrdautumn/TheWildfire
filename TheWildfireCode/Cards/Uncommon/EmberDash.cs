@@ -16,8 +16,8 @@ public class EmberDash() : TheWildfireCard(0,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.RandomEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(5, ValueProp.Move),
-    new IgniteVar(5)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Move),
+    new IgniteVar(3)];
 
     protected override bool HasEnergyCostX => true;
 
@@ -28,15 +28,14 @@ public class EmberDash() : TheWildfireCard(0,
         if (CombatState == null)
             return;
         int hits = ResolveEnergyXValue();
-        AttackCommand result = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(hits).FromCard(this, play).TargetingRandomOpponents(CombatState).WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
-        List<Creature> enemies = result.Results.SelectMany(r => r.Select(c => c.Receiver)).Distinct().ToList();
-        int ignite = DynamicVars["Ignite"].IntValue * enemies.Count;
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(hits).FromCard(this, play).TargetingRandomOpponents(CombatState).WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
+        int ignite = DynamicVars["Ignite"].IntValue * hits;
         await FirepowerController.Ignite(choiceContext, ignite, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(1);
+        DynamicVars.Damage.UpgradeValueBy(2);
         DynamicVars["Ignite"].UpgradeValueBy(1);
     }
 }

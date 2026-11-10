@@ -15,13 +15,13 @@ using TheWildfire.TheWildfireCode.Cards.Status;
 using TheWildfire.TheWildfireCode.Cards.Variables;
 using TheWildfire.TheWildfireCode.Firepower;
 
-namespace TheWildfire.TheWildfireCode.Cards.Common;
+namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
 
 public class DragonPunch() : TheWildfireCard(2,
-    CardType.Attack, CardRarity.Common,
+    CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(12, ValueProp.Move), new PowerVar<WeakPower>(2), new PowerVar<VulnerablePower>(2),
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(14, ValueProp.Move), new PowerVar<WeakPower>(2), new PowerVar<VulnerablePower>(2),
         new AfterburnVar(2)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>

@@ -43,7 +43,7 @@ public class BurningTide() : TheWildfireCard(0,
     {
         int exert = ResolveExert();
         bool fullExert = false;
-        await CommonActions.CardAttack(this, play, vfx:"vfx/vfx_attack_slash").Execute(choiceContext);
+        await CommonActions.CardAttack(this, play, vfx:"vfx/vfx_attack_slash").WithAttackerAnim("cast",0.25f).Execute(choiceContext);
         if (exert >= DynamicVars["Exert"].IntValue)
             fullExert = true;
         await FirepowerController.Exert(choiceContext, exert, Owner, fullExert, play);

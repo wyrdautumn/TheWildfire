@@ -17,7 +17,7 @@ public class StunningPalm() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(12, ValueProp.Move), new ExertVar(4),
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(11, ValueProp.Move), new ExertVar(4),
         new CalculationBaseVar(0),
         new CalculationExtraVar(1),
         new CalculatedVar("Debuff").WithMultiplier(Calc)];

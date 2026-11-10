@@ -30,6 +30,7 @@ public class Overflow() : TheWildfireCard(0,
     {
         if (CombatState == null)
             return;
+        await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
         foreach (Creature creature in CombatState.GetTeammatesOf(Owner.Creature)
                      .Where<Creature>((Func<Creature, bool>)(c => c != null && c.IsAlive && c.IsPlayer && c != Owner.Creature)))
         {

@@ -1,4 +1,7 @@
 using Godot;
+using HarmonyLib;
+using MegaCrit.Sts2.addons.mega_text;
+using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions;
@@ -11,7 +14,7 @@ using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Nodes;
 
-public partial class WildfireHpTrackers : Control, IFirepowerNode
+public partial class WildfireHpTrackers : Control
 {
 	private Control? _overheat;
 	private Label? _overheatLabel;
@@ -30,6 +33,9 @@ public partial class WildfireHpTrackers : Control, IFirepowerNode
 		
 		_overheat = GetNodeOrNull<Control>("OverheatContainer");
 		_overheatLabel = GetNodeOrNull<Label>("OverheatContainer/OverheatLabel");
+		
+		if (_overheatLabel != null)
+			_overheatLabel.AddThemeFontOverride(ThemeConstants.Label.Font, PreloadManager.Cache.GetAsset<Font>("res://themes/kreon_bold_glyph_space_one.tres"));
 
 		if (GetParent() is NHealthBar healthBar)
 			_healthBar = healthBar;
@@ -42,29 +48,32 @@ public partial class WildfireHpTrackers : Control, IFirepowerNode
 		this.Visible = true;
 		if (_creature != null && _creature.Player != null && _creature.Player.Character is Character.TheWildfire)
 		{
+			SetProcess(true);
 			_overheat.Visible = true;
 		}
 		else
 		{
+			SetProcess(false);
 			_overheat.Visible = false;
-		}
-		
-		if (!FirepowerController.FirepowerNodes.Contains(this))
-		{
-			FirepowerController.FirepowerNodes.Add(this);
 		}
 		
 		UpdateFirepowerLabel();
 	}
+	
+	public override void _EnterTree()
+	{
+		base._EnterTree();
+		FirepowerController.FirepowerUpdated += AfterFirepowerUpdate;
+	}
+
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		FirepowerController.FirepowerUpdated -= AfterFirepowerUpdate;
+	}
 
 	public override void _Process(double delta)
 	{
-		if (_overheat != null && _overheatLabel != null && _overheat.Visible)
-		{
-			if (_healthBar != null && _healthBar.GetNode("MintyIncomingDamageText") is Label label)
-				AdjustMintyPreview(label);
-		}
-		
 		UpdateCounterHover();
 	}
 
@@ -88,8 +97,12 @@ public partial class WildfireHpTrackers : Control, IFirepowerNode
 		}
 	}
 	
-	public void AdjustMintyPreview(Label label)
+	public void AdjustMintyPreview()
 	{
+		if (_overheat == null || _overheatLabel == null || !_overheat.Visible || _healthBar == null || _healthBar.GetNodeOrNull("MintyIncomingDamageText") is not Label label)
+		{
+			return;
+		}
 		Control? overheat = GetNodeOrNull<Control>("%OverheatContainer");
 		Control? block;
 		if (_healthBar != null)
@@ -193,6 +206,7 @@ public partial class WildfireHpTrackers : Control, IFirepowerNode
 			_creature.Player.PlayerCombatState != null &&
 			FirepowerController.Firepower.Get(_creature.Player.PlayerCombatState) > 0)
 		{
+			SetProcess(true);
 			_overheat.Visible = true;
 		}
 
@@ -206,5 +220,15 @@ public partial class WildfireHpTrackers : Control, IFirepowerNode
 	public void AfterFirepowerUpdate()
 	{
 		UpdateFirepowerLabel();
+		if (_healthBar == null || _healthBar.GetNodeOrNull("MintyIncomingDamageText") is not Label label)
+		{
+			return;
+		}
+		var mintyType = AccessTools.TypeByName("MintySpire2.MintySpire2Code.combat.SummedIncomingDamageRender");
+		if (mintyType != null && _healthBar != null)
+		{
+			var addMethod = AccessTools.DeclaredMethod(mintyType, "RefreshVisibilityAndText");
+			addMethod.Invoke(null, [_healthBar]);
+		}
 	}
 }

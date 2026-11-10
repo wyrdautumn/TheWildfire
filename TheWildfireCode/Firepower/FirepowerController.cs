@@ -29,8 +29,6 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
 {
     public static readonly SpireField<PlayerCombatState, int> Firepower = new(() => 0);
     
-    public static List<IFirepowerNode> FirepowerNodes = new List<IFirepowerNode>();
-    
     public static readonly AddedNode<NEnergyCounter, WildfireFireCounter> FireCounterNode =
         new(parent =>
         {
@@ -90,7 +88,7 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
         int increase = val + ignite;
         SfxCmd.Play("event:/sfx/characters/attack_fire");
         Firepower.Set(player.PlayerCombatState, increase);
-        UpdateFirepower();
+        FirepowerUpdated?.Invoke();;
         await FirepowerHooks.AfterIgnite(player.Creature.CombatState, choiceContext, ignite, player);
     }
 
@@ -140,7 +138,7 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
                 Firepower.Set(player.PlayerCombatState, result);
             }
         }
-        UpdateFirepower();
+        FirepowerUpdated?.Invoke();
         await FirepowerHooks.AfterExert(player.Creature.CombatState, choiceContext, spent, player, fullExert);
     }
 
@@ -156,7 +154,7 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
             await PowerCmd.Decrement(overdrive);
         else
             Firepower.Set(player.PlayerCombatState, 0);
-        UpdateFirepower();
+        FirepowerUpdated?.Invoke();;
         await FirepowerHooks.AfterExert(player.Creature.CombatState, choiceContext, val, player, fullExert);
     }
     
@@ -219,13 +217,9 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
         return val;
     }
 
-    public static void UpdateFirepower()
-    {
-        foreach (IFirepowerNode node in FirepowerNodes)
-        {
-            node.AfterFirepowerUpdate();
-        }
-    }
+    public delegate void FirepowerUpdater();
+
+    public static event FirepowerUpdater? FirepowerUpdated;
     
     public static void UpdateFirepowerVisuals(Player player)
     {
@@ -237,11 +231,5 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
         NCreatureVisuals visuals = creature.Visuals;
         if (visuals is NDeshaVisuals desha)
             desha.UpdateFireParticles();
-    }
-
-    public override Task AfterCombatEnd(CombatRoom room)
-    {
-        FirepowerNodes.Clear();
-        return Task.CompletedTask;
     }
 }

@@ -59,6 +59,7 @@ public class BurnIn() : TheWildfireCard(1,
     {
         if (play.Target == null)
             return;
+        await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
         int exert = ResolveExert();
         bool fullExert = false;
         BurnInPower? burnInPower = await PowerCmd.Apply<BurnInPower>(choiceContext, play.Target, exert, Owner.Creature, this);

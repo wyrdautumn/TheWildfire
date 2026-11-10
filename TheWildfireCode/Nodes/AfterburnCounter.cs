@@ -1,5 +1,8 @@
 ﻿using BaseLib.Extensions;
 using Godot;
+using MegaCrit.Sts2.addons.mega_text;
+using MegaCrit.Sts2.Core.Assets;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
@@ -35,6 +38,14 @@ public partial class AfterburnCounter : Control
         _exertUpper = GetNodeOrNull<RichTextLabel>("AfterburnCounterVisual/ExertIcon/ExertUpper");
         _exertGreen = GetNodeOrNull<TextureRect>("AfterburnCounterVisual/ExertIcon/ExertIconGreen");
         _exertPurple = GetNodeOrNull<TextureRect>("AfterburnCounterVisual/ExertIcon/ExertIconPurple");
+
+        if (_label != null)
+            _label.AddThemeFontOverride(ThemeConstants.Label.Font, PreloadManager.Cache.GetAsset<Font>("res://themes/kreon_bold_shared.tres"));
+        if (_exertLower != null)
+            _exertLower.AddThemeFontOverride(ThemeConstants.RichTextLabel.NormalFont, PreloadManager.Cache.GetAsset<Font>("res://themes/kreon_bold_shared.tres"));
+        if (_exertUpper != null)
+            _exertUpper.AddThemeFontOverride(ThemeConstants.RichTextLabel.NormalFont, PreloadManager.Cache.GetAsset<Font>("res://themes/kreon_bold_shared.tres"));
+
 
         if (GetParent() is Control container)
         {
@@ -124,7 +135,10 @@ public partial class AfterburnCounter : Control
             if (!card.IsInCombat || combatState == null)
             {
                 _exertUpper.Text = "[center]0[/center]";
-                _exertLower.Text = denominator;
+                if (card.UpgradePreviewType.IsPreview() && card.DynamicVars["Exert"].WasJustUpgraded)
+                    _exertLower.Text = "[color=7FFF00][outline_color=1F5923]" + denominator + "[/outline_color][/color]";
+                else
+                    _exertLower.Text = denominator;
                 return;
             }
 
@@ -143,7 +157,10 @@ public partial class AfterburnCounter : Control
                 _exertPurple.Visible = true;
             numerator = "[center]" + firepower + "[/center]";
             _exertUpper.Text = numerator;
-            _exertLower.Text = denominator;
+            if (card.UpgradePreviewType.IsPreview() && card.DynamicVars["Exert"].WasJustUpgraded)
+                _exertLower.Text = "[color=7FFF00][outline_color=1F5923]" + denominator + "[/outline_color][/color]";
+            else
+                _exertLower.Text = denominator;
             return;
         }
 

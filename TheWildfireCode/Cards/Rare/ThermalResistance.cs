@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.ValueProps;
 using TheWildfire.TheWildfireCode.Cards.Status;
 using TheWildfire.TheWildfireCode.Firepower;
 using TheWildfire.TheWildfireCode.Powers;
@@ -18,7 +19,9 @@ public class ThermalResistance() : TheWildfireCard(0,
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CalculationBaseVar(0),
         new CalculationExtraVar(1),
-        new CalculatedVar("Constitution").WithMultiplier(Calc)];
+        new CalculatedBlockVar(ValueProp.Move).WithMultiplier(Calc)];
+
+    public override bool GainsBlock => true;
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Firepower),HoverTipFactory.FromPower<ConstitutionPower>()];
@@ -32,7 +35,8 @@ public class ThermalResistance() : TheWildfireCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CommonActions.ApplySelf<ConstitutionPower>(choiceContext, this, ((CalculatedVar) DynamicVars["Constitution"]).Calculate(null));
+        decimal block = await CommonActions.CardBlock(this, play);
+        await CommonActions.ApplySelf<ConstitutionPower>(choiceContext, this, block);
     }
 
     protected override void OnUpgrade()

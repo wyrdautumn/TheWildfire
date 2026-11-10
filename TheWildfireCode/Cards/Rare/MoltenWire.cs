@@ -20,7 +20,7 @@ public class MoltenWire() : TheWildfireCard(1,
     public int _currentStrength = 3;
     public int _increasedStrength;
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(10, ValueProp.Move), new PowerVar<MoltenWirePower>(3), new IntVar("Increase", 1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(12, ValueProp.Move), new PowerVar<MoltenWirePower>(3), new IntVar("Increase", 1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<StrengthPower>()];

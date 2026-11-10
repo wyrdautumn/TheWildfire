@@ -72,6 +72,8 @@ public class TheWildfire : PlaceholderCharacterModel
     public override string CustomVisualPath => "res://TheWildfire/scenes/desha.tscn";
     public override string CustomMerchantAnimPath => "res://TheWildfire/scenes/wildfire_merchant.tscn";
 
+    public override float DeathAnimTime => 1.83f;
+
     public override Color EnergyLabelOutlineColor => new ("562F53");
     public override Color DialogueColor => new ("713980");
     public override VfxColor SpeechBubbleColor => VfxColor.Purple;
