@@ -1,6 +1,9 @@
 ﻿using BaseLib.Abstracts;
 using TheWildfire.TheWildfireCode.Extensions;
 using Godot;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Unlocks;
+using TheWildfire.TheWildfireCode.Epochs;
 
 namespace TheWildfire.TheWildfireCode.Character;
 
@@ -33,4 +36,26 @@ public class TheWildfireCardPool : CustomCardPoolModel
     public override Color DeckEntryCardColor => new("5d2461");
 
     public override bool IsColorless => false;
+    
+    protected override IEnumerable<CardModel> FilterThroughEpochs(UnlockState unlockState, IEnumerable<CardModel> cards)
+    {
+        var list = cards.ToList();
+
+        if (!unlockState.IsEpochRevealed<Wildfire5Epoch>())
+        {
+            list.RemoveAll(c => Wildfire5Epoch.Cards.Any(card => card.Id == c.Id));
+        }
+
+        if (!unlockState.IsEpochRevealed<Wildfire3Epoch>())
+        {
+            list.RemoveAll(c => Wildfire3Epoch.Cards.Any(card => card.Id == c.Id));
+        }
+
+        if (!unlockState.IsEpochRevealed<Wildfire7Epoch>())
+        {
+            list.RemoveAll(c => Wildfire7Epoch.Cards.Any(card => card.Id == c.Id));
+        }
+
+        return list;
+    }
 }

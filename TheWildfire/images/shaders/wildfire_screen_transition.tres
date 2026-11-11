@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c3lcv4wpn7nm6"]
+
+[ext_resource type="Shader" uid="uid://dmeb6ijiddch7" path="res://TheWildfire/images/shaders/wildfire_screen_transition.gdshader" id="1_0u1yw"]
+[ext_resource type="Texture2D" uid="uid://bveecc8rfpc2j" path="res://TheWildfire/images/shaders/wildfire_screen_transition.png" id="2_e65vm"]
+
+[resource]
+shader = ExtResource("1_0u1yw")
+shader_parameter/transitionTex = ExtResource("2_e65vm")
+shader_parameter/threshold = 0.0

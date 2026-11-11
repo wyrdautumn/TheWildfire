@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://c0skkaipo50ro"]
+
+[ext_resource type="Shader" uid="uid://bohnbhpje0x6p" path="res://TheWildfire/scenes/cast_fire_shader.gdshader" id="1_4ptbo"]
+[ext_resource type="Texture2D" uid="uid://6tkqqslrjm66" path="res://TheWildfire/images/shaders/fire materials/anime_fire.png" id="2_ghmy5"]
+[ext_resource type="Texture2D" uid="uid://bo5rmygjgvn0w" path="res://TheWildfire/images/shaders/fire materials/distortion_exclussion_mask.png" id="3_s73nb"]
+[ext_resource type="Texture2D" uid="uid://cv1lxkjxdwg55" path="res://TheWildfire/images/shaders/fire materials/fbm_noise.png" id="4_dk07g"]
+[ext_resource type="Texture2D" uid="uid://548ovotw8hw4" path="res://TheWildfire/images/shaders/fire materials/anime_fire_2d_normal.png" id="5_pmjyx"]
+
+[resource]
+shader = ExtResource("1_4ptbo")
+shader_parameter/speed = 0.5
+shader_parameter/normal_scl_out = 1.5
+shader_parameter/normal_scl_in = 2.0
+shader_parameter/noise_scl_out = 0.4
+shader_parameter/noise_scl_in = 0.2
+shader_parameter/distortion_scl_out = 0.1
+shader_parameter/distortion_scl_in = 0.08
+shader_parameter/mask_force = 0.6
+shader_parameter/fps = 12.0
+shader_parameter/draw_tex = ExtResource("2_ghmy5")
+shader_parameter/normal_tex = ExtResource("5_pmjyx")
+shader_parameter/noise_tex = ExtResource("4_dk07g")
+shader_parameter/mask_tex = ExtResource("3_s73nb")
+shader_parameter/color_out_a = Color(0.8862745, 0.627451, 1, 1)
+shader_parameter/color_out_b = Color(0.6862745, 0.37254903, 0.9019608, 1)
+shader_parameter/color_in_a = Color(0.5372549, 0.24705882, 0.7372549, 1)
+shader_parameter/color_in_b = Color(0.6392157, 0.30588236, 0.88235295, 1)

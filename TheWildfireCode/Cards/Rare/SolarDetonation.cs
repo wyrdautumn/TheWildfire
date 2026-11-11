@@ -22,7 +22,7 @@ public class SolarDetonation() : TheWildfireCard(3,
     CardType.Attack, CardRarity.Rare,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(36, ValueProp.Move), new PowerVar<WeakPower>(2), new PowerVar<VulnerablePower>(2), new AfterburnVar(5)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(30, ValueProp.Move), new PowerVar<WeakPower>(3), new PowerVar<VulnerablePower>(3), new AfterburnVar(5)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<Afterburn>(),HoverTipFactory.FromPower<WeakPower>(),HoverTipFactory.FromPower<VulnerablePower>()];
     
@@ -66,6 +66,6 @@ public class SolarDetonation() : TheWildfireCard(3,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(12);
+        DynamicVars.Damage.UpgradeValueBy(10);
     }
 }

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://du2mjusvbrpng"]
+
+[ext_resource type="Script" uid="uid://cdm8sslw2rlr3" path="res://TheWildfireCode/Nodes/NWildfireMerchant.cs" id="1_2pndc"]
+[ext_resource type="Texture2D" uid="uid://dqu8p757jss83" path="res://TheWildfire/images/character/desha.png" id="2_uchrn"]
+
+[node name="WildfireMerchant" type="Node2D"]
+script = ExtResource("1_2pndc")
+
+[node name="Visuals" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1.9073486e-06, -165)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_uchrn")

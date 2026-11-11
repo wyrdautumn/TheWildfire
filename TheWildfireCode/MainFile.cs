@@ -1,9 +1,12 @@
 using System.Reflection;
+using BaseLib.Config;
 using BaseLib.Hooks;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
+using TheWildfire.TheWildfireCode.Character;
 using TheWildfire.TheWildfireCode.Firepower;
+using TheWildfire.TheWildfireCode.Patches.EpochPatches;
 
 namespace TheWildfire.TheWildfireCode;
 
@@ -18,6 +21,9 @@ public partial class MainFile : Node
 
     public static void Initialize()
     {
+        EpochRegistration.RegisterEpochs();
+        ModConfigRegistry.Register(ModId, new TheWildfireConfig());
+        
         Harmony harmony = new(ModId);
 
         harmony.PatchAllUncategorized();

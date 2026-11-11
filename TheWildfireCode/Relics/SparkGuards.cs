@@ -31,7 +31,6 @@ public class SparkGuards() : TheWildfireRelic
         {
             if (card.Owner.PlayerCombatState == null || card.CombatState == null)
                 return;
-            int afterburn = Afterburn.AfterburnCount.Get(card.Owner.PlayerCombatState);
             foreach (Creature target in card.CombatState.HittableEnemies)
             {
                 NCreature? creatureNode = NCombatRoom.Instance?.GetCreatureNode(target);
@@ -47,7 +46,7 @@ public class SparkGuards() : TheWildfireRelic
                         instance.CombatVfxContainer.AddChildSafely((Godot.Node)child);
                 }
             }
-            await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), card.CombatState.HittableEnemies, afterburn, ValueProp.Unpowered, Owner.Creature, null, null);
+            await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), card.CombatState.HittableEnemies, card.DynamicVars.Damage.BaseValue, ValueProp.Unpowered, Owner.Creature, null, null);
         }
     }
 }

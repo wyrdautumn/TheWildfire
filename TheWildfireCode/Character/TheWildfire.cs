@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
 using BaseLib.Abstracts;
+using BaseLib.Patches.UI;
 using BaseLib.Utils.NodeFactories;
 using TheWildfire.TheWildfireCode.Extensions;
 using Godot;
@@ -71,13 +73,40 @@ public class TheWildfire : PlaceholderCharacterModel
     public override string CustomEnergyCounterPath => "res://TheWildfire/scenes/wildfire_energy_counter.tscn";
     public override string CustomVisualPath => "res://TheWildfire/scenes/desha.tscn";
     public override string CustomMerchantAnimPath => "res://TheWildfire/scenes/wildfire_merchant.tscn";
+    public override string CustomRestSiteAnimPath => "res://TheWildfire/scenes/wildfire_rest_site.tscn";
+    public override string CustomTrailPath => "res://TheWildfire/scenes/card_trail_wildfire.tscn";
 
     public override float DeathAnimTime => 1.83f;
 
+    public override string CustomCharacterSelectTransitionPath =>
+        "res://TheWildfire/images/shaders/wildfire_screen_transition.tres";
+
+    public override RelicIconData? CustomYummyCookie => new RelicIconData("res://TheWildfire/images/relics/big/yummy_cookie_wildfire.png","res://TheWildfire/images/relics/yummy_cookie_wildfire.png","res://TheWildfire/images/relics/yummy_cookie_wildfire_outline.png");
+    
+    public override string CharacterTransitionSfx => "res://TheWildfire/audio/wildfire_transition.wav";
     public override Color EnergyLabelOutlineColor => new ("562F53");
     public override Color DialogueColor => new ("713980");
     public override VfxColor SpeechBubbleColor => VfxColor.Purple;
     public override Color MapDrawingColor => new ("AD43C8");
     public override Color RemoteTargetingLineColor => new ("c07ceaFF");
     public override Color RemoteTargetingLineOutline => new ("a342b5FF");
+    
+    public override List<string> GetArchitectAttackVfx()
+    {
+        int num = 5;
+        List<string> list = new List<string>(num);
+        CollectionsMarshal.SetCount<string>(list, num);
+        Span<string> span = CollectionsMarshal.AsSpan<string>(list);
+        int index1 = 0;
+        span[index1] = "vfx/vfx_attack_slash";
+        int index2 = index1 + 1;
+        span[index2] = "vfx/vfx_fire_burst";
+        int index3 = index2 + 1;
+        span[index3] = "vfx/vfx_rock_shatter";
+        int index4 = index3 + 1;
+        span[index4] = "vfx/vfx_bloody_impact";
+        int index5 = index4 + 1;
+        span[index5] = "vfx/vfx_fire_burst";
+        return list;
+    }
 }
