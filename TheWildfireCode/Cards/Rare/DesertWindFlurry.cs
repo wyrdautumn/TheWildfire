@@ -24,7 +24,16 @@ public class DesertWindFlurry() : TheWildfireCard(2,
     TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Move),
-        new DynamicVar("hits",4)];
+        new DynamicVar("hits",5),
+        new CalculationBaseVar(0),
+        new CalculationExtraVar(1),
+        new CalculatedVar("SelfDamage").WithMultiplier(Calc)];
+    private static decimal Calc(CardModel card, Creature? arg2)
+    {
+        if (card.Owner.PlayerCombatState == null)
+            return 0;
+        return FirepowerController.Firepower.Get(card.Owner.PlayerCombatState);
+    }
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Firepower)];
     
@@ -64,6 +73,6 @@ public class DesertWindFlurry() : TheWildfireCard(2,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["hits"].UpgradeValueBy(1);
+        DynamicVars.Damage.UpgradeValueBy(2);
     }
 }

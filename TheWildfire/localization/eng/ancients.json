@@ -109,7 +109,7 @@
   "TANX.talk.THEWILDFIRE-THE_WILDFIRE.2-4.ancient": "YOU ARE STRONG, LITTLE BIRD!! TAKE A WEAPON! LET'S FIGHT AGAIN!",
   "TANX.talk.THEWILDFIRE-THE_WILDFIRE.2-4.next": "Catch your breath",
   "TANX.talk.THEWILDFIRE-THE_WILDFIRE.2-4.ancient.sfx": "event:/sfx/npcs/tanx/tanx_laugh",
-  "TANX.talk.THEWILDFIRE-THE_WILDFIRE.2-5.char": "Ha... ha...\nOkay... sure. I'm having fun.",
+  "TANX.talk.THEWILDFIRE-THE_WILDFIRE.2-5.char": "[sine]Ha... ha...[/sine]\nOkay... sure. I'm having fun.",
   "TEZCATARA.talk.THEWILDFIRE-THE_WILDFIRE.0-0.ancient": "Oh, my. Aren't you just an [jitter][b]adorable[/b][/jitter] little thing?",
   "TEZCATARA.talk.THEWILDFIRE-THE_WILDFIRE.0-0.next": "Blanch",
   "TEZCATARA.talk.THEWILDFIRE-THE_WILDFIRE.0-1.char": "I would. Not describe myself with any of those words.",

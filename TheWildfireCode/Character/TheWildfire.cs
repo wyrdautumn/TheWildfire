@@ -81,9 +81,18 @@ public class TheWildfire : PlaceholderCharacterModel
     public override string CustomCharacterSelectTransitionPath =>
         "res://TheWildfire/images/shaders/wildfire_screen_transition.tres";
 
+    public override string CharacterTransitionSfx => "res://TheWildfire/audio/wildfire_transition.wav";
+
+    public override string CustomArmPointingTexturePath =>
+        "res://TheWildfire/images/character/hands/desha_hand_point.png";
+    public override string CustomArmRockTexturePath =>
+        "res://TheWildfire/images/character/hands/desha_hand_rock.png";
+    public override string CustomArmPaperTexturePath =>
+        "res://TheWildfire/images/character/hands/desha_hand_paper.png";
+    public override string CustomArmScissorsTexturePath =>
+        "res://TheWildfire/images/character/hands/desha_hand_scissors.png";
     public override RelicIconData? CustomYummyCookie => new RelicIconData("res://TheWildfire/images/relics/big/yummy_cookie_wildfire.png","res://TheWildfire/images/relics/yummy_cookie_wildfire.png","res://TheWildfire/images/relics/yummy_cookie_wildfire_outline.png");
     
-    public override string CharacterTransitionSfx => "res://TheWildfire/audio/wildfire_transition.wav";
     public override Color EnergyLabelOutlineColor => new ("562F53");
     public override Color DialogueColor => new ("713980");
     public override VfxColor SpeechBubbleColor => VfxColor.Purple;

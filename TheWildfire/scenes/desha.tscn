@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dsypbaxmtvhby"]
+[gd_scene load_steps=46 format=3 uid="uid://dsypbaxmtvhby"]
 
 [ext_resource type="Texture2D" uid="uid://dqu8p757jss83" path="res://TheWildfire/images/character/desha.png" id="1_po6yp"]
 [ext_resource type="Script" uid="uid://cqspi2asgty4d" path="res://TheWildfireCode/Nodes/NDeshaVisuals.cs" id="1_xbonc"]
@@ -185,6 +185,24 @@ gravity = Vector3(0, 0, 0)
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vc4v3"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(800, 40, 1)
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 660.07996
+initial_velocity_max = 936.75995
+angular_velocity_min = -221.98001
+angular_velocity_max = 221.97998
+gravity = Vector3(-11, -1800, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = -2.2351742e-06
+scale_min = 0.29999998
+scale_max = 0.59999996
+color = Color(0.7894787, 0.5965844, 0.9110031, 1)
+anim_offset_max = 1.0
+
 [sub_resource type="Animation" id="Animation_2ksc3"]
 length = 0.001
 tracks/0/type = "value"
@@ -214,7 +232,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/GPUParticles2D:emitting")
+tracks/2/path = NodePath("Visuals/CastEffect:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -283,6 +301,18 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Visuals/ReviveEffect:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_g68w6"]
 resource_name = "attack"
@@ -308,7 +338,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.13333334, 0.23333333, 0.36666667, 0.43333334),
 "transitions": PackedFloat32Array(3.9999933, 5.4641533, 4.141056, 0.3789299, 1),
 "update": 0,
-"values": [0.0, -1.92684349420174, -1.9268434942017398, 0.0, 0.0]
+"values": [0.0, -1.92684349420174, -1.92684349420174, 0.0, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_7xpmy"]
@@ -340,7 +370,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/GPUParticles2D:emitting")
+tracks/2/path = NodePath("Visuals/CastEffect:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -516,6 +546,46 @@ tracks/4/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_e1j1a"]
+resource_name = "revive"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:self_modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/ash pile:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/ReviveEffect:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g68w6"]
 _data = {
 &"RESET": SubResource("Animation_2ksc3"),
@@ -523,7 +593,8 @@ _data = {
 &"cast": SubResource("Animation_7xpmy"),
 &"die": SubResource("Animation_w5hie"),
 &"hurt": SubResource("Animation_vc4v3"),
-&"idle": SubResource("Animation_dpvx4")
+&"idle": SubResource("Animation_dpvx4"),
+&"revive": SubResource("Animation_e1j1a")
 }
 
 [node name="Desha" type="Node2D"]
@@ -692,7 +763,7 @@ lifetime = 0.36
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_7xpmy")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Visuals"]
+[node name="CastEffect" type="GPUParticles2D" parent="Visuals"]
 material = SubResource("CanvasItemMaterial_dpvx4")
 position = Vector2(-11.111107, 279.99994)
 emitting = false
@@ -726,6 +797,22 @@ offset_top = -575.55554
 offset_right = 473.3334
 offset_bottom = 420.00006
 pivot_offset = Vector2(481.111, 830)
+
+[node name="ReviveEffect" type="GPUParticles2D" parent="Visuals"]
+material = SubResource("CanvasItemMaterial_dpvx4")
+position = Vector2(-11.111107, 279.99994)
+emitting = false
+amount = 12000
+texture = ExtResource("7_xbonc")
+lifetime = 0.52
+one_shot = true
+speed_scale = 0.4
+explosiveness = 0.2
+randomness = 0.38
+local_coords = true
+trail_enabled = true
+trail_lifetime = 0.36
+process_material = SubResource("ParticleProcessMaterial_vc4v3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

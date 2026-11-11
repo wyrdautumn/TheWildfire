@@ -14,8 +14,17 @@ public class EagleClawStrike() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(12, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(16, ValueProp.Move), 
+        new CalculationBaseVar(0),
+        new CalculationExtraVar(1),
+        new CalculatedVar("SelfDamage").WithMultiplier(Calc)];
+    
+    private static decimal Calc(CardModel card, Creature? arg2)
+    {
+        if (card.Owner.PlayerCombatState == null)
+            return 0;
+        return FirepowerController.Firepower.Get(card.Owner.PlayerCombatState);
+    }
     
     protected override HashSet<CardTag> CanonicalTags
     {
@@ -46,6 +55,6 @@ public class EagleClawStrike() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(3);
+        DynamicVars.Damage.UpgradeValueBy(5);
     }
 }

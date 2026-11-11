@@ -15,8 +15,16 @@ public class CarefulStride() : TheWildfireCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(9, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(12, ValueProp.Move),
+        new CalculationBaseVar(0),
+        new CalculationExtraVar(1),
+        new CalculatedVar("SelfDamage").WithMultiplier(Calc)];
+    private static decimal Calc(CardModel card, Creature? arg2)
+    {
+        if (card.Owner.PlayerCombatState == null)
+            return 0;
+        return FirepowerController.Firepower.Get(card.Owner.PlayerCombatState);
+    }
     public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.SkillFlow];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Firepower)];

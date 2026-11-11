@@ -15,7 +15,16 @@ public class HarmoniousDiscipline() : TheWildfireCard(0,
     CardType.Power, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<StrengthPower>(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<StrengthPower>(2),
+        new CalculationBaseVar(0),
+        new CalculationExtraVar(1),
+        new CalculatedVar("SelfDamage").WithMultiplier(Calc)];
+    private static decimal Calc(CardModel card, Creature? arg2)
+    {
+        if (card.Owner.PlayerCombatState == null)
+            return 0;
+        return FirepowerController.Firepower.Get(card.Owner.PlayerCombatState);
+    }
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<StrengthPower>(),HoverTipFactory.Static(WildfireKeywords.Firepower)];
     
