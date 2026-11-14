@@ -13,7 +13,7 @@ public class ImmolatingFist() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Move), new IgniteVar(6)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Move), new IgniteVar(4)];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

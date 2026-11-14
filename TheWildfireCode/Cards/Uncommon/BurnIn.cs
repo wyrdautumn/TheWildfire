@@ -25,7 +25,7 @@ using TheWildfire.TheWildfireCode.Powers;
 namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
 
 public class BurnIn() : TheWildfireCard(0,
-    CardType.Skill, CardRarity.Uncommon,
+    CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("SelfDamage",4),

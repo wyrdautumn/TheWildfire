@@ -55,6 +55,6 @@ public class EagleClawStrike() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(5);
+        DynamicVars.Damage.UpgradeValueBy(4);
     }
 }

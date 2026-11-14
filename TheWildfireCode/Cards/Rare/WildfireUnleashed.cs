@@ -26,7 +26,7 @@ public class WildfireUnleashed() : TheWildfireCard(0,
     CardType.Attack, CardRarity.Rare,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(45, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(40, ValueProp.Move)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.FlowStatic), HoverTipFactory.Static(WildfireKeywords.Rekindle)];
@@ -79,6 +79,6 @@ public class WildfireUnleashed() : TheWildfireCard(0,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(15);
+        DynamicVars.Damage.UpgradeValueBy(12);
     }
 }

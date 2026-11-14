@@ -73,5 +73,8 @@
   "THEWILDFIRE-UNFORGIVING_FLAME_POWER.title": "Unforgiving Flame",
   "THEWILDFIRE-SMOKE_COVER_POWER.description": "Whenever another player [gold]Exhausts[/gold] a card, gain [gold]Block[/gold].",
   "THEWILDFIRE-SMOKE_COVER_POWER.smartDescription": "Whenever another player [gold]Exhausts[/gold] a card, gain [blue]{Amount}[/blue] [gold]Block[/gold].",
-  "THEWILDFIRE-SMOKE_COVER_POWER.title": "Smoke Bomb"
+  "THEWILDFIRE-SMOKE_COVER_POWER.title": "Smoke Bomb",
+  "THEWILDFIRE-COMBAT_FLEXIBILITY_POWER.description": "Whenever another player gains [gold]Block[/gold], gain [gold]Stretch[/gold].",
+  "THEWILDFIRE-COMBAT_FLEXIBILITY_POWER.smartDescription": "Whenever another player gains [gold]Block[/gold], gain [blue]{Amount}[/blue] [gold]Stretch[/gold].",
+  "THEWILDFIRE-COMBAT_FLEXIBILITY_POWER.title": "Combat Flexibility"
 }

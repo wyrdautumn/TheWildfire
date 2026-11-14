@@ -16,7 +16,7 @@ public class MasterfulSpiral() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(10, ValueProp.Move), new ExertVar(12)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(10, ValueProp.Move), new ExertVar(10)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.PowerFlow];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.FullExert)];

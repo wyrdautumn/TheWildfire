@@ -24,7 +24,7 @@ public class DesertWindFlurry() : TheWildfireCard(2,
     TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Move),
-        new DynamicVar("hits",5),
+        new HitCountVar("hits",5),
         new CalculationBaseVar(0),
         new CalculationExtraVar(1),
         new CalculatedVar("SelfDamage").WithMultiplier(Calc)];

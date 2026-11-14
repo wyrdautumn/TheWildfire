@@ -23,9 +23,9 @@ public class UnrelentingHeatWave() : TheWildfireCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 0, 2);
-        var cards = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this));
-        foreach (CardModel card in cards)
+        CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1);
+        CardModel? card = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this)).FirstOrDefault();
+        if (card != null)
             await CardCmd.Exhaust(choiceContext, card);
         CardPile? draw = CardPile.Get(PileType.Draw, Owner);
         CardPile? exhaust = CardPile.Get(PileType.Exhaust, Owner);

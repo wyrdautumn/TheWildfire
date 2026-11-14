@@ -21,7 +21,7 @@ public class FierySerpent() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(22, ValueProp.Move), new ExertVar(6)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(21, ValueProp.Move), new ExertVar(7)];
     protected override HashSet<CardTag> CanonicalTags
     {
         get => new HashSet<CardTag>() { WildfireKeywords.ExertTag };
@@ -70,6 +70,6 @@ public class FierySerpent() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(4);
+        DynamicVars.Damage.UpgradeValueBy(5);
     }
 }

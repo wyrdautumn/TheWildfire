@@ -818,3 +818,8 @@ process_material = SubResource("ParticleProcessMaterial_vc4v3")
 libraries = {
 &"": SubResource("AnimationLibrary_g68w6")
 }
+
+[node name="FormVfx" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0

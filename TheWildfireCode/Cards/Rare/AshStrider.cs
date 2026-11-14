@@ -15,7 +15,7 @@ public class AshStrider() : TheWildfireCard(3,
     CardType.Skill, CardRarity.Rare,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(5, ValueProp.Move | ValueProp.Unblockable | ValueProp.Unpowered)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Move | ValueProp.Unblockable | ValueProp.Unpowered)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<WeakPower>()];
@@ -26,17 +26,14 @@ public class AshStrider() : TheWildfireCard(3,
     {
         if (CombatState == null)
             return;
-        for (int i = 1; i > 0; i--)
+        CardSelectorPrefs prefs = new CardSelectorPrefs(SelectionScreenPrompt, 0, 999999999);
+        List<CardModel> list = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this)).ToList();
+        int loops = list.Count + 1;
+        for (int i = loops; i > 0; i--)
         {
             await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies, DynamicVars.Damage, Owner.Creature);
             await PowerCmd.Apply<WeakPower>(choiceContext, CombatState.HittableEnemies, 1, Owner.Creature, this);
-            CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 0, 1);
-            CardModel? card = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this)).FirstOrDefault();
-            if (card != null)
-            {
-                await CardCmd.Exhaust(choiceContext, card);
-                i++;
-            }
+
         }
     }
 

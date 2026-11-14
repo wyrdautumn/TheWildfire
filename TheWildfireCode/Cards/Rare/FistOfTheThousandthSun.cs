@@ -17,7 +17,7 @@ public class FistOfTheThousandthSun() : TheWildfireCard(2,
 {
     private int _hits = 1;
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7, ValueProp.Move), new DynamicVar("hits", 1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7, ValueProp.Move), new HitCountVar("hits", 1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [..HoverTipFactory.FromCardWithCardHoverTips<SolarPower>(IsUpgraded)];
 

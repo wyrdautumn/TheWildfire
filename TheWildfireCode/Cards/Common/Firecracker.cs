@@ -15,7 +15,7 @@ public class Firecracker() : TheWildfireCard(0,
     CardType.Skill, CardRarity.Common,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<WeakPower>(1), new PowerVar<VulnerablePower>(1), new AfterburnVar(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<WeakPower>(1), new PowerVar<VulnerablePower>(1), new AfterburnVar(2)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override HashSet<CardTag> CanonicalTags
     {

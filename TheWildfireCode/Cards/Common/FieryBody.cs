@@ -13,7 +13,7 @@ public class FieryBody() : TheWildfireCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(6,  ValueProp.Move), new PowerVar<RagingFirePower>(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(8,  ValueProp.Move), new PowerVar<RagingFirePower>(4)];
     public override bool GainsBlock => true;
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<RagingFirePower>()];

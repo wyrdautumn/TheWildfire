@@ -14,7 +14,7 @@ public class TwoTalons() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(3, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(3, ValueProp.Move), new HitCountVar(2)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.AttackFlow];
 
     protected override bool ShouldGlowGoldInternal => OverdriveGlowPatch.CheckFlow(this, CardType.Attack);
@@ -23,7 +23,7 @@ public class TwoTalons() : TheWildfireCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        int hits = 2;
+        int hits = DynamicVars.HitCount.IntValue;
         if (FlowSingleton.WillTriggerFlow(this))
             hits += 2;
         await CommonActions.CardAttack(this, play, hits, vfx: "vfx/vfx_attack_slash").Execute(choiceContext);

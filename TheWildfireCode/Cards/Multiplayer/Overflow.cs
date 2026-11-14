@@ -12,7 +12,7 @@ public class Overflow() : TheWildfireCard(0,
     CardType.Skill, CardRarity.Rare,
     TargetType.AllAllies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1), new EnergyVar(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2), new EnergyVar(1)];
     
     public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.AttackFlow,WildfireKeywords.PowerFlow,CardKeyword.Exhaust];
     
@@ -43,6 +43,6 @@ public class Overflow() : TheWildfireCard(0,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars.Energy.UpgradeValueBy(1);
     }
 }

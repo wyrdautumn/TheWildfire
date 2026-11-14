@@ -11,7 +11,7 @@ public class LivingBonfire() : TheWildfireCard(0,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(2, ValueProp.Move), new DynamicVar("hits", 2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(2, ValueProp.Move), new HitCountVar("hits", 2)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.PowerFlow];
 
     protected override async Task OnPlay(

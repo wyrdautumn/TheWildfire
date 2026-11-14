@@ -14,7 +14,7 @@ public class FlashFire() : TheWildfireCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(10, ValueProp.Move), new CardsVar(1), new AfterburnVar(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(11, ValueProp.Move), new CardsVar(1), new AfterburnVar(3)];
     public override bool GainsBlock => true;
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<Afterburn>()];
@@ -37,6 +37,7 @@ public class FlashFire() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(3);
+        DynamicVars.Block.UpgradeValueBy(1);
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

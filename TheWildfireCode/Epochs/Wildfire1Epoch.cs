@@ -8,8 +8,8 @@ namespace TheWildfire.TheWildfireCode.Epochs;
 public class Wildfire1Epoch : EpochModel
 {
     public override string Id => "THEWILDFIRE-WILDFIRE1_EPOCH";
-    public override EpochEra Era => EpochEra.Invitation2;
-    public override int EraPosition => 4;
+    public override EpochEra Era => EpochEra.Invitation1;
+    public override int EraPosition => 5;
     public override string? StoryId => "Wildfire";
 
     public static List<RelicModel> Relics =>

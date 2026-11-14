@@ -9,11 +9,11 @@ using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards.Common;
 
-public class FlamesBlessing() : TheWildfireCard(1,
+public class FlamesBlessing() : TheWildfireCard(0,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<RagingFirePower>(4)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<RagingFirePower>(3)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.AttackFlow];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<RagingFirePower>()];
@@ -28,6 +28,6 @@ public class FlamesBlessing() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        DynamicVars["RagingFirePower"].UpgradeValueBy(2);
     }
 }
