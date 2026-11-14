@@ -94,20 +94,21 @@ public class FlowSingleton() : CustomSingletonModel(HookType.Combat)
 
     public static async Task AchieveFlow(PlayerChoiceContext choiceContext, Player player, CardModel? card, CardType cardType)
     {
+        int energy = 1 + player.Creature.GetPowerAmount<MasterOfFlowPower>();
         switch (cardType)
         {
             case CardType.Attack:
-                await PlayerCmd.GainEnergy(1, player);
+                await PlayerCmd.GainEnergy(energy, player);
                 await CardPileCmd.Draw(choiceContext, player);
                 await PowerCmd.Apply<AttackFlowPower>(choiceContext, player.Creature, 1, player.Creature, card, true);
                 break;
             case CardType.Skill:
-                await PlayerCmd.GainEnergy(1, player);
+                await PlayerCmd.GainEnergy(energy, player);
                 await CardPileCmd.Draw(choiceContext, player);
                 await PowerCmd.Apply<SkillFlowPower>(choiceContext, player.Creature, 1, player.Creature, card, true);
                 break;
             case CardType.Power:
-                await PlayerCmd.GainEnergy(1, player);
+                await PlayerCmd.GainEnergy(energy, player);
                 await CardPileCmd.Draw(choiceContext, player);
                 await PowerCmd.Apply<PowerFlowPower>(choiceContext, player.Creature, 1, player.Creature, card, true);
                 break;

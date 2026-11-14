@@ -26,7 +26,7 @@
   "THEWILDFIRE-AFTERBURN_STATIC.title": "Overheat",
   "THEWILDFIRE-AFTERBURN_STATIC.description": "Overheat cards increase your Overheat damage and create an [gold]Afterburn[/gold].",
   "THEWILDFIRE-FLOW_STATIC.title": "Flow",
-  "THEWILDFIRE-FLOW_STATIC.description": "You can achieve [color=D74040]Attack Flow[/color], [color=12AF1A]Skill Flow[/color], and [color=5D76EA]Power Flow[/color] by playing cards in the correct sequence.",
+  "THEWILDFIRE-FLOW_STATIC.description": "Draw a card and gain {energyPrefix:energyIcons(1)} when you play [color=D74040]Attack Flow[/color], [color=12AF1A]Skill Flow[/color], or [color=5D76EA]Power Flow[/color] cards after a card of the corresponding type.",
   "THEWILDFIRE_OVERHEAT_COUNTER.title": "Firepower Damage",
   "THEWILDFIRE_OVERHEAT_COUNTER.description": "Take [blue]{overheat}[/blue] damage at the end of your turn."
 }

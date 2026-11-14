@@ -12,7 +12,7 @@ public class MasterOfFlow() : TheWildfireCard(2,
     CardType.Power, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<MasterOfFlowPower>(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.FlowStatic)];
 
@@ -21,7 +21,7 @@ public class MasterOfFlow() : TheWildfireCard(2,
         CardPlay play)
     {
         await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
-        await CommonActions.ApplySelf<MasterOfFlowPower>(choiceContext, this);
+        await CommonActions.ApplySelf<MasterOfFlowPower>(choiceContext, this, DynamicVars.Energy.BaseValue);
     }
 
     protected override void OnUpgrade()

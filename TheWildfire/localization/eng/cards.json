@@ -173,7 +173,7 @@
   "THEWILDFIRE-CHANNELED_RAGE.title": "Channeled Rage",
   "THEWILDFIRE-HEAT_VENT.description": "Whenever you [gold]Exhaust[/gold] a Status card, deal {HeatVentPower:diff()} damage to a random enemy.",
   "THEWILDFIRE-HEAT_VENT.title": "Heat Vent",
-  "THEWILDFIRE-MASTER_OF_FLOW.description": "Whenever playing a card would achieve [gold]Flow[/gold], reduce its cost by {energyPrefix:energyIcons(1)}.",
+  "THEWILDFIRE-MASTER_OF_FLOW.description": "Whenever you achieve [gold]Flow[/gold], gain an additional {Energy:energyIcons()}.",
   "THEWILDFIRE-MASTER_OF_FLOW.title": "Master of Flow",
   "THEWILDFIRE-STEPS_OF_GRASPING_FIRE.description": "Whenever you deal damage to yourself, gain {StepsOfGraspingFirePower:diff()} [gold]Block[/gold].",
   "THEWILDFIRE-STEPS_OF_GRASPING_FIRE.title": "Steps of Grasping Fire",
