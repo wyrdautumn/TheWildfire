@@ -2,11 +2,11 @@
   "id": "TheWildfire",
   "name": "The Wildfire",
   "author": "wyrdautumn",
-  "description": "The daughter of a wayward flame fights to find her place in a world that never wanted her. Using sounds from JohnLoser, SilverIllusionist, FlipBook, and gloriaeffect.",
-  "version": "v0.1.6",
+  "description": "The daughter of a wayward flame fights to find her place in a world that never wanted her. Using art from _korvii and SuperMint and sounds from JohnLoser, SilverIllusionist, FlipBook, and gloriaeffect.",
+  "version": "v0.2.0",
   "has_pck": true,
   "has_dll": true,
   "dependencies": [{"id": "BaseLib", "min_version": "3.4.7"}],
-  "min_game_version": "0.111.0",
+  "min_game_version": "0.113.0",
   "affects_gameplay": true
 }
