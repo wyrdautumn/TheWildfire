@@ -29,7 +29,7 @@ public class WildfireUnleashed() : TheWildfireCard(0,
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(40, ValueProp.Move)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.FlowStatic), HoverTipFactory.Static(WildfireKeywords.Rekindle)];
+        [HoverTipFactory.Static(WildfireKeywords.FlowStatic, new EnergyVar(1)), HoverTipFactory.Static(WildfireKeywords.Rekindle)];
 
     public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {

@@ -5,7 +5,7 @@
   "THEWILDFIRE-DEFEND_WILDFIRE.title": "Defend",
   "THEWILDFIRE-AFTERBURN.description": "Take {Damage:diff()} damage.\nDraw a card.",
   "THEWILDFIRE-AFTERBURN.title": "Afterburn",
-  "THEWILDFIRE-FIREBOLT.description": "Deal {Damage:diff()} damage.\nDouble the damage of ALL Firebolt cards this combat.",
+  "THEWILDFIRE-FIREBOLT.description": "Deal {Damage:diff()} damage.\nDouble the base damage of ALL Firebolt cards this combat.",
   "THEWILDFIRE-FIREBOLT.title": "Firebolt",
   "THEWILDFIRE-SOLAR_POWER.description": "Gain {StrengthPower:diff()} [gold]Strength[/gold].",
   "THEWILDFIRE-SOLAR_POWER.title": "Solar Power",

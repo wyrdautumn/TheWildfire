@@ -18,7 +18,7 @@ public class MartialArtistsBelt() : TheWildfireRelic
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(4, ValueProp.Unpowered)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.FlowStatic)];
+        [HoverTipFactory.Static(WildfireKeywords.FlowStatic, new EnergyVar(1))];
 
     public override async Task FlowAchieved(PlayerChoiceContext choiceContext, Player achiever, CardType type)
     {

@@ -16,7 +16,7 @@ public class AthleticFlow() : TheWildfireCard(3,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<AthleticFlowPower>(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.FlowStatic),HoverTipFactory.FromPower<StrengthPower>(),HoverTipFactory.FromPower<DexterityPower>(),HoverTipFactory.FromPower<ConstitutionPower>()];
+        [HoverTipFactory.Static(WildfireKeywords.FlowStatic, new EnergyVar(1)),HoverTipFactory.FromPower<StrengthPower>(),HoverTipFactory.FromPower<DexterityPower>(),HoverTipFactory.FromPower<ConstitutionPower>()];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

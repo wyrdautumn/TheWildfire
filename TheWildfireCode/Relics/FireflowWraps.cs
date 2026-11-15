@@ -20,7 +20,7 @@ public class FireflowWraps() : TheWildfireRelic
     protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(3)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.FlowStatic)];
+        [HoverTipFactory.Static(WildfireKeywords.FlowStatic, new EnergyVar(1))];
 
     public override async Task FlowAchieved(PlayerChoiceContext choiceContext, Player achiever, CardType type)
     {

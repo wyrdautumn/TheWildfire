@@ -15,7 +15,7 @@ public class AthleticFlowPower() : TheWildfirePower
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.FlowStatic),HoverTipFactory.FromPower<StrengthPower>(),HoverTipFactory.FromPower<DexterityPower>(),HoverTipFactory.FromPower<ConstitutionPower>()];
+        [HoverTipFactory.Static(WildfireKeywords.FlowStatic, new EnergyVar(1)),HoverTipFactory.FromPower<StrengthPower>(),HoverTipFactory.FromPower<DexterityPower>(),HoverTipFactory.FromPower<ConstitutionPower>()];
 
     public override async Task FlowAchieved(PlayerChoiceContext choiceContext, Player achiever, CardType type)
     {

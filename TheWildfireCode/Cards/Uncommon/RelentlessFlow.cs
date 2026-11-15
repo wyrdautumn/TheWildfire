@@ -15,7 +15,7 @@ public class RelentlessFlow() : TheWildfireCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<RelentlessFlowPower>(3)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(WildfireKeywords.FlowStatic)];
+        [HoverTipFactory.Static(WildfireKeywords.FlowStatic, new EnergyVar(1))];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
