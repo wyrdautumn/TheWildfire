@@ -1,5 +1,6 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -17,7 +18,10 @@ public class SmokeCoverPower : TheWildfirePower
 
     public override async Task AfterCardExhausted(PlayerChoiceContext choiceContext, CardModel card, bool causedByEthereal)
     {
-        if (card.Owner.Creature != Owner)
-            await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Unpowered, null);
+        if (card.Owner.Creature == Owner || Owner.CombatState == null)
+            return;
+        Creature? target = Owner.CombatState.RunState.Rng.CombatTargets.NextItem(Owner.CombatState.HittableEnemies);
+        if (target != null)
+            await CreatureCmd.Damage(choiceContext, target, Amount, ValueProp.Unpowered, Owner);
     }
 }

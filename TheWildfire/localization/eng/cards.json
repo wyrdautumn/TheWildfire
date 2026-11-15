@@ -187,9 +187,9 @@
   "THEWILDFIRE-BURN_TOGETHER.title": "Burn Together",
   "THEWILDFIRE-KINETIC_AURA.description": "ALL players gain{InCombat: {Vigor:diff()}|} [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img] [gold]Vigor[/gold].",
   "THEWILDFIRE-KINETIC_AURA.title": "Kinetic Aura",
-  "THEWILDFIRE-SMOKE_COVER.description": "Whenever another player [gold]Exhausts[/gold] a card, gain {SmokeCoverPower:diff()} [gold]Block[/gold].",
+  "THEWILDFIRE-SMOKE_COVER.description": "Whenever another player [gold]Exhausts[/gold] a card, deal {SmokeCoverPower:diff()} damage to a random enemy.",
   "THEWILDFIRE-SMOKE_COVER.title": "Smoke Bomb",
-  "THEWILDFIRE-OVERFLOW.description": "Allies gain {Energy:energyIcons()}.\nAllies draw {Cards:diff()} {Cards:plural:card|cards}.",
+  "THEWILDFIRE-OVERFLOW.description": "ALL allies gain {Energy:energyIcons()}.\nALL allies draw {Cards:diff()} {Cards:plural:card|cards}.",
   "THEWILDFIRE-OVERFLOW.title": "Overflow",
   "THEWILDFIRE-COMBAT_FLEXIBILITY.description": "Whenever another player gains [gold]Block[/gold], gain {CombatFlexibilityPower:diff()} [gold]Stretch[/gold].",
   "THEWILDFIRE-COMBAT_FLEXIBILITY.title": "Combat Flexibility"
