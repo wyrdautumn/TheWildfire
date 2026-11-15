@@ -40,6 +40,6 @@ public class FlowPotion : TheWildfirePotion
         }
     }
     
-    public override string? CustomPackedImagePath => "res://TheWildfire/images/potions/firebreath_potion.png";
-    public override string? CustomPackedOutlinePath => "res://TheWildfire/images/potions/firebreath_potion_outline.png";
+    public override string? CustomPackedImagePath => "res://TheWildfire/images/potions/soothing_tonic.png";
+    public override string? CustomPackedOutlinePath => "res://TheWildfire/images/potions/soothing_tonic_outline.png";
 }

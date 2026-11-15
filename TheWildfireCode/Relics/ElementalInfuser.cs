@@ -11,7 +11,7 @@ namespace TheWildfire.TheWildfireCode.Relics;
 public class ElementalInfuser() : TheWildfireRelic
 {
     public override RelicRarity Rarity =>
-        RelicRarity.Uncommon;
+        RelicRarity.Rare;
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.FullExert)];
 

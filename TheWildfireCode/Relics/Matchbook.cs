@@ -13,7 +13,7 @@ namespace TheWildfire.TheWildfireCode.Relics;
 public class Matchbook() : TheWildfireRelic
 {
     public override RelicRarity Rarity =>
-        RelicRarity.Rare;
+        RelicRarity.Shop;
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<Firebolt>()];
 

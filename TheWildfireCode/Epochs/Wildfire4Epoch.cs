@@ -16,8 +16,8 @@ public class Wildfire4Epoch : EpochModel
     public static List<RelicModel> Relics =>
     [
         ModelDb.Relic<BoxOfTinder>(),
-        ModelDb.Relic<ElementalInfuser>(),
-        ModelDb.Relic<Matchbook>()
+        ModelDb.Relic<FireflowWraps>(),
+        ModelDb.Relic<ElementalInfuser>()
     ];
 
     public override string UnlockText => CreateRelicUnlockText(Relics);

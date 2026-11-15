@@ -3,6 +3,6 @@
   "THEWILDFIRE-BURNING_ELIXIR.title": "Burning Elixir",
   "THEWILDFIRE-FLOW_POTION.description": "Achieve a random [gold]Flow[/gold] you haven't achieved this turn.",
   "THEWILDFIRE-FLOW_POTION.title": "Flow Potion",
-  "THEWILDFIRE-SOOTHING_TONIC.description": "Gain [blue]{RegenPower}[/blue] [gold]Regen[/gold].",
-  "THEWILDFIRE-SOOTHING_TONIC.title": "Soothing Tonic"
+  "THEWILDFIRE-SOOTHING_TONIC.description": "Gain [blue]{Block}[/blue] [gold]Block[/gold] and [blue]{ConstitutionPower}[/blue] [gold]Constitution[/gold].",
+  "THEWILDFIRE-SOOTHING_TONIC.title": "Drakeheart Tincture"
 }
