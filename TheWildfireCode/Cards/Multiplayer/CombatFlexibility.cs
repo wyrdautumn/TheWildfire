@@ -14,7 +14,7 @@ public class CombatFlexibility() : TheWildfireCard(2,
     CardType.Power, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<CombatFlexibilityPower>(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<CombatFlexibilityPower>(2)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<StretchPower>()];
     

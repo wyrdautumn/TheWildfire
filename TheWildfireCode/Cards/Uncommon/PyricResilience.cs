@@ -49,6 +49,6 @@ public class PyricResilience() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Exert"].UpgradeValueBy(2);
+        DynamicVars["Exert"].UpgradeValueBy(3);
     }
 }
