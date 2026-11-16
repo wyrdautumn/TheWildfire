@@ -28,6 +28,8 @@ public class AshStrider() : TheWildfireCard(3,
             return;
         CardSelectorPrefs prefs = new CardSelectorPrefs(SelectionScreenPrompt, 0, 999999999);
         List<CardModel> list = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this)).ToList();
+        foreach (CardModel card in list)
+            await CardCmd.Exhaust(choiceContext, card);
         int loops = list.Count + 1;
         for (int i = loops; i > 0; i--)
         {

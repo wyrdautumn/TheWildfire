@@ -33,6 +33,8 @@ public class HeartOfSorcery() : TheWildfireRelic
 
     public override async Task AfterEnergyReset(Player player)
     {
+        if (player != Owner)
+            return;
         await FirepowerController.Ignite(new BlockingPlayerChoiceContext(), DynamicVars["Ignite"].IntValue, Owner);
     }
 }
