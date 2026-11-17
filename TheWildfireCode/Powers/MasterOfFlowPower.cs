@@ -12,7 +12,7 @@ namespace TheWildfire.TheWildfireCode.Powers;
 public class MasterOfFlowPower : TheWildfirePower
 {
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.FlowStatic, new EnergyVar(1))];
 

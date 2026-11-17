@@ -28,5 +28,7 @@
   "THEWILDFIRE-FLOW_STATIC.title": "Flow",
   "THEWILDFIRE-FLOW_STATIC.description": "Draw a card and gain {Energy:energyIcons()} when you play [color=D74040]Attack Flow[/color], [color=12AF1A]Skill Flow[/color], or [color=5D76EA]Power Flow[/color] cards after a card of the corresponding type.",
   "THEWILDFIRE_OVERHEAT_COUNTER.title": "Firepower Damage",
-  "THEWILDFIRE_OVERHEAT_COUNTER.description": "Take [blue]{overheat}[/blue] damage at the end of your turn."
+  "THEWILDFIRE_OVERHEAT_COUNTER.description": "Take [blue]{overheat}[/blue] damage at the end of your turn.",
+  "THEWILDFIRE-ANCIENTS_AWAKENED.description": "This card is designed for use with the [gold]Ancients Awakened[/gold] mod.",
+  "THEWILDFIRE-ANCIENTS_AWAKENED.title": "Ancients Awakened"
 }

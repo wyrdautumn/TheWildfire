@@ -192,5 +192,11 @@
   "THEWILDFIRE-OVERFLOW.description": "ALL allies gain {Energy:energyIcons()}.\nALL allies draw {Cards:diff()} {Cards:plural:card|cards}.",
   "THEWILDFIRE-OVERFLOW.title": "Overflow",
   "THEWILDFIRE-COMBAT_FLEXIBILITY.description": "Whenever another player gains [gold]Block[/gold], gain {CombatFlexibilityPower:diff()} [gold]Stretch[/gold].",
-  "THEWILDFIRE-COMBAT_FLEXIBILITY.title": "Combat Flexibility"
+  "THEWILDFIRE-COMBAT_FLEXIBILITY.title": "Combat Flexibility",
+  "THEWILDFIRE-KINETIC_STRIKE.description": "Deal {Damage:diff()} damage.\n[gold]Overheat[/gold] {Afterburn:diff()}.",
+  "THEWILDFIRE-KINETIC_STRIKE.title": "Kinetic Strike",
+  "THEWILDFIRE-KINETIC_DEFEND.description": "Gain {Block:diff()} [gold]Block[/gold].",
+  "THEWILDFIRE-KINETIC_DEFEND.title": "Kinetic Defend",
+  "THEWILDFIRE-FINAL_GATE.description": "Gain {Ignite:diff()} [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img].\n[gold]Scorch[/gold].\nReturn this card to your [gold]Hand[/gold].",
+  "THEWILDFIRE-FINAL_GATE.title": "Final Gate"
 }

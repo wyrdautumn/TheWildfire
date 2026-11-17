@@ -7,6 +7,7 @@ using TheWildfire.TheWildfireCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using TheWildfire.TheWildfireCode.Cards.Status;
 using TheWildfire.TheWildfireCode.Firepower;
@@ -15,8 +16,8 @@ using TheWildfire.TheWildfireCode.Powers;
 namespace TheWildfire.TheWildfireCode.Cards;
 
 [Pool(typeof(TheWildfireCardPool))]
-public abstract class TheWildfireCard(int cost, CardType type, CardRarity rarity, TargetType target) :
-    CustomCardModel(cost, type, rarity, target), IFirepowerListener
+public abstract class TheWildfireCard(int cost, CardType type, CardRarity rarity, TargetType target, bool library = true, bool auto = true) :
+    CustomCardModel(cost, type, rarity, target, library, auto), IFirepowerListener
 {
     //Image size:
     //Normal art: 1000x760 (Using 500x380 should also work, it will simply be scaled.)
@@ -62,4 +63,12 @@ public abstract class TheWildfireCard(int cost, CardType type, CardRarity rarity
     public virtual Task AfterOverheatDamage(PlayerChoiceContext choiceContext, int damage, int damageMitigated,
         Player overheater) => Task.CompletedTask;
     public virtual Task FlowAchieved(PlayerChoiceContext choiceContext, Player achiever, CardType type) => Task.CompletedTask;
+    
+    protected IEnumerable<IHoverTip> AddAncientsAwakened()
+    {
+        if (!IsInCombat)
+        {
+            yield return HoverTipFactory.Static(WildfireKeywords.AncientsAwakened);
+        }
+    }
 }

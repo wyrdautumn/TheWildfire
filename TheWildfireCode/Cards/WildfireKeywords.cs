@@ -21,4 +21,5 @@ public class WildfireKeywords
     [CustomEnum] public static CardKeyword AttackFlow;
     [CustomEnum] public static CardKeyword SkillFlow;
     [CustomEnum] public static CardKeyword PowerFlow;
+    [CustomEnum] public static StaticHoverTip AncientsAwakened;
 }
