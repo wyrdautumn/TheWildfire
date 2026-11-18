@@ -32,8 +32,8 @@ public class BurnIn() : TheWildfireCard(0,
         new CalculationBaseVar(0),
         new ExtraDamageVar(1),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier(Calc)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
+    
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.SkillFlow];
     
     private static decimal Calc(CardModel card, Creature? arg2)
     {
@@ -67,11 +67,6 @@ public class BurnIn() : TheWildfireCard(0,
             instance.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(Owner.Creature, VfxColor.Purple));
         SfxCmd.Play("event:/sfx/characters/attack_fire");
         await CreatureCmd.Damage(choiceContext, Owner.Creature, DynamicVars["SelfDamage"].BaseValue, ValueProp.Unpowered, this, play);
-        CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1);
-        CardModel? card = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this)).FirstOrDefault();
-        if (card == null)
-            return;
-        await CardCmd.Exhaust(choiceContext, card);
     }
 
     protected override void OnUpgrade()

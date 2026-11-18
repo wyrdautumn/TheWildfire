@@ -8,13 +8,13 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using TheWildfire.TheWildfireCode.Cards;
 
-namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
+namespace TheWildfire.TheWildfireCode.Cards.Rare;
 
 public class AbundantStep() : TheWildfireCard(0,
-    CardType.Skill, CardRarity.Uncommon,
+    CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(8, ValueProp.Move), new DynamicVar("Rekindle", 10)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(6, ValueProp.Move), new DynamicVar("Rekindle", 6)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Rekindle)];
@@ -39,6 +39,6 @@ public class AbundantStep() : TheWildfireCard(0,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(3);
+        DynamicVars.Block.UpgradeValueBy(2);
     }
 }

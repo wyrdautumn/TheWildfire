@@ -15,19 +15,17 @@ public class FistOfTheThousandthSun() : TheWildfireCard(2,
     CardType.Attack, CardRarity.Rare,
     TargetType.AnyEnemy)
 {
-    private int _hits = 1;
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7, ValueProp.Move), new HitCountVar("hits", 1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7, ValueProp.Move), new HitCountVar("hits", 2)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [..HoverTipFactory.FromCardWithCardHoverTips<SolarPower>(IsUpgraded)];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.AttackFlow];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
         await CommonActions.CardAttack(this, play, DynamicVars["hits"].IntValue, vfx: "vfx/vfx_attack_blunt").Execute(choiceContext);
-        DynamicVars["hits"].BaseValue += 1;
-        _hits += 1;
         if (CombatState == null)
             return;
         var solarPowers = await SolarPower.CreateInHand(Owner, 1, CombatState);
@@ -39,11 +37,6 @@ public class FistOfTheThousandthSun() : TheWildfireCard(2,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2);
-    }
-    
-    protected override void AfterDowngraded()
-    {
-        DynamicVars["hits"].BaseValue = _hits;
+        DynamicVars.Damage.UpgradeValueBy(1);
     }
 }

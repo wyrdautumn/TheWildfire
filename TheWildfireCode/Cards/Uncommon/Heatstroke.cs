@@ -14,7 +14,7 @@ public class Heatstroke() : TheWildfireCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Scorch), HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
     
@@ -28,25 +28,14 @@ public class Heatstroke() : TheWildfireCard(1,
         CardPlay play)
     {
         CardSelectorPrefs prefs1 = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, DynamicVars.Cards.IntValue);
-        CardSelectorPrefs prefs2 = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 0, DynamicVars.Cards.IntValue);
-        if (!IsUpgraded)
-        {
-            CardModel? card = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs1, null, this)).FirstOrDefault();
-            if (card == null)
-                return;
+        var cards = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs1, null, this)).ToList();
+        foreach (CardModel card in cards)
             await CardCmd.Exhaust(choiceContext, card);
-        }
-        else
-        {
-            var cards = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs2, null, this)).ToList();
-            foreach (CardModel card in cards)
-                await CardCmd.Exhaust(choiceContext, card);
-        }
         await FirepowerController.Scorch(choiceContext, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(1);
+        AddKeyword(CardKeyword.Retain);
     }
 }

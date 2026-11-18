@@ -23,6 +23,7 @@ public class TheWildfire : PlaceholderCharacterModel
     public static readonly Color Color = new("803bb2");
 
     public override Color NameColor => Color;
+    public override Color DreadNameColor => Color;
     public override CharacterGender Gender => CharacterGender.Feminine;
     public override int StartingHp => 80;
 

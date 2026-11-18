@@ -15,13 +15,16 @@ public class LanternsWillPower : TheWildfirePower
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<Burn>(),HoverTipFactory.FromCard<Afterburn>(),HoverTipFactory.FromPower<RagingFirePower>()];
+        [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
 
     public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
-        if (card.Owner.Creature == Owner && (card is Burn || card is Afterburn))
+        if (Owner.Player != null && Owner.Player == card.Owner && (card.Type == CardType.Status || card.Type == CardType.Curse))
         {
-            await PowerCmd.Apply<RagingFirePower>(choiceContext, Owner, Amount, Owner, null);
+            Flash();
+            await CardCmd.Exhaust(choiceContext, card);
+            await CardPileCmd.Draw(choiceContext, Owner.Player);
+            await PowerCmd.Decrement(this);
         }
     }
 }

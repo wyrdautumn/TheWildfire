@@ -14,7 +14,9 @@ public class KindleInnerFlames() : TheWildfireCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(5), new CardsVar(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(4), new CardsVar(2)];
+    
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.AttackFlow];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

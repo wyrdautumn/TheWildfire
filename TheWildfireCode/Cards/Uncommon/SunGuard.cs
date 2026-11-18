@@ -37,6 +37,6 @@ public class SunGuard() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(1);
+        DynamicVars.Block.UpgradeValueBy(2);
     }
 }
