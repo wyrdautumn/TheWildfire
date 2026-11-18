@@ -30,7 +30,7 @@ public class SoothingTonic : TheWildfirePotion
         if (target.Player == null)
             return;
         await CreatureCmd.GainBlock(target, DynamicVars.Block, null);
-        await PowerCmd.Apply<ConstitutionPower>(choiceContext, target, DynamicVars["RegenPower"].BaseValue, Owner.Creature, null);
+        await PowerCmd.Apply<ConstitutionPower>(choiceContext, target, DynamicVars["ConstitutionPower"].BaseValue, Owner.Creature, null);
     }
     
     public override string? CustomPackedImagePath => "res://TheWildfire/images/potions/firebreath_potion.png";

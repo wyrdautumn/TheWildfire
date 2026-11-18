@@ -28,7 +28,7 @@ public class KineticStrike : TheWildfireAncientsAwakenedCard
         get => new HashSet<CardTag>() { WildfireKeywords.ShowAfterburn, CardTag.Strike };
     }
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(12, ValueProp.Move), new AfterburnVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(12, ValueProp.Move), new AfterburnVar(1)];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

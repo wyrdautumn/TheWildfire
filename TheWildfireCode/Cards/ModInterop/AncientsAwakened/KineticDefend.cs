@@ -24,7 +24,7 @@ public class KineticDefend : TheWildfireAncientsAwakenedCard
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(5, ValueProp.Move)];
     
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.AttackFlow,WildfireKeywords.SkillFlow];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [WildfireKeywords.AttackFlow];
     
     protected override HashSet<CardTag> CanonicalTags
     {
