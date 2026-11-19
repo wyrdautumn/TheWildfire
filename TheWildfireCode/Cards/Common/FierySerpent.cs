@@ -38,6 +38,8 @@ public class FierySerpent() : TheWildfireCard(1,
                 return true;
             if (Owner.HasPower<OverdrivePower>())
                 return true;
+            if (TemporaryStarCost != null && TemporaryStarCost.Cost == 0)
+                return true;
             return false;
         }
     }

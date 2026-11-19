@@ -8,12 +8,11 @@ using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards.Rare;
 
-public class ChanneledRage() : TheWildfireCard(2,
+public class ChanneledRage() : TheWildfireCard(3,
     CardType.Power, CardRarity.Rare,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<ChanneledRagePower>(1)];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<RagingFirePower>()];
 
@@ -27,6 +26,6 @@ public class ChanneledRage() : TheWildfireCard(2,
 
     protected override void OnUpgrade()
     {
-        RemoveKeyword(CardKeyword.Ethereal);
+        EnergyCost.UpgradeBy(-1);
     }
 }

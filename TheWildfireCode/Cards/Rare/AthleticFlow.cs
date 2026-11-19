@@ -10,7 +10,7 @@ using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards.Rare;
 
-public class AthleticFlow() : TheWildfireCard(3,
+public class AthleticFlow() : TheWildfireCard(2,
     CardType.Power, CardRarity.Rare,
     TargetType.Self)
 {
@@ -28,6 +28,6 @@ public class AthleticFlow() : TheWildfireCard(3,
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        AddKeyword(CardKeyword.Innate);
     }
 }

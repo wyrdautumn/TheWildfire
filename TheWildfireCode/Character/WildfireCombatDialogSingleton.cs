@@ -108,4 +108,18 @@ public class WildfireCombatDialogSingleton() : CustomSingletonModel(HookType.Com
             }
         }
     }
+    
+    [HarmonyPatch(typeof(ThievingHopper), nameof(ThievingHopper.ThieveryMove))]
+    public static class HopperDialogPatch
+    {
+        [HarmonyPostfix]
+        private static async void AddHopperDialog(Task __result, CalcifiedCultist __instance)
+        {
+            await __result;
+            Player? wildfire = __instance.CombatState.Players.FirstOrDefault(p => p.Character is Character.TheWildfire);
+            if (wildfire == null)
+                return;
+            TalkCmd.Play(new LocString("combat_messages", "WILDFIRE.HOPPER"), wildfire.Creature, VfxColor.Purple, VfxDuration.Standard);
+        }
+    }
 }

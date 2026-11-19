@@ -11,11 +11,12 @@ using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards.Rare;
 
-public class RisingDragonFire() : TheWildfireCard(1,
+public class RisingDragonFire() : TheWildfireCard(2,
     CardType.Power, CardRarity.Rare,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<RisingDragonFirePower>(1)];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<Afterburn>(), HoverTipFactory.FromCard<Firebolt>(),HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
 
@@ -29,6 +30,6 @@ public class RisingDragonFire() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        AddKeyword(CardKeyword.Innate);
+        RemoveKeyword(CardKeyword.Ethereal);
     }
 }
