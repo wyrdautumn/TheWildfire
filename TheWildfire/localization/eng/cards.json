@@ -100,7 +100,7 @@
   "THEWILDFIRE-FIRE_SNAKE_DANCE.title": "Fire-Snake Dance",
   "THEWILDFIRE-FALLING_STAR_STRIKE.description": "Deal {Damage:diff()} damage to a random enemy.\nApply {WeakPower:diff()} [gold]Weak[/gold] and {VulnerablePower:diff()} [gold]Vulnerable[/gold] to that enemy.\n[gold]Overheat[/gold] {Afterburn:diff()}.",
   "THEWILDFIRE-FALLING_STAR_STRIKE.title": "Falling Star Strike",
-  "THEWILDFIRE-SPARK_SHOT.description": "Deal damage equal to your [gold]Overheat[/gold] damage{InCombat: ({CalculatedDamage:diff()})|}.\nAdd a {IfUpgraded:show:[gold]Firebolt+[/gold]|[gold]Firebolt[/gold]} into your [gold]Draw Pile[/gold].\nAdd a [gold]Burn[/gold] into your [gold]Hand[/gold].",
+  "THEWILDFIRE-SPARK_SHOT.description": "Deal damage equal to your [gold]Overheat[/gold] damage{InCombat: ({Damage:diff()})|}.\nAdd a {IfUpgraded:show:[gold]Firebolt+[/gold]|[gold]Firebolt[/gold]} into your [gold]Draw Pile[/gold].\nAdd a [gold]Burn[/gold] into your [gold]Hand[/gold].",
   "THEWILDFIRE-SPARK_SHOT.title": "Spark Shot",
   "THEWILDFIRE-TWO_TALONS.description": "Deal {Damage:diff()} damage {HitCount:choose(2):twice|{HitCount:diff()} times}.\nIf [gold]Attack Flow[/gold] is triggered, hit 2 additional times.",
   "THEWILDFIRE-TWO_TALONS.title": "Two Talons",

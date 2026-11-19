@@ -1,6 +1,7 @@
 ﻿using BaseLib.Patches.Content;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace TheWildfire.TheWildfireCode.Cards;
 
@@ -21,5 +22,6 @@ public class WildfireKeywords
     [CustomEnum] public static CardKeyword AttackFlow;
     [CustomEnum] public static CardKeyword SkillFlow;
     [CustomEnum] public static CardKeyword PowerFlow;
+    [CustomEnum] public static VfxDuration WildfireVeryLong;
     [CustomEnum] public static StaticHoverTip AncientsAwakened;
 }

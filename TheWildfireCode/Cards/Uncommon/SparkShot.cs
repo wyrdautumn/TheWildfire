@@ -18,10 +18,7 @@ public class SparkShot() : TheWildfireCard(0,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new CalculationBaseVar(0),
-        new ExtraDamageVar(1),
-        new CalculatedDamageVar(ValueProp.Move).WithMultiplier(Calc)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(0, ValueProp.Move)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.AfterburnStatic),HoverTipFactory.FromCard<Afterburn>(),HoverTipFactory.FromCard<Firebolt>(IsUpgraded),HoverTipFactory.FromCard<Burn>()];
@@ -30,13 +27,6 @@ public class SparkShot() : TheWildfireCard(0,
         get => new HashSet<CardTag>() { WildfireKeywords.ShowAfterburn };
     }
     
-    private static decimal Calc(CardModel card, Creature? arg2)
-    {
-        if (card.Owner.PlayerCombatState == null)
-            return 0;
-        return Afterburn.AfterburnCount.Get(card.Owner.PlayerCombatState);
-    }
-
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)

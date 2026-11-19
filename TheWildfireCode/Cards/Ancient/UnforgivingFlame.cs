@@ -1,4 +1,5 @@
-﻿using BaseLib.Utils;
+﻿using BaseLib.Abstracts;
+using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -11,7 +12,7 @@ namespace TheWildfire.TheWildfireCode.Cards.Ancient;
 
 public class UnforgivingFlame() : TheWildfireCard(2,
     CardType.Power, CardRarity.Ancient,
-    TargetType.Self)
+    TargetType.Self), ITomeCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<UnforgivingFlamePower>(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
