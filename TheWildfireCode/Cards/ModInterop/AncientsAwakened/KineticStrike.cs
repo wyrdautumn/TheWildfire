@@ -9,6 +9,7 @@ using TheWildfire.TheWildfireCode.Cards;
 using TheWildfire.TheWildfireCode.Cards.Basic;
 using TheWildfire.TheWildfireCode.Cards.Status;
 using TheWildfire.TheWildfireCode.Cards.Variables;
+using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards.ModInterop.AncientsAwakened;
 
@@ -19,7 +20,7 @@ public class KineticStrike : TheWildfireAncientsAwakenedCard
     }
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [..AddAncientsAwakened()];
+        [..AddAncientsAwakened(), HoverTipFactory.FromCard<Afterburn>()];
     
     public override CardPoolModel VisualCardPool => AncientsAwakenedPerfectedInterop.PerfectedCardPool(Pool) ?? base.VisualCardPool;
     
@@ -28,7 +29,7 @@ public class KineticStrike : TheWildfireAncientsAwakenedCard
         get => new HashSet<CardTag>() { WildfireKeywords.ShowAfterburn, CardTag.Strike };
     }
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(12, ValueProp.Move), new AfterburnVar(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(9, ValueProp.Move), new PowerVar<AfterburnDrawPower>(1), new AfterburnVar(1)];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -37,11 +38,13 @@ public class KineticStrike : TheWildfireAncientsAwakenedCard
         await CommonActions.CardAttack(this, play,vfx:"vfx/vfx_attack_slash").Execute(choiceContext);
         if (CombatState == null)
             return;
+        await CommonActions.ApplySelf<AfterburnDrawPower>(choiceContext, this);
         await Afterburn.CreateAfterburn(DynamicVars["Afterburn"].IntValue, Owner, CombatState);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(4);
+        DynamicVars.Damage.UpgradeValueBy(1);
+        DynamicVars["AfterburnDrawPower"].UpgradeValueBy(1);
     }
 }

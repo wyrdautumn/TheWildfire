@@ -76,5 +76,8 @@
   "THEWILDFIRE-SMOKE_COVER_POWER.title": "Smoke Bomb",
   "THEWILDFIRE-COMBAT_FLEXIBILITY_POWER.description": "Whenever another player gains [gold]Block[/gold], gain [gold]Stretch[/gold].",
   "THEWILDFIRE-COMBAT_FLEXIBILITY_POWER.smartDescription": "Whenever another player gains [gold]Block[/gold], gain [blue]{Amount}[/blue] [gold]Stretch[/gold].",
-  "THEWILDFIRE-COMBAT_FLEXIBILITY_POWER.title": "Combat Flexibility"
+  "THEWILDFIRE-COMBAT_FLEXIBILITY_POWER.title": "Combat Flexibility",
+  "THEWILDFIRE-AFTERBURN_DRAW_POWER.description": "The next time you play [gold]Afterburn[/gold], draw a card.",
+  "THEWILDFIRE-AFTERBURN_DRAW_POWER.smartDescription": "The next {Amount:plural:time|[blue]{}[/blue] times} you play [gold]Afterburn[/gold], draw a card.",
+  "THEWILDFIRE-AFTERBURN_DRAW_POWER.title": "Afterburn Draw"
 }

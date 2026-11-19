@@ -21,7 +21,7 @@ public class BoxOfTinder : TheWildfireRelic
 
     public override async Task AfterExert(PlayerChoiceContext choiceContext, int amount, Player exerter, bool fullExert)
     {
-        if (exerter == Owner && Owner.Creature.CombatState != null)
+        if (exerter == Owner && Owner.Creature.CombatState != null && amount > 0)
         {
             Flash();
             Creature? target = Owner.RunState.Rng.CombatTargets.NextItem(Owner.Creature.CombatState.HittableEnemies);

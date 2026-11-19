@@ -21,6 +21,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using TheWildfire.TheWildfireCode.Cards;
 using TheWildfire.TheWildfireCode.Firepower;
 using TheWildfire.TheWildfireCode.Nodes;
+using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards.Status;
 
@@ -61,10 +62,18 @@ public class Afterburn() : TheWildfireCard(0,
             return counter;
         });
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(0, ValueProp.Unpowered | ValueProp.Move), new CardsVar(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(0, ValueProp.Unpowered | ValueProp.Move), new CardsVar(1),
+    new CalculationBaseVar(0),
+    new CalculationExtraVar(1),
+    new CalculatedVar("draws").WithMultiplier(Calc)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [];
+    
+    private static decimal Calc(CardModel card, Creature? arg2)
+    {
+        return card.Owner.Creature.GetPowerAmount<AfterburnDrawPower>();
+    }
     
     public override int MaxUpgradeLevel => 0;
     
@@ -78,7 +87,12 @@ public class Afterburn() : TheWildfireCard(0,
             instance.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(Owner.Creature, VfxColor.Purple));
         SfxCmd.Play("event:/sfx/characters/attack_fire");
         await CreatureCmd.Damage(choiceContext, Owner.Creature, DynamicVars.Damage, this, cardPlay);
-        await CommonActions.Draw(this, choiceContext);
+        PowerModel? draw = Owner.Creature.GetPower<AfterburnDrawPower>();
+        if (draw != null)
+        {
+            await CommonActions.Draw(this, choiceContext);
+            await PowerCmd.Decrement(draw);
+        }
     }
 
     public static async Task CreateAfterburn(int afterburn, Player owner, ICombatState combatState)
