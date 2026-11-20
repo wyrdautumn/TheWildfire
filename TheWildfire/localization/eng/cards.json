@@ -61,7 +61,7 @@
   "THEWILDFIRE-AFTERBURNER_KICK.title": "Afterburner Kick",
   "THEWILDFIRE-FLINT_STRIKE.description": "Deal {Damage:diff()} damage.\nGain {Ignite:diff()} [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img].\nIncrease this card's [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img] gain by {Increase:diff()}.",
   "THEWILDFIRE-FLINT_STRIKE.title": "Flint Strike",
-  "THEWILDFIRE-KINDLE_INNER_FLAMES.description": "Gain {Ignite:diff()} [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img].\nDraw {Cards:diff()} {Cards:plural:card|cards}.\nPut a card from your [gold]Hand[/gold] on top of your [gold]Draw Pile[/gold].",
+  "THEWILDFIRE-KINDLE_INNER_FLAMES.description": "Gain {Ignite:diff()} [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img].\nDraw {Cards:diff()} {Cards:plural:card|cards}.\nDiscard 1 card.",
   "THEWILDFIRE-KINDLE_INNER_FLAMES.selectionScreenPrompt": "Choose a card to put on top of your Draw Pile.",
   "THEWILDFIRE-KINDLE_INNER_FLAMES.title": "Kindle Inner Flames",
   "THEWILDFIRE-EMBER_DASH.description": "Deal {Damage:diff()} damage to a random enemy X times.\nGain {Ignite:diff()} [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img] for each enemy damaged.",

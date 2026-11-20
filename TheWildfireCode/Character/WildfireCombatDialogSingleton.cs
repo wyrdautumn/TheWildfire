@@ -5,12 +5,16 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Encounters;
 using MegaCrit.Sts2.Core.Models.Monsters;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
+using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
+using MegaCrit.Sts2.Core.ValueProps;
 using TheWildfire.TheWildfireCode.Cards;
 
 namespace TheWildfire.TheWildfireCode.Character;
@@ -18,6 +22,7 @@ namespace TheWildfire.TheWildfireCode.Character;
 public class WildfireCombatDialogSingleton() : CustomSingletonModel(HookType.Combat)
 {
     public static readonly SavedSpireField<RunState, int> WildfireCultistBanter = new(() => 0, "WildfireCultistsBantered");
+    private bool wildfireAttackBantered = false;
     
     public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
@@ -28,6 +33,7 @@ public class WildfireCombatDialogSingleton() : CustomSingletonModel(HookType.Com
             return;
         if (combatState.RoundNumber > 1)
             return;
+        wildfireAttackBantered = false;
         Player? wildfire = combatState.Players.FirstOrDefault(p => p.Character is Character.TheWildfire);
         if (wildfire == null)
             return;
@@ -57,7 +63,162 @@ public class WildfireCombatDialogSingleton() : CustomSingletonModel(HookType.Com
         return combatState.Enemies.FirstOrDefault();
     }
     
-        [HarmonyPatch(typeof(DampCultist), nameof(DampCultist.IncantationMove))]
+    public override Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props,
+        Creature target, CardModel? cardSource)
+    {
+        if (dealer == null || dealer.Player == null || dealer.Player.Character is not Character.TheWildfire || wildfireAttackBantered)
+            return Task.CompletedTask;
+        EncounterModel? encounter = dealer.CombatState?.Encounter;
+        if (dealer.CombatState == null || encounter == null || encounter.RoomType != RoomType.Boss)
+            return Task.CompletedTask;
+        if (encounter is CeremonialBeastBoss)
+        {
+            if (result.TotalDamage >= 45)
+            {
+                if ((double)dealer.CurrentHp / dealer.MaxHp > .25)
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_BEAST_BOSS_ATTACK_HIGH"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                else
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_BEAST_BOSS_ATTACK_LOW"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                wildfireAttackBantered = true;
+            }
+            return Task.CompletedTask;
+        }
+        if (encounter is TheKinBoss)
+        {
+            if (result.TotalDamage >= 45)
+            {
+                if ((double)dealer.CurrentHp / dealer.MaxHp > .25)
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_KIN_BOSS_ATTACK_HIGH"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                else
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_KIN_BOSS_ATTACK_LOW"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                wildfireAttackBantered = true;
+            }
+            return Task.CompletedTask;
+        }
+        if (encounter is VantomBoss)
+        {
+            if (result.TotalDamage >= 45)
+            {
+                if ((double)dealer.CurrentHp / dealer.MaxHp > .25)
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_VANTOM_BOSS_ATTACK_HIGH"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                else
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_VANTOM_BOSS_ATTACK_LOW"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                wildfireAttackBantered = true;
+            }
+            return Task.CompletedTask;
+        }
+        if (encounter is WaterfallGiantBoss)
+        {
+            if (result.TotalDamage >= 45)
+            {
+                if ((double)dealer.CurrentHp / dealer.MaxHp > .25 || (double)target.CurrentHp / target.MaxHp > .5)
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_WATERFALL_BOSS_ATTACK_HIGH"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                else
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_WATERFALL_BOSS_ATTACK_LOW"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                wildfireAttackBantered = true;
+            }
+            return Task.CompletedTask;
+        }
+        if (encounter is SoulFyshBoss)
+        {
+            if (result.TotalDamage >= 45)
+            {
+                if ((double)dealer.CurrentHp / dealer.MaxHp > .25)
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_FISH_BOSS_ATTACK_HIGH"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                else
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_FISH_BOSS_ATTACK_LOW"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                wildfireAttackBantered = true;
+            }
+            return Task.CompletedTask;
+        }
+        if (encounter is LagavulinMatriarchBoss)
+        {
+            if (result.TotalDamage >= 45)
+            {
+                if ((double)dealer.CurrentHp / dealer.MaxHp > .25)
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_MATRIARCH_BOSS_ATTACK_HIGH"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                else
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_MATRIARCH_BOSS_ATTACK_LOW"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                wildfireAttackBantered = true;
+            }
+            return Task.CompletedTask;
+        }
+        if (encounter is KnowledgeDemonBoss)
+        {
+            if (result.TotalDamage >= 65)
+            {
+                if ((double)dealer.CurrentHp / dealer.MaxHp > .25)
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_DEMON_BOSS_ATTACK_HIGH"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                else
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_DEMON_BOSS_ATTACK_LOW"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                wildfireAttackBantered = true;
+            }
+            return Task.CompletedTask;
+        }
+        if (encounter is KaiserCrabBoss)
+        {
+            if (result.TotalDamage >= 65)
+            {
+                if ((double)dealer.CurrentHp / dealer.MaxHp > .25)
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_CRAB_BOSS_ATTACK_HIGH"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                else
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_CRAB_BOSS_ATTACK_LOW"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                wildfireAttackBantered = true;
+            }
+            return Task.CompletedTask;
+        }
+        if (encounter is TheInsatiableBoss)
+        {
+            if (result.TotalDamage >= 65)
+            {
+                SandpitPower? sandpitPower = target.Powers.OfType<SandpitPower>().FirstOrDefault(s => s.Target == dealer);
+                if ((double)dealer.CurrentHp / dealer.MaxHp > .25 && sandpitPower == null || (sandpitPower != null && sandpitPower.Amount > 1))
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_INSATIABLE_BOSS_ATTACK_HIGH"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                else
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_INSATIABLE_BOSS_ATTACK_LOW"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                wildfireAttackBantered = true;
+            }
+            return Task.CompletedTask;
+        }
+        if (encounter is QueenBoss)
+        {
+            if (result.TotalDamage >= 80)
+            {
+                if ((double)dealer.CurrentHp / dealer.MaxHp > .25)
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_QUEEN_BOSS_ATTACK_HIGH"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                else
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_QUEEN_BOSS_ATTACK_LOW"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                wildfireAttackBantered = true;
+            }
+            return Task.CompletedTask;
+        }
+        if (encounter is TestSubjectBoss)
+        {
+            if (result.TotalDamage >= 80)
+            {
+                if ((double)dealer.CurrentHp / dealer.MaxHp > .25)
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_SUBJECT_BOSS_ATTACK_HIGH"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                else
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_SUBJECT_BOSS_ATTACK_LOW"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                wildfireAttackBantered = true;
+            }
+            return Task.CompletedTask;
+        }
+        if (encounter is AeonglassBoss)
+        {
+            if (result.TotalDamage >= 80)
+            {
+                if ((double)dealer.CurrentHp / dealer.MaxHp > .25)
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_GLASS_BOSS_ATTACK_HIGH"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                else
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE_GLASS_BOSS_ATTACK_LOW"),dealer,VfxColor.Purple,WildfireKeywords.WildfireVeryLong);
+                wildfireAttackBantered = true;
+            }
+        }
+        return Task.CompletedTask;
+    }
+    
+    [HarmonyPatch(typeof(DampCultist), nameof(DampCultist.IncantationMove))]
     public static class DampDialogPatch
     {
         [HarmonyPostfix]

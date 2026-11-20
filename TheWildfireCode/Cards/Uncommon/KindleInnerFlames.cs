@@ -25,12 +25,11 @@ public class KindleInnerFlames() : TheWildfireCard(1,
         await FirepowerController.Ignite(choiceContext, DynamicVars["Ignite"].IntValue, Owner);
         await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
         CardSelectorPrefs prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1);
-        IReadOnlyList<CardPileAddResult> cardPileAddResultList = await CardPileCmd.Add(await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this), PileType.Draw, CardPilePosition.Top);
+        await CardCmd.Discard(choiceContext, await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this));
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Ignite"].UpgradeValueBy(2);
-        DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars["Ignite"].UpgradeValueBy(3);
     }
 }
