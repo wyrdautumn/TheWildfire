@@ -12,7 +12,13 @@
   "WILDFIREBANTER.QUEEN_BOSS": "I sure didn't vote for her.",
   "WILDFIREBANTER.TEST_SUBJECT_BOSS": "...I'll make it quick.",
   "WILDFIREBANTER.AEONGLASS_BOSS": "What are you even supposed to be?",
-  
+  "WILDFIREBANTER.FAKE_MERCHANT_EVENT_ENCOUNTER": "I thought you liked that smelly crap!",
+  "WILDFIREBANTER.FAKE_MERCHANT_EVENT_ENCOUNTER.reply": "WHY WOULD ANYBODY LIKE THAT!?",
+  "WILDFIREBANTER.DENSE_VEGETATION_EVENT_ENCOUNTER": "Eww. Gross. Burn it.",
+  "WILDFIREBANTER.MYSTERIOUS_KNIGHT_EVENT_ENCOUNTER": "Why does everyone in this tower want to mug me?",
+  "WILDFIREBANTER.PUNCH_OFF_EVENT_ENCOUNTER": "Maybe I liked it better when you were hitting each other.",
+  "WILDFIREBANTER.BATTLEWORN_DUMMY_EVENT_ENCOUNTER": "Just like when I was a kid.",
+
   "WILDFIRE.CAWCAW.1": "[jitter]WE DON'T DO THAT![/jitter]",
   "WILDFIRE.CAWCAW.1.reply": "Don't let them get under your skin.",
   "WILDFIRE.CAWCAW.2": "You guys are starting to piss me off.",

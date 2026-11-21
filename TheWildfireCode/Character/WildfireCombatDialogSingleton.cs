@@ -38,7 +38,7 @@ public class WildfireCombatDialogSingleton() : CustomSingletonModel(HookType.Com
         Player? sorceress = combatState.Players.FirstOrDefault(p => p.Character.Id.Entry == "THESORCERESSMOD-THE_SORCERESS_MOD");
         if (wildfire == null)
             return;
-        if (encounter is CultistsNormal && sorceress != null)
+        if ((encounter is CultistsNormal || encounter is PunchOffEventEncounter || encounter is MysteriousKnightEventEncounter || encounter is QueenBoss) && sorceress != null)
             return;
         LocString? banter = LocString.GetIfExists("combat_messages", "WILDFIREBANTER." + encounter.Id.Entry);
         if (banter != null)
