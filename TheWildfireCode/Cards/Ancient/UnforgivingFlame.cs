@@ -15,6 +15,7 @@ public class UnforgivingFlame() : TheWildfireCard(2,
     TargetType.Self), ITomeCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<UnforgivingFlamePower>(1)];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Scorch)];
 
@@ -28,6 +29,6 @@ public class UnforgivingFlame() : TheWildfireCard(2,
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        RemoveKeyword(CardKeyword.Ethereal);
     }
 }

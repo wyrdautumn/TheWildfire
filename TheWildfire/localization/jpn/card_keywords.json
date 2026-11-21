@@ -1,0 +1,8 @@
+﻿{
+  "THEWILDFIRE-ATTACKFLOW.description": "このターンに最後にプレイしたカードがアタックなら、{energyPrefix:energyIcons(1)}を得て、カードを1枚引く。アタックフローは1ターンに1回のみ発動する。",
+  "THEWILDFIRE-ATTACKFLOW.title": "アタックフロー",
+  "THEWILDFIRE-POWERFLOW.description": "このターンに最後にプレイしたカードがパワーなら、{energyPrefix:energyIcons(1)}を得て、カードを1枚引く。パワーフローは1ターンに1回のみ発動する。",
+  "THEWILDFIRE-POWERFLOW.title": "パワーフロー",
+  "THEWILDFIRE-SKILLFLOW.description": "このターンに最後にプレイしたカードがスキルなら、{energyPrefix:energyIcons(1)}を得て、カードを1枚引く。スキルフローは1ターンに1回のみ発動する。",
+  "THEWILDFIRE-SKILLFLOW.title": "スキルフロー"
+}

@@ -16,7 +16,6 @@ public class RisingDragonFire() : TheWildfireCard(2,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<RisingDragonFirePower>(1)];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<Afterburn>(), HoverTipFactory.FromCard<Firebolt>(),HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
 
@@ -30,6 +29,6 @@ public class RisingDragonFire() : TheWildfireCard(2,
 
     protected override void OnUpgrade()
     {
-        RemoveKeyword(CardKeyword.Ethereal);
+        EnergyCost.UpgradeBy(-1);
     }
 }

@@ -21,7 +21,8 @@ public class MintyPatches
     [HarmonyPostfix]
     public static void RefreshVisibilityPostfix(NHealthBar bar)
     {
-        WildfireHpTrackers node = bar.GetNodeOrNull<WildfireHpTrackers>("WildfireHPTrackers");
-        node.AdjustMintyPreview();
+        WildfireHpTrackers? node = bar.GetNodeOrNull<WildfireHpTrackers>("WildfireHPTrackers");
+        if (node != null)
+            node.AdjustMintyPreview();
     }
 }

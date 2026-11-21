@@ -208,6 +208,7 @@ public partial class WildfireHpTrackers : Control
 		{
 			SetProcess(true);
 			_overheat.Visible = true;
+			AdjustMintyPreview();
 		}
 
 		if (_overheat != null && _overheatLabel != null && _overheat.Visible && _creature.Player != null)

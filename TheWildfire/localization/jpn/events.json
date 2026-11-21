@@ -1,0 +1,7 @@
+﻿{
+"BYRDONIS_NEST.pages.EAT.wildfireDescription": "卵を割り、炎で焼いて食べる。\n\n誇れることではないけれど、圧倒的な安堵感に包まれる。あなたはまだ母親になる覚悟が[jitter]できていない[/jitter]。",
+"BYRDONIS_NEST.pages.INITIAL.wildfireDescription": "巨大な[jitter][red]よろめく獣[/red][/jitter]が、傷ついた[green][sine]緑のビャード[/sine][/green]を追いかけるのを目撃する。\n\nバードが逃げ込んだ窪みには、[gold]無防備な卵が1つ[/gold]取り残されている。\n\n[sine]あなたが感じたのは……[/sine]\n\n気まずさ。",
+"BYRDONIS_NEST.pages.TAKE.wildfireDescription": "卵をそっとすくい上げ、しまい込む。\n\nこの[green]ビャード[/green]をひとりぼっちにするのは……なんだか薄情な気がする。自分の面倒を見るだけでも手いっぱいだけど、食べさせるクチバシがもうひとつ増えたところで、どうってことないよね？\n\n……そうよね？",
+"COLORFUL_PHILOSOPHERS.pages.INITIAL.options.CARD_POOL∴THEWILDFIRE-THE_WILDFIRE_CARD_POOL.description": "ワイルドファイアのカードを[blue]{Cards}[/blue]枚獲得する。",
+"COLORFUL_PHILOSOPHERS.pages.INITIAL.options.CARD_POOL∴THEWILDFIRE-THE_WILDFIRE_CARD_POOL.title": "マゼンタ"
+}

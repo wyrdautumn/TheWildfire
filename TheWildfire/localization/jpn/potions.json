@@ -1,0 +1,8 @@
+﻿{
+  "THEWILDFIRE-BURNING_ELIXIR.description": "[img]res://TheWildfire/images/charui/firepower_text_icon.png[/img][blue]{Ignite}[/blue]を得る。",
+  "THEWILDFIRE-BURNING_ELIXIR.title": "バーニングエリクサー",
+  "THEWILDFIRE-FLOW_POTION.description": "このターンにまだ発動していない[gold]フロー[/gold]をランダムに1つ達成する。",
+  "THEWILDFIRE-FLOW_POTION.title": "フローポーション",
+  "THEWILDFIRE-SOOTHING_TONIC.description": "[blue]{Block}[/blue][gold]ブロック[/gold]と[gold]体質[/gold][blue]{ConstitutionPower}[/blue]を得る。",
+  "THEWILDFIRE-SOOTHING_TONIC.title": "竜心薬"
+}

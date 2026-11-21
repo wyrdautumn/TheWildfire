@@ -35,7 +35,10 @@ public class WildfireCombatDialogSingleton() : CustomSingletonModel(HookType.Com
             return;
         wildfireAttackBantered = false;
         Player? wildfire = combatState.Players.FirstOrDefault(p => p.Character is Character.TheWildfire);
+        Player? sorceress = combatState.Players.FirstOrDefault(p => p.Character.Id.Entry == "THESORCERESSMOD-THE_SORCERESS_MOD");
         if (wildfire == null)
+            return;
+        if (encounter is CultistsNormal && sorceress != null)
             return;
         LocString? banter = LocString.GetIfExists("combat_messages", "WILDFIREBANTER." + encounter.Id.Entry);
         if (banter != null)
@@ -226,6 +229,7 @@ public class WildfireCombatDialogSingleton() : CustomSingletonModel(HookType.Com
         {
             await __result;
             Player? wildfire = __instance.CombatState.Players.FirstOrDefault(p => p.Character is Character.TheWildfire);
+            Player? sorceress = __instance.CombatState.Players.FirstOrDefault(p => p.Character.Id.Entry == "THESORCERESSMOD-THE_SORCERESS_MOD");
             RunState? runState = __instance.CombatState.RunState as RunState;
             if (wildfire == null || runState == null)
                 return;
@@ -234,11 +238,23 @@ public class WildfireCombatDialogSingleton() : CustomSingletonModel(HookType.Com
             {
                 WildfireCultistBanter.Set(runState, 1);
                 TalkCmd.Play(new LocString("combat_messages", "WILDFIRE.CAWCAW.1"), wildfire.Creature, VfxColor.Purple, VfxDuration.Standard);
+                if (sorceress != null)
+                {
+                    await Cmd.CustomScaledWait(0.4f, 1);
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE.CAWCAW.1.reply"), sorceress.Creature,
+                        VfxColor.Purple, VfxDuration.Standard);
+                }
             }
             else if (num == 1)
             {
                 WildfireCultistBanter.Set(runState, 2);
                 TalkCmd.Play(new LocString("combat_messages", "WILDFIRE.CAWCAW.2"), wildfire.Creature, VfxColor.Purple, VfxDuration.Standard);
+                if (sorceress != null)
+                {
+                    await Cmd.CustomScaledWait(0.4f, 1);
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE.CAWCAW.2.reply"), sorceress.Creature,
+                        VfxColor.Purple, VfxDuration.Standard);
+                }
             }
         }
     }
@@ -251,6 +267,7 @@ public class WildfireCombatDialogSingleton() : CustomSingletonModel(HookType.Com
         {
             await __result;
             Player? wildfire = __instance.CombatState.Players.FirstOrDefault(p => p.Character is Character.TheWildfire);
+            Player? sorceress = __instance.CombatState.Players.FirstOrDefault(p => p.Character.Id.Entry == "THESORCERESSMOD-THE_SORCERESS_MOD");
             RunState? runState = __instance.CombatState.RunState as RunState;
             if (wildfire == null || runState == null)
                 return;
@@ -258,14 +275,32 @@ public class WildfireCombatDialogSingleton() : CustomSingletonModel(HookType.Com
             if (num == 0)
             {
                 TalkCmd.Play(new LocString("combat_messages", "WILDFIRE.BIGCAW.1"), wildfire.Creature, VfxColor.Purple, VfxDuration.Standard);
+                if (sorceress != null)
+                {
+                    await Cmd.CustomScaledWait(0.4f, 1);
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE.BIGCAW.1.reply"), sorceress.Creature,
+                        VfxColor.Purple, VfxDuration.Standard);
+                }
             }
             else if (num == 1)
             {
                 TalkCmd.Play(new LocString("combat_messages", "WILDFIRE.BIGCAW.2"), wildfire.Creature, VfxColor.Purple, VfxDuration.Standard);
+                if (sorceress != null)
+                {
+                    await Cmd.CustomScaledWait(0.4f, 1);
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE.BIGCAW.2.reply"), sorceress.Creature,
+                        VfxColor.Purple, VfxDuration.Standard);
+                }
             }
             else if (num == 2)
             {
                 TalkCmd.Play(new LocString("combat_messages", "WILDFIRE.BIGCAW.3"), wildfire.Creature, VfxColor.Purple, VfxDuration.Standard);
+                if (sorceress != null)
+                {
+                    await Cmd.CustomScaledWait(0.4f, 1);
+                    TalkCmd.Play(new LocString("combat_messages", "WILDFIRE.BIGCAW.3.reply"), sorceress.Creature,
+                        VfxColor.Purple, VfxDuration.Standard);
+                }
             }
         }
     }

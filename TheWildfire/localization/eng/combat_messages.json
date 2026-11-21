@@ -14,10 +14,15 @@
   "WILDFIREBANTER.AEONGLASS_BOSS": "What are you even supposed to be?",
   
   "WILDFIRE.CAWCAW.1": "[jitter]WE DON'T DO THAT![/jitter]",
+  "WILDFIRE.CAWCAW.1.reply": "Don't let them get under your skin.",
   "WILDFIRE.CAWCAW.2": "You guys are starting to piss me off.",
+  "WILDFIRE.CAWCAW.2.reply": "They aren't worth the energy.",
   "WILDFIRE.BIGCAW.1": "You think you're funny, big guy?",
+  "WILDFIRE.BIGCAW.1.reply": "I don't believe he thinks much at all.",
   "WILDFIRE.BIGCAW.2": "I'm gonna fucking kill you.",
+  "WILDFIRE.BIGCAW.2.reply": "I suppose I can't object.",
   "WILDFIRE.BIGCAW.3": "[jitter][b]You will die screaming and I promise you I will enjoy it.[/b][/jitter]",
+  "WILDFIRE.BIGCAW.3.reply": "...It may be best to let it go.",
   "WILDFIRE.HOPPER": "Give that back! You can't even play it!",
 
   "WILDFIRE_BEAST_BOSS_ATTACK_HIGH": "I should feel worse about this.",

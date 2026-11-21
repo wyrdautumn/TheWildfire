@@ -33,6 +33,6 @@ public class CombatFlexibility() : TheWildfireCard(2,
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        DynamicVars["CombatFlexibilityPower"].UpgradeValueBy(1);
     }
 }
