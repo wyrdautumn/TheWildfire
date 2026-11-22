@@ -25,7 +25,7 @@ public class DragonPunch() : TheWildfireCard(2,
         new AfterburnVar(2)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<WeakPower>(), HoverTipFactory.FromPower<VulnerablePower>(), HoverTipFactory.FromCard<Afterburn>()];
+        [HoverTipFactory.FromPower<WeakPower>(), HoverTipFactory.FromPower<VulnerablePower>(), GenerateAfterburnTooltip()];
     protected override HashSet<CardTag> CanonicalTags
     {
         get => new HashSet<CardTag>() { WildfireKeywords.ShowAfterburn };

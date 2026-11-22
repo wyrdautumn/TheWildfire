@@ -20,7 +20,7 @@ public class KineticStrike : TheWildfireAncientsAwakenedCard
     }
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [..AddAncientsAwakened(), HoverTipFactory.FromCard<Afterburn>()];
+        [..AddAncientsAwakened(), GenerateAfterburnTooltip()];
     
     public override CardPoolModel VisualCardPool => AncientsAwakenedPerfectedInterop.PerfectedCardPool(Pool) ?? base.VisualCardPool;
     

@@ -56,6 +56,8 @@ public class WildfireCombatDialogSingleton() : CustomSingletonModel(HookType.Com
 
     private VfxColor GetMonsterVfxColor(EncounterModel encounter)
     {
+        if (encounter is RubyRaidersNormal)
+            return VfxColor.Red;
         return VfxColor.Blue;
     }
 
@@ -63,6 +65,8 @@ public class WildfireCombatDialogSingleton() : CustomSingletonModel(HookType.Com
     {
         if (encounter is SeapunkNormal)
             return combatState.Enemies.Where(c => c.Monster != null && c.Monster is CalcifiedCultist).FirstOrDefault();
+        if (encounter is RubyRaidersNormal)
+            return combatState.Enemies.ElementAtOrDefault(1);
         return combatState.Enemies.FirstOrDefault();
     }
     

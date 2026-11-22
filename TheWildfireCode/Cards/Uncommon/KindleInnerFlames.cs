@@ -24,7 +24,7 @@ public class KindleInnerFlames() : TheWildfireCard(1,
     {
         await FirepowerController.Ignite(choiceContext, DynamicVars["Ignite"].IntValue, Owner);
         await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
-        CardSelectorPrefs prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1);
+        CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 1);
         await CardCmd.Discard(choiceContext, await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this));
     }
 

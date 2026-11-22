@@ -18,7 +18,7 @@ public class FireSnakeDance() : TheWildfireCard(0,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2), new AfterburnVar(4)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<Afterburn>(),HoverTipFactory.ForEnergy(this), HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
+        [GenerateAfterburnTooltip(),HoverTipFactory.ForEnergy(this), HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
     
     protected override HashSet<CardTag> CanonicalTags
     {

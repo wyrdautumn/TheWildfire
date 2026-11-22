@@ -21,7 +21,7 @@ public class FallingStarStrike() : TheWildfireCard(0,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Move), new PowerVar<VulnerablePower>(1), new PowerVar<WeakPower>(1), new AfterburnVar(3)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<Afterburn>(),HoverTipFactory.FromPower<WeakPower>(),HoverTipFactory.FromPower<VulnerablePower>()];
+        [GenerateAfterburnTooltip(),HoverTipFactory.FromPower<WeakPower>(),HoverTipFactory.FromPower<VulnerablePower>()];
     protected override HashSet<CardTag> CanonicalTags
     {
         get => new HashSet<CardTag>() { CardTag.Strike, WildfireKeywords.ShowAfterburn };

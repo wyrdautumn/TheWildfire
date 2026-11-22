@@ -17,7 +17,7 @@ public class AfterburnerKick() : TheWildfireCard(2,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(18, ValueProp.Move), new IgniteVar(6), new AfterburnVar(3)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<Afterburn>()];
+        [GenerateAfterburnTooltip()];
     protected override HashSet<CardTag> CanonicalTags
     {
         get => new HashSet<CardTag>() { WildfireKeywords.ShowAfterburn };

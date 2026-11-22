@@ -21,7 +21,7 @@
   "THEWILDFIRE-WILDFIRE6_EPOCH.unlock": "[color=db5ee2]ワイルドファイア[/color]の炎が再び燃え上がる。\nラン開始時に[red]アセンション[/red]を選択できるようになった。",
   "THEWILDFIRE-WILDFIRE6_EPOCH.unlockInfo": "[color=db5ee2]ワイルドファイア[/color]で[gold]第3幕[/gold]をクリアする{IsRevealed:と、この年代記が解放される}。",
   "THEWILDFIRE-WILDFIRE6_EPOCH.unlockText": "ワイルドファイアの[red]アセンション[/red]と[gold]{Potion1}[/gold]、[gold]{Potion2}[/gold]、[gold]{Potion3}[/gold]が解放された。",
-  "THEWILDFIRE-WILDFIRE7_EPOCH.description": "[gold]塔[/gold]の奥深くで、悪魔が[color=db5ee2]ワイルドファイア[/color]の苦境に強い関心を寄せていた。\n\n「なあ、お前の[color=B18AFF]『パパ』[/color]は、思っているほど遠くにいないかもしれないぜ。お前の[color=db5ee2]魔術[/color]をほんの少し使えば、そいつを探す手伝いをしてやれる。どうせ持て余すほどの力を持ってるんだろ？」\n\n一瞬、[color=db5ee2]ワイルドファイア[/color]は心を揺さぶられる。だが、彼女の内にある何かが、誇りゆえにそれを受け入れることを拒んだ。\n\n[color=db5ee2]「ごめん。でも、この炎は私のもの。自分で制御しなきゃいけないの。だから、誰かに渡すわけにはいかない」[/color]",
+  "THEWILDFIRE-WILDFIRE7_EPOCH.description": "[gold]塔[/gold]の奥深くで、悪魔が[color=db5ee2]ワイルドファイア[/color]の苦境に強い関心を寄せていた。\n\n「あなたの[color=B18AFF]『パパ』[/color]は、思っているほど遠くにいないかもしれませんよ。あなたの[color=db5ee2]魔術[/color]をほんの少し使えば、彼を探す手伝いをしてあげられます。どうせ持て余すほどの力を持ってるんでしょう？」\n\n一瞬、[color=db5ee2]ワイルドファイア[/color]は心を揺さぶられる。だが、彼女の内にある何かが、誇りゆえにそれを受け入れることを拒んだ。\n\n[color=db5ee2]「ごめん。でも、この炎は私のもの。自分で制御しなきゃいけないの。だから、誰かに渡すわけにはいかない」[/color]",
   "THEWILDFIRE-WILDFIRE7_EPOCH.title": "正直であれ",
   "THEWILDFIRE-WILDFIRE7_EPOCH.unlockInfo": "[color=db5ee2]ワイルドファイア[/color]で[red]アセンション[/red][blue]1[/blue]をクリアする{IsRevealed:と、この年代記が解放される}"
 }

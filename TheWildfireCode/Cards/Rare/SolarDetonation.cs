@@ -24,7 +24,7 @@ public class SolarDetonation() : TheWildfireCard(3,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(30, ValueProp.Move), new PowerVar<WeakPower>(3), new PowerVar<VulnerablePower>(3), new AfterburnVar(5)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<Afterburn>(),HoverTipFactory.FromPower<WeakPower>(),HoverTipFactory.FromPower<VulnerablePower>()];
+        [GenerateAfterburnTooltip(),HoverTipFactory.FromPower<WeakPower>(),HoverTipFactory.FromPower<VulnerablePower>()];
     
     protected override HashSet<CardTag> CanonicalTags
     {

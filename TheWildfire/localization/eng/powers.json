@@ -79,5 +79,8 @@
   "THEWILDFIRE-COMBAT_FLEXIBILITY_POWER.title": "Combat Flexibility",
   "THEWILDFIRE-AFTERBURN_DRAW_POWER.description": "The next time you play [gold]Afterburn[/gold], draw a card.",
   "THEWILDFIRE-AFTERBURN_DRAW_POWER.smartDescription": "The next {Amount:plural:time|[blue]{}[/blue] times} you play [gold]Afterburn[/gold], draw a card.",
-  "THEWILDFIRE-AFTERBURN_DRAW_POWER.title": "Afterburn Draw"
+  "THEWILDFIRE-AFTERBURN_DRAW_POWER.title": "Afterburn Draw",
+  "THEWILDFIRE-BURNING_BLADE_POWER.description": "At the start of its turn, takes damage.",
+  "THEWILDFIRE-BURNING_BLADE_POWER.smartDescription": "At the start of its turn, takes [blue]{Amount}[/blue] damage.",
+  "THEWILDFIRE-BURNING_BLADE_POWER.title": "The Burning Blade"
 }

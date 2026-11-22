@@ -3,7 +3,7 @@
   "THEWILDFIRE-STRIKE_WILDFIRE.title": "Strike",
   "THEWILDFIRE-DEFEND_WILDFIRE.description": "Gain {Block:diff()} [gold]Block[/gold].",
   "THEWILDFIRE-DEFEND_WILDFIRE.title": "Defend",
-  "THEWILDFIRE-AFTERBURN.description": "Take {Damage:diff()} damage.{draws:cond:>0?\nDraw a card.|}",
+  "THEWILDFIRE-AFTERBURN.description": "Take {Damage:choose(0):X|{Damage:diff()}} damage.{draws:cond:>0?\nDraw a card.|}",
   "THEWILDFIRE-AFTERBURN.title": "Afterburn",
   "THEWILDFIRE-FIREBOLT.description": "Deal {Damage:diff()} damage.\nDouble the base damage of ALL Firebolt cards this combat.",
   "THEWILDFIRE-FIREBOLT.title": "Firebolt",
@@ -200,5 +200,7 @@
   "THEWILDFIRE-FINAL_GATE.description": "Gain {Ignite:diff()} [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img].\n[gold]Scorch[/gold].\nReturn this card to your [gold]Hand[/gold].",
   "THEWILDFIRE-FINAL_GATE.title": "Final Gate",
   "THEWILDFIRE-STEADFAST_DISCIPLINE.description": "Add [gold]Solar Power[/gold] into your [gold]Hand[/gold].",
-  "THEWILDFIRE-STEADFAST_DISCIPLINE.title": "Steadfast Discipline"
+  "THEWILDFIRE-STEADFAST_DISCIPLINE.title": "Steadfast Discipline",
+  "THEWILDFIRE-THE_BURNING_BLADE.description": "Deal {Damage:diff()} damage.\nThe enemy takes {BurningBladePower:diff()} damage at the start of each of its turns.",
+  "THEWILDFIRE-THE_BURNING_BLADE.title": "The Burning Blade"
 }

@@ -17,7 +17,7 @@ public class FlashFire() : TheWildfireCard(1,
     protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(11, ValueProp.Move), new CardsVar(1), new AfterburnVar(3)];
     public override bool GainsBlock => true;
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<Afterburn>()];
+        [GenerateAfterburnTooltip()];
     protected override HashSet<CardTag> CanonicalTags
     {
         get => new HashSet<CardTag>() { WildfireKeywords.ShowAfterburn };

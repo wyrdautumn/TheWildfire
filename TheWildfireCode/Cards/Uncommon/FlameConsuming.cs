@@ -19,7 +19,7 @@ public class FlameConsuming() : TheWildfireCard(0,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(2), new PowerVar<RagingFirePower>(4), new AfterburnVar(3)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<RagingFirePower>(), HoverTipFactory.FromCard<Afterburn>(), HoverTipFactory.Static(WildfireKeywords.Scorch)];
+        [HoverTipFactory.FromPower<RagingFirePower>(), GenerateAfterburnTooltip(), HoverTipFactory.Static(WildfireKeywords.Scorch)];
     protected override HashSet<CardTag> CanonicalTags
     {
         get => new HashSet<CardTag>() { WildfireKeywords.ShowAfterburn, WildfireKeywords.ScorchTag };

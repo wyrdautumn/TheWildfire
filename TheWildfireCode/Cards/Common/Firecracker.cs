@@ -22,7 +22,7 @@ public class Firecracker() : TheWildfireCard(0,
         get => new HashSet<CardTag>() { WildfireKeywords.ShowAfterburn };
     }
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<WeakPower>(), HoverTipFactory.FromPower<VulnerablePower>(), HoverTipFactory.FromCard<Afterburn>()];
+        [HoverTipFactory.FromPower<WeakPower>(), HoverTipFactory.FromPower<VulnerablePower>(), GenerateAfterburnTooltip()];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

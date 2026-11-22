@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
+using TheWildfire.TheWildfireCode.Cards.ModInterop.AncientsAwakened;
 using TheWildfire.TheWildfireCode.Cards.Status;
 using TheWildfire.TheWildfireCode.Firepower;
 using TheWildfire.TheWildfireCode.Powers;
@@ -63,6 +64,20 @@ public abstract class TheWildfireCard(int cost, CardType type, CardRarity rarity
     public virtual Task AfterOverheatDamage(PlayerChoiceContext choiceContext, int damage, int damageMitigated,
         Player overheater) => Task.CompletedTask;
     public virtual Task FlowAchieved(PlayerChoiceContext choiceContext, Player achiever, CardType type) => Task.CompletedTask;
+
+    protected IHoverTip GenerateAfterburnTooltip()
+    {
+        CardModel preview = (CardModel) ModelDb.Card<Afterburn>().MutableClone();
+        if (DynamicVars.ContainsKey("Afterburn"))
+            preview.DynamicVars.Damage.BaseValue = DynamicVars["Afterburn"].BaseValue;
+        if (this is KineticStrike || (IsInCombat && Owner.HasPower<AfterburnDrawPower>()))
+        {
+            preview.DynamicVars.CalculationBase.UpgradeValueBy(1);
+            preview.DynamicVars.RecalculateForUpgradeOrEnchant();
+            preview.UpdateDynamicVarPreview(CardPreviewMode.Normal, null, preview.DynamicVars);
+        }
+        return HoverTipFactory.FromCard(preview);
+    }
     
     protected IEnumerable<IHoverTip> AddAncientsAwakened()
     {

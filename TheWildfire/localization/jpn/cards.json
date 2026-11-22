@@ -3,7 +3,7 @@
   "THEWILDFIRE-ABUNDANT_STEP.title": "豊穣の歩み",
   "THEWILDFIRE-ADAMANT_SOUL.description": "{CalculatedBlock:diff()}ブロックを得る。\n[gold]パワーフロー[/gold]が発動した場合、追加で{CalculationExtra:diff()}ブロックを得る。",
   "THEWILDFIRE-ADAMANT_SOUL.title": "不屈の魂",
-  "THEWILDFIRE-AFTERBURN.description": "{Damage:diff()}ダメージを受ける。{draws:cond:>0?\nカードを1枚引く。|}",
+  "THEWILDFIRE-AFTERBURN.description": "{Damage:choose(0):X|{Damage:diff()}}ダメージを受ける。{draws:cond:>0?\nカードを1枚引く。|}",
   "THEWILDFIRE-AFTERBURN.title": "アフターバーン",
   "THEWILDFIRE-AFTERBURNER_KICK.description": "{Damage:diff()}ダメージを与える。\n[img]res://TheWildfire/images/charui/firepower_text_icon.png[/img]{Ignite:diff()}を得る。\n[gold]オーバーヒート[/gold] {Afterburn:diff()}。",
   "THEWILDFIRE-AFTERBURNER_KICK.title": "アフターバーナーキック",
@@ -200,5 +200,7 @@
   "THEWILDFIRE-WHOLENESS_OF_BODY.description": "[img]res://TheWildfire/images/charui/firepower_text_icon.png[/img]HPを{InCombat: {Heal:diff()}|}回復する。",
   "THEWILDFIRE-WHOLENESS_OF_BODY.title": "心身の充実",
   "THEWILDFIRE-WILDFIRE_UNLEASHED.description": "{Damage:diff()}ダメージを与える。\n1ターン中にすべての[gold]フロー[/gold]を発動すると、このカードは[gold]再燃[/gold]する。\n戦闘開始時、[gold]廃棄[/gold]されている。",
-  "THEWILDFIRE-WILDFIRE_UNLEASHED.title": "解き放たれたワイルドファイア"
+  "THEWILDFIRE-WILDFIRE_UNLEASHED.title": "解き放たれたワイルドファイア",
+  "THEWILDFIRE-THE_BURNING_BLADE.description": "{Damage:diff()}ダメージを与える。\n対象は各ターン開始時に{BurningBladePower:diff()}ダメージを受ける。",
+  "THEWILDFIRE-THE_BURNING_BLADE.title": "燃え盛る刃"
 }

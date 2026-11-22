@@ -23,7 +23,9 @@ public class WholenessOfBody() : TheWildfireCard(0,
     {
         get => new HashSet<CardTag>() { WildfireKeywords.ExertTag };
     }
-    
+
+    public override bool CanBeGeneratedInCombat => false;
+
     private static decimal Calc(CardModel card, Creature? arg2)
     {
         if (card is not TheWildfireCard)
