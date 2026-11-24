@@ -86,4 +86,12 @@ public abstract class TheWildfireCard(int cost, CardType type, CardRarity rarity
             yield return HoverTipFactory.Static(WildfireKeywords.AncientsAwakened);
         }
     }
+    
+    protected IEnumerable<IHoverTip> AddHeroExpansion()
+    {
+        if (!IsInCombat)
+        {
+            yield return HoverTipFactory.Static(WildfireKeywords.HeroExpansion);
+        }
+    }
 }

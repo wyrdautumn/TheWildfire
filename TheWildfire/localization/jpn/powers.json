@@ -60,7 +60,7 @@
   "THEWILDFIRE-RELENTLESS_FLOW_POWER.smartDescription": "[gold]フロー[/gold]を発動するたび、このターンに発動した[gold]フロー[/gold]の数に応じて、すべての敵に[blue]{Amount}[/blueダメージを与える。",
   "THEWILDFIRE-RELENTLESS_FLOW_POWER.title": "絶え間ないフロー",
   "THEWILDFIRE-RISING_DRAGON_FIRE_POWER.description": "各ターン、初めて[gold]アフターバーン[/gold]を[gold]廃棄[/gold]したとき、[gold]ファイアボルト[/gold]を手札に加える。",
-  "THEWILDFIRE-RISING_DRAGON_FIRE_POWER.smartDescription": "各ターン、{Amount:plural:初めて|[blue]{}[/blue]回}[gold]アフターバーン[/gold]を[gold]廃棄[/gold]したとき、{Amount:plural:[blue]{Amount}[/blue]枚の[gold]ファイアボルト[/gold]|[gold]ファイアボルト[/gold]}を手札に加える。",
+  "THEWILDFIRE-RISING_DRAGON_FIRE_POWER.smartDescription": "各ターン、{Amount:plural:初めて|[blue]{}[/blue]回}[gold]アフターバーン[/gold]を[gold]廃棄[/gold]したとき、{Amount:plural:[blue]{Amount}[/blue]枚の[gold]ファイアボルト+[/gold]|[gold]ファイアボルト+[/gold]}を手札に加える。",
   "THEWILDFIRE-RISING_DRAGON_FIRE_POWER.title": "昇竜の炎",
   "THEWILDFIRE-SKILL_FLOW_POWER.description": "このターン、スキルフローはすでに発動している。",
   "THEWILDFIRE-SKILL_FLOW_POWER.smartDescription": "このターン、スキルフローはすでに発動している。",

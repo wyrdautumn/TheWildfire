@@ -30,5 +30,7 @@
   "THEWILDFIRE_FIREPOWER_COUNTER.description": "内に燃え盛る炎。ファイアパワー([img]res://TheWildfire/images/charui/firepower_text_icon.png[/img])はワイルドファイアのカードを強化する。ターン終了時、所持している[img]res://TheWildfire/images/charui/firepower_text_icon.png[/img] [blue]10[/blue]ごとに[blue]1[/blue]ダメージを受ける。",
   "THEWILDFIRE_FIREPOWER_COUNTER.title": "ファイアパワー",
   "THEWILDFIRE_OVERHEAT_COUNTER.description": "ターン終了時、[blue]{overheat}[/blue]ダメージを受ける。",
-  "THEWILDFIRE_OVERHEAT_COUNTER.title": "ファイアパワー：ダメージ"
+  "THEWILDFIRE_OVERHEAT_COUNTER.title": "ファイアパワー：ダメージ",
+  "THEWILDFIRE-HERO_EXPANSION.description": "このカードは[gold]Hero Expansion[/gold] modとの併用を想定して設計されている。",
+  "THEWILDFIRE-HERO_EXPANSION.title": "Hero Expansion"
 }

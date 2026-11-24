@@ -10,7 +10,7 @@ using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards.Multiplayer;
 
-public class CombatFlexibility() : TheWildfireCard(2,
+public class CombatFlexibility() : TheWildfireCard(1,
     CardType.Power, CardRarity.Rare,
     TargetType.Self)
 {

@@ -1,4 +1,5 @@
 ﻿using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -15,7 +16,7 @@ public class RisingDragonFirePower : TheWildfirePower
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<Afterburn>(), HoverTipFactory.FromCard<Firebolt>(),HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
+        [HoverTipFactory.FromCard<Afterburn>(), HoverTipFactory.FromCard<Firebolt>(true),HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
     
     public override int DisplayAmount
     {
@@ -28,7 +29,9 @@ public class RisingDragonFirePower : TheWildfirePower
         int afterburns = GetInternalData<Data>().AfterburnsPlayed;
         if (card is Afterburn && card.Owner.Creature == Owner && Amount > afterburns)
         {
-            await Firebolt.CreateInHand(card.Owner, Amount, CombatState);
+            var bolt = await Firebolt.CreateInHand(card.Owner, Amount, CombatState);
+            foreach (CardModel firebolt in bolt)
+                CardCmd.Upgrade(firebolt);
             Flash();
             SetAfterburnsPlayed(afterburns + 1);
         }

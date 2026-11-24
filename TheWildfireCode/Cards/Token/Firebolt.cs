@@ -21,7 +21,7 @@ public class Firebolt() : TheWildfireCard(0,
 {
     public int CurrentDamage = 0;
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(4, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Move), new DynamicVar("Increase", 8)];
     
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -32,7 +32,7 @@ public class Firebolt() : TheWildfireCard(0,
             return;
         foreach (Firebolt firebolt in Owner.PlayerCombatState.AllCards.OfType<Firebolt>())
         {
-            firebolt.DynamicVars.Damage.BaseValue *= 2;
+            firebolt.DynamicVars.Damage.BaseValue += DynamicVars["Increase"].BaseValue;
             firebolt.CurrentDamage = firebolt.DynamicVars.Damage.IntValue;
         }
     }
@@ -40,6 +40,7 @@ public class Firebolt() : TheWildfireCard(0,
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(2);
+        DynamicVars["Increase"].UpgradeValueBy(2);
     }
     
     protected override void AfterDowngraded()

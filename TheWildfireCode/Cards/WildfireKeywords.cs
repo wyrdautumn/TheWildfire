@@ -24,4 +24,5 @@ public class WildfireKeywords
     [CustomEnum] public static CardKeyword PowerFlow;
     [CustomEnum] public static VfxDuration WildfireVeryLong;
     [CustomEnum] public static StaticHoverTip AncientsAwakened;
+    [CustomEnum] public static StaticHoverTip HeroExpansion;
 }

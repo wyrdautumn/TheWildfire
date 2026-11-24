@@ -30,5 +30,7 @@
   "THEWILDFIRE_OVERHEAT_COUNTER.title": "Firepower Damage",
   "THEWILDFIRE_OVERHEAT_COUNTER.description": "Take [blue]{overheat}[/blue] damage at the end of your turn.",
   "THEWILDFIRE-ANCIENTS_AWAKENED.description": "This card is designed for use with the [gold]Ancients Awakened[/gold] mod.",
-  "THEWILDFIRE-ANCIENTS_AWAKENED.title": "Ancients Awakened"
+  "THEWILDFIRE-ANCIENTS_AWAKENED.title": "Ancients Awakened",
+  "THEWILDFIRE-HERO_EXPANSION.description": "This card is designed for use with the [gold]Hero Expansion[/gold] mod.",
+  "THEWILDFIRE-HERO_EXPANSION.title": "Hero Expansion"
 }

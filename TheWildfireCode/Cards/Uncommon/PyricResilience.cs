@@ -15,7 +15,7 @@ public class PyricResilience() : TheWildfireCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(5),
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(6),
         new CalculationBaseVar(0),
         new CalculationExtraVar(1),
         new CalculatedBlockVar(ValueProp.Move).WithMultiplier(Calc)];

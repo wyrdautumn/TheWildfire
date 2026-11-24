@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using TheWildfire.TheWildfireCode.Cards;
+using TheWildfire.TheWildfireCode.Cards.ModInterop.HeroExpansion;
 using TheWildfire.TheWildfireCode.Cards.Status;
 using TheWildfire.TheWildfireCode.Cards.Uncommon;
 using TheWildfire.TheWildfireCode.Firepower;
@@ -105,7 +106,7 @@ public partial class AfterburnCounter : Control
         if (_exertIcon == null || _exertLower == null || _exertUpper == null || _exertGreen == null || _exertPurple == null)
             return;
 
-        if (!card.Tags.Contains(WildfireKeywords.ExertTag))
+        if (!card.Tags.Contains(WildfireKeywords.ExertTag) && card.Enchantment is not BlazingEnchantment)
         {
             _exertIcon.Visible = false;
             return;
@@ -126,6 +127,36 @@ public partial class AfterburnCounter : Control
             (card.TemporaryStarCost != null && card.TemporaryStarCost.Cost == 0))
         {
             isFree = true;
+        }
+
+        if (card.Enchantment is BlazingEnchantment)
+        {
+            int exert = card.Enchantment.Amount;
+            denominator = "[center]" + exert + "[/center]";
+            if (!card.IsInCombat || combatState == null)
+            {
+                _exertUpper.Text = "[center]0[/center]";
+                _exertLower.Text = denominator;
+                return;
+            }
+            
+            if (isFree)
+            {
+                _exertGreen.Visible = true;
+                numerator = "[color=7FFF00][outline_color=1F5923]" + denominator + "[/outline_color][/color]";
+                denominator = numerator;
+                _exertUpper.Text = numerator;
+                _exertLower.Text = denominator;
+                return;
+            }
+            
+            int firepower = Math.Min(exert, FirepowerController.Firepower.Get(combatState));
+            if (firepower >= exert)
+                _exertPurple.Visible = true;
+            numerator = "[center]" + firepower + "[/center]";
+            _exertUpper.Text = numerator;
+            _exertLower.Text = denominator;
+            return;
         }
 
         if (card.DynamicVars.TryGetValue("Exert", out var var))

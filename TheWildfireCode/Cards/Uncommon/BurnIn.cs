@@ -71,6 +71,6 @@ public class BurnIn() : TheWildfireCard(0,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["SelfDamage"].UpgradeValueBy(-3);
+        DynamicVars["SelfDamage"].UpgradeValueBy(-2);
     }
 }
