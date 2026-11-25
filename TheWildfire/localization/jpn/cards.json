@@ -74,7 +74,7 @@
   "THEWILDFIRE-FIERY_VORTEX.title": "炎の渦",
   "THEWILDFIRE-FINAL_GATE.description": "[img]res://TheWildfire/images/charui/firepower_text_icon.png[/img]{Ignite:diff()}を得る。\n[gold]焦熱[/gold]。\nこのカードを手札に戻す。",
   "THEWILDFIRE-FINAL_GATE.title": "最後の門",
-  "THEWILDFIRE-FIREBOLT.description": "{Damage:diff()}ダメージを与える。\nこの戦闘中、すべての[gold]ファイアボルト[/gold]カードの基本ダメージを2倍にする。",
+  "THEWILDFIRE-FIREBOLT.description": "{Damage:diff()}ダメージを与える。\nこの戦闘中、すべてのファイアボルトのダメージを{Increase:diff()}増加させる。",
   "THEWILDFIRE-FIREBOLT.title": "ファイアボルト",
   "THEWILDFIRE-FIRECRACKER.description": "すべての敵に[gold]脱力[/gold]{WeakPower:diff()}を付与する。\nすべての敵に[gold]弱体[/gold]{VulnerablePower:diff()}を付与する。\n[gold]オーバーヒート[/gold] {Afterburn:diff()}。",
   "THEWILDFIRE-FIRECRACKER.title": "爆竹",
@@ -202,5 +202,16 @@
   "THEWILDFIRE-WILDFIRE_UNLEASHED.description": "{Damage:diff()}ダメージを与える。\n1ターン中にすべての[gold]フロー[/gold]を発動すると、このカードは[gold]再燃[/gold]する。\n戦闘開始時、[gold]廃棄[/gold]されている。",
   "THEWILDFIRE-WILDFIRE_UNLEASHED.title": "解き放たれたワイルドファイア",
   "THEWILDFIRE-THE_BURNING_BLADE.description": "{Damage:diff()}ダメージを与える。\n対象は各ターン開始時に{BurningBladePower:diff()}ダメージを受ける。",
-  "THEWILDFIRE-THE_BURNING_BLADE.title": "燃え盛る刃"
+  "THEWILDFIRE-THE_BURNING_BLADE.title": "燃え盛る刃",
+  "THEWILDFIRE-TALON_SURGE.description": "{Damage:diff()}ダメージを{HitCount:diff()}回与える。\nカードを1枚引く。",
+  "THEWILDFIRE-TALON_SURGE.title": "爪襲突",
+  "THEWILDFIRE-PATH_TO_PERFECTION.description": "[gold]捨て札[/gold]のすべての状態異常カードを{IfUpgraded:show:[gold]タロンサージ+[/gold]|[gold]タロンサージ[/gold]}に変化させる。",
+  "THEWILDFIRE-PATH_TO_PERFECTION.title": "完璧への道",
+  "THEWILDFIRE-FLARE.description": "[img]res://TheWildfire/images/charui/firepower_text_icon.png[/img]を{Ignite:diff()}得る。\n[gold]手札[/gold]のアタック1枚に、[img]res://TheWildfire/images/charui/firepower_text_icon.png[/img]のコストを必要としない[gold]炎上[/gold]{Blazing:diff()}[gold]エンチャント[/gold]を付与する。",
+  "THEWILDFIRE-FLARE.title": "フレア",
+  "THEWILDFIRE-FLARE.selectionScreenPrompt": "燃え上がれ",
+  "THEWILDFIRE-STOKED_FLAME_STANCE.description": "[gold]山札[/gold]に[gold]{IfUpgraded:show:タロンサージ+|タロンサージ}[/gold]を{Cards:diff()}枚加える。",
+  "THEWILDFIRE-STOKED_FLAME_STANCE.title": "盛炎の構え",
+  "THEWILDFIRE-BOLSTER_FLAMES.description": "[img]res://TheWildfire/images/charui/firepower_text_icon.png[/img][img]res://TheWildfire/images/charui/firepower_text_icon.png[/img]{InCombat: {CalculatedBlock:diff()}|}[gold]ブロック[/gold]を得る。\n[gold]活力[/gold][img]res://TheWildfire/images/charui/firepower_text_icon.png[/img]{InCombat: {Vigor:diff()}|}を得る。",
+  "THEWILDFIRE-BOLSTER_FLAMES.title": "強まる炎"
 }

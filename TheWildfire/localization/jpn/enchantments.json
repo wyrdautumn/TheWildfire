@@ -1,0 +1,5 @@
+﻿{
+  "THEWILDFIRE-BLAZING_ENCHANTMENT.description": "[blue]{Amount}[/blue]までの[img]res://TheWildfire/images/charui/firepower_text_icon.png[/img]を消費し、追加で[img]res://TheWildfire/images/charui/firepower_text_icon.png[/img][img]res://TheWildfire/images/charui/firepower_text_icon.png[/img]ダメージを与える。",
+  "THEWILDFIRE-BLAZING_ENCHANTMENT.extraCardText": "追加で[img]res://TheWildfire/images/charui/firepower_text_icon.png[/img][img]res://TheWildfire/images/charui/firepower_text_icon.png[/img]ダメージを与える。",
+  "THEWILDFIRE-BLAZING_ENCHANTMENT.title": "炎上"
+}

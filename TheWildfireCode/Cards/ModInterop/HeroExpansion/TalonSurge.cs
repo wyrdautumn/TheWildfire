@@ -17,7 +17,7 @@ public class TalonSurge() : TheWildfireHeroExpansionCard(0,
     CardType.Attack, CardRarity.Token,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(2, ValueProp.Move), new HitCountVar(3), new CardsVar(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(1, ValueProp.Move), new HitCountVar(3), new CardsVar(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [..AddHeroExpansion()];
     
@@ -33,7 +33,7 @@ public class TalonSurge() : TheWildfireHeroExpansionCard(0,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(1);
+        DynamicVars.HitCount.UpgradeValueBy(1);
     }
     
     public static async Task<IEnumerable<TalonSurge>> CreateInHand(

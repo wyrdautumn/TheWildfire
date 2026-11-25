@@ -10,7 +10,8 @@ spacing_glyph = 2
 [node name="WildfireHPTrackers" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
+offset_top = -30.0
+offset_right = 161.0
 offset_bottom = 40.0
 script = ExtResource("1_8ndc0")
 
@@ -18,9 +19,9 @@ script = ExtResource("1_8ndc0")
 unique_name_in_owner = true
 anchors_preset = 0
 offset_left = 105.0
-offset_top = -24.0
+offset_top = 6.0
 offset_right = 165.0
-offset_bottom = 36.0
+offset_bottom = 66.0
 mouse_filter = 2
 
 [node name="OverheatIcon" type="TextureRect" parent="OverheatContainer"]

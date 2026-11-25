@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Godot;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -17,11 +18,11 @@ public partial class WildfireFireCounter : Control
 	private NEnergyCounter? _energyCounter;
 	private Player? _player;
 
+	private bool _nodeHovered = false;
+	private bool _tooltipShown = false;
+
 	private int _fireCount = 0;
 	private int _damageCount = 0;
-
-	private bool _wasMouseOverCounter;
-	private bool _tooltipShown;
 
 	private WildfireParticles? _vfxFront;
 	private WildfireParticles? _vfxBack;
@@ -35,7 +36,7 @@ public partial class WildfireFireCounter : Control
 	
 	public override void _Ready()
 	{
-		SetMouseFilterRecursive(this, MouseFilterEnum.Ignore);
+		SetMouseFilterRecursive(this, MouseFilterEnum.Pass);
 
 		_label = GetNodeOrNull<Label>("FirepowerVisual/Label");
 		_fireLayers = GetNodeOrNull<Control>("FirepowerVisual/FireLayers");
@@ -50,6 +51,12 @@ public partial class WildfireFireCounter : Control
 		_layer5 = GetNodeOrNull<TextureRect>("FirepowerVisual/FireLayers/Layer5");
 		_layer6 = GetNodeOrNull<TextureRect>("FirepowerVisual/FireLayers/Layer6");
 
+		if (_fireLayers == null)
+			return;
+		
+		Connect(Godot.Control.SignalName.MouseEntered, Callable.From(OnHovered));
+		Connect(Godot.Control.SignalName.MouseExited, Callable.From(OnUnhovered));
+
 		if (GetParent() is NEnergyCounter energyCounter)
 		{
 			_energyCounter = energyCounter;
@@ -57,7 +64,6 @@ public partial class WildfireFireCounter : Control
 		}
 
 		this.Visible = false;
-		this.SetProcess(false);
 		RefreshVisibility();
 
 		if (this.Visible == true)
@@ -80,23 +86,45 @@ public partial class WildfireFireCounter : Control
 	{
 		base._ExitTree();
 		FirepowerController.FirepowerUpdated -= AfterFirepowerUpdate;
-		HideFirepowerTooltip();
 	}
 
 	public override void _Process(double delta)
 	{
-		if (_player == null)
-		{
+		if (!Visible || !_nodeHovered)
 			return;
-		}
+		if (IsMouseOverFirepowerCounter() && !_tooltipShown)
+			ShowFirepowerTooltip();
+		else if (!IsMouseOverFirepowerCounter() && _tooltipShown)
+			HideFirepowerTooltip();
+	}
+	
+	public bool IsMouseOverFirepowerCounter()
+	{
+		Vector2 mouse = GetGlobalMousePosition();
 
-		if (this.Visible == false)
-		{
-			SetProcess(false);
-			return;
-		}
+		if (_fireLayers == null || !GodotObject.IsInstanceValid(_fireLayers))
+			return false;
 
-		UpdateCounterHover();
+		return _fireLayers.GetGlobalRect().Grow(4f).HasPoint(mouse);
+	}
+
+	private bool IsMouseOverEnergyCounter()
+	{
+		if (_energyCounter == null || !GodotObject.IsInstanceValid(_energyCounter))
+			return false;
+
+		return _energyCounter.GetGlobalRect().Grow(4f).HasPoint(GetGlobalMousePosition());
+	}
+
+	private void OnHovered()
+	{
+			_nodeHovered = true;
+	}
+
+	private void OnUnhovered()
+	{
+		_nodeHovered = false;
+		HideFirepowerTooltip();
 	}
 
 	private void RefreshVisibility()
@@ -109,8 +137,6 @@ public partial class WildfireFireCounter : Control
 		{
 			int fire = FirepowerController.Firepower.Get(_player.PlayerCombatState);
 			this.Visible = this.Visible || _player.Character is Character.TheWildfire || fire > 0;
-			if (this.Visible)
-				this.SetProcess(true);
 		}
 	}
 
@@ -180,32 +206,6 @@ public partial class WildfireFireCounter : Control
 			_layer6.Visible = false;
 	}
 	
-	
-	private void UpdateCounterHover()
-	{
-		bool isMouseOverMaterial = IsMouseOverFirepowerCounter();
-
-		if (isMouseOverMaterial == _wasMouseOverCounter)
-			return;
-
-		_wasMouseOverCounter = isMouseOverMaterial;
-
-		if (isMouseOverMaterial)
-			ShowFirepowerTooltip();
-		else
-			HideFirepowerTooltip();
-	}
-	
-	public bool IsMouseOverFirepowerCounter()
-	{
-		Vector2 mouse = GetGlobalMousePosition();
-
-		if (_fireLayers == null || !GodotObject.IsInstanceValid(_fireLayers))
-			return false;
-
-		return _fireLayers.GetGlobalRect().Grow(4f).HasPoint(mouse);
-	}
-	
 	private static void SetMouseFilterRecursive(Node node, MouseFilterEnum mouseFilter)
 	{
 		if (node is Control control)
@@ -217,17 +217,9 @@ public partial class WildfireFireCounter : Control
 	
 	private void ShowFirepowerTooltip()
 	{
-		if (_player == null)
-			return;
-
-		if (!Visible)
-			return;
-
-		if (_tooltipShown)
-			return;
-
 		_tooltipShown = true;
-
+		HoverTip hoverTip = BuildHoverTip();
+		
 		// Important:
 		// Clean stale entry for this owner before showing.
 		NHoverTipSet.Remove(this);
@@ -236,8 +228,6 @@ public partial class WildfireFireCounter : Control
 		if (_energyCounter != null && GodotObject.IsInstanceValid(_energyCounter))
 			NHoverTipSet.Remove(_energyCounter);
 
-		HoverTip hoverTip = BuildHoverTip();
-
 		NHoverTipSet.CreateAndShow(this, hoverTip)
 			?.SetGlobalPosition(GlobalPosition + new Vector2(Size.X * 1.5f, 0));
 	}
@@ -245,26 +235,17 @@ public partial class WildfireFireCounter : Control
 	private void HideFirepowerTooltip()
 	{
 		_tooltipShown = false;
-
 		NHoverTipSet.Remove(this);
-
+		
 		if (_energyCounter == null || !GodotObject.IsInstanceValid(_energyCounter))
 			return;
 
-		if (!IsMouseOverEnergyCounter())
+		if (!IsMouseOverEnergyCounter() || !_nodeHovered)
 			return;
 
 		// Let Material fully unregister first, then let Energy try to show again.
 		if (!NHoverTipSet._activeHoverTips.ContainsKey(_energyCounter))
 			_energyCounter.CallDeferred(nameof(NEnergyCounter.OnHovered));
-	}
-
-	private bool IsMouseOverEnergyCounter()
-	{
-		if (_energyCounter == null || !GodotObject.IsInstanceValid(_energyCounter))
-			return false;
-
-		return _energyCounter.GetGlobalRect().Grow(4f).HasPoint(GetGlobalMousePosition());
 	}
 	
 	private HoverTip BuildHoverTip()

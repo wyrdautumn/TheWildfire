@@ -18,7 +18,7 @@ public class BolsterFlames() : TheWildfireHeroExpansionCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(4),
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new ExertVar(5),
         new CalculationBaseVar(0),
         new CalculationExtraVar(2),
         new CalculatedBlockVar(ValueProp.Move).WithMultiplier(Calc),

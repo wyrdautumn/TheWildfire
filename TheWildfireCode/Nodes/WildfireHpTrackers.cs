@@ -22,14 +22,15 @@ public partial class WildfireHpTrackers : Control
 	private NHealthBar? _healthBar;
 	private Creature? _creature;
 
+	private bool _nodeHovered = false;
+
 	private int _overheatCount;
 	
-	private bool _wasMouseOverOverheatCounter;
 	private bool _tooltipShown;
 
 	public override void _Ready()
 	{
-		SetMouseFilterRecursive(this, MouseFilterEnum.Ignore);
+		SetMouseFilterRecursive(this, MouseFilterEnum.Pass);
 		
 		_overheat = GetNodeOrNull<Control>("OverheatContainer");
 		_overheatLabel = GetNodeOrNull<Label>("OverheatContainer/OverheatLabel");
@@ -44,6 +45,9 @@ public partial class WildfireHpTrackers : Control
 		{
 			_creature = creature.Entity;
 		}
+		
+		Connect(Godot.Control.SignalName.MouseEntered, Callable.From(OnHovered));
+		Connect(Godot.Control.SignalName.MouseExited, Callable.From(OnUnhovered));
 
 		this.Visible = true;
 		if (_creature != null && _creature.Player != null && _creature.Player.Character is Character.TheWildfire)
@@ -71,9 +75,22 @@ public partial class WildfireHpTrackers : Control
 		base._ExitTree();
 		FirepowerController.FirepowerUpdated -= AfterFirepowerUpdate;
 	}
+	
+	private void OnHovered()
+	{
+		_nodeHovered = true;
+	}
+
+	private void OnUnhovered()
+	{
+		_nodeHovered = false;
+		HideTooltips();
+	}
 
 	public override void _Process(double delta)
 	{
+		if (!_nodeHovered)
+			return;
 		UpdateCounterHover();
 	}
 
@@ -120,16 +137,9 @@ public partial class WildfireHpTrackers : Control
 
 	private void UpdateCounterHover()
 	{
-		bool isMouseOverOverheat = IsMouseOverOverheatCounter();
-
-		if (isMouseOverOverheat == _wasMouseOverOverheatCounter)
-			return;
-
-		_wasMouseOverOverheatCounter = isMouseOverOverheat;
-		
-		if (isMouseOverOverheat)
+		if (IsMouseOverOverheatCounter() && !_tooltipShown)
 			ShowOverheatTooltip();
-		else
+		else if (!IsMouseOverOverheatCounter() && _tooltipShown)
 			HideTooltips();
 	}
 	
