@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btkykeyo3dwus"
-path="res://.godot/imported/bolster_flame.png-c446e90655640c95616ba51c85b92902.ctex"
+uid="uid://dhnfyc1tm676c"
+path="res://.godot/imported/greater_fortitude_power.png-db588152bb99fdf991577768e8dea14f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TheWildfire/images/card_portraits/big/bolster_flame.png"
-dest_files=["res://.godot/imported/bolster_flame.png-c446e90655640c95616ba51c85b92902.ctex"]
+source_file="res://TheWildfire/images/powers/greater_fortitude_power.png"
+dest_files=["res://.godot/imported/greater_fortitude_power.png-db588152bb99fdf991577768e8dea14f.ctex"]
 
 [params]
 

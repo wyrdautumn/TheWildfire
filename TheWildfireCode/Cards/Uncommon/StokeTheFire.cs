@@ -16,7 +16,7 @@ public class StokeTheFire() : TheWildfireCard(5,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(14, ValueProp.Move), new PowerVar<RagingFirePower>(6)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(14, ValueProp.Move), new PowerVar<RagingFirePower>(4)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<RagingFirePower>(),HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
     

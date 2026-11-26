@@ -16,6 +16,7 @@ using MegaCrit.Sts2.Core.Settings;
 using MegaCrit.Sts2.Core.ValueProps;
 using TheWildfire.TheWildfireCode.Cards;
 using TheWildfire.TheWildfireCode.Firepower;
+using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards.Rare;
 
@@ -32,7 +33,7 @@ public class DesertWindFlurry() : TheWildfireCard(2,
     {
         if (card.Owner.PlayerCombatState == null)
             return 0;
-        return FirepowerController.Firepower.Get(card.Owner.PlayerCombatState);
+        return FirepowerController.Firepower.Get(card.Owner.PlayerCombatState) - card.Owner.Creature.GetPowerAmount<GreaterFortitudePower>();
     }
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Firepower)];
@@ -43,7 +44,7 @@ public class DesertWindFlurry() : TheWildfireCard(2,
         {
             if (Owner.PlayerCombatState == null)
                 return false;
-            int damage = FirepowerController.Firepower.Get(Owner.PlayerCombatState);
+            int damage = FirepowerController.Firepower.Get(Owner.PlayerCombatState) - Owner.Creature.GetPowerAmount<GreaterFortitudePower>();
             int health = Owner.Creature.CurrentHp + Owner.Creature.Block;
             if (damage >= health)
                 return true;

@@ -14,7 +14,7 @@ using TheWildfire.TheWildfireCode.Cards.Token;
 
 namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
 
-public class SparkShot() : TheWildfireCard(0,
+public class SparkShot() : TheWildfireCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
@@ -37,11 +37,10 @@ public class SparkShot() : TheWildfireCard(0,
         CardModel firebolt = CombatState.CreateCard<Firebolt>(Owner);
         if (IsUpgraded)
             CardCmd.Upgrade(firebolt);
-        CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(firebolt, PileType.Draw, Owner,
-            CardPilePosition.Random));
+        CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(firebolt, PileType.Hand, Owner));
         await Cmd.Wait(0.5f);
         CardModel burn = CombatState.CreateCard<Burn>(Owner);
-        await CardPileCmd.AddGeneratedCardToCombat(burn, PileType.Hand, Owner);
+        await CardPileCmd.AddGeneratedCardToCombat(burn, PileType.Discard, Owner);
     }
 
     protected override void OnUpgrade()

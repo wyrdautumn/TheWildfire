@@ -21,7 +21,7 @@ public class WildfireEpochUnlockPatches
 
     [HarmonyPatch(typeof(ProgressSaveManager), "ObtainCharUnlockEpoch")]
     [HarmonyPostfix]
-    public static void SorceressUnlockEpochPostfix(ProgressSaveManager __instance, Player localPlayer, int act)
+    public static void WildfireUnlockEpochPostfix(ProgressSaveManager __instance, Player localPlayer, int act)
     {
         if (!(localPlayer.Character is Character.TheWildfire))
             return;
@@ -50,7 +50,7 @@ public class WildfireEpochUnlockPatches
 
     [HarmonyPatch(typeof(ProgressSaveManager), "CheckFifteenElitesDefeatedEpoch")]
     [HarmonyPostfix]
-    public static void SorceressEliteEpochPostfix(ProgressSaveManager __instance, Player localPlayer)
+    public static void WildfireEliteEpochPostfix(ProgressSaveManager __instance, Player localPlayer)
     {
         if (!(localPlayer.Character is Character.TheWildfire) || localPlayer.UnlockState.IsEpochRevealed<Wildfire5Epoch>())
             return;
@@ -90,7 +90,7 @@ public class WildfireEpochUnlockPatches
 
     [HarmonyPatch(typeof(ProgressSaveManager), "CheckFifteenBossesDefeatedEpoch")]
     [HarmonyPostfix]
-    public static void SorceressBossEpochPostfix(ProgressSaveManager __instance, Player localPlayer)
+    public static void WildfireBossEpochPostfix(ProgressSaveManager __instance, Player localPlayer)
     {
         if (!(localPlayer.Character is Character.TheWildfire) || localPlayer.UnlockState.IsEpochRevealed<Wildfire1Epoch>())
             return;
@@ -133,7 +133,7 @@ public class WildfireEpochUnlockPatches
 
     [HarmonyPatch(typeof(ProgressSaveManager), "CheckAscensionOneCompleted")]
     [HarmonyPostfix]
-    public static void SorceressAscensionEpochPostfix(ProgressSaveManager __instance,
+    public static void WildfireAscensionEpochPostfix(ProgressSaveManager __instance,
         SerializablePlayer serializablePlayer, SerializableRun serializableRun)
     {
         if (serializableRun.Ascension != 1)
@@ -156,7 +156,7 @@ public class WildfireEpochUnlockPatches
 
     [HarmonyPatch(typeof(ProgressSaveManager), "PostRunUnlockCharacterEpochCheck")]
     [HarmonyPostfix]
-    public static void UnlockSorceressEpochPostfix(ProgressSaveManager __instance, SerializablePlayer serializablePlayer, SerializableRun serializableRun)
+    public static void UnlockWildfireEpochPostfix(ProgressSaveManager __instance, SerializablePlayer serializablePlayer, SerializableRun serializableRun)
     {
         if (serializablePlayer.CharacterId != ModelDb.GetId<Character.TheWildfire>())
         {
@@ -176,7 +176,7 @@ public class WildfireEpochUnlockPatches
 
     [HarmonyPatch(typeof(SaveManager), "GetCardUnlockEpochIds")]
     [HarmonyPostfix]
-    public static void CardEpochIdsPostfix(ref string[] __result)
+    public static void WildfireCardEpochIdsPostfix(ref string[] __result)
     {
         try
         {
@@ -196,7 +196,7 @@ public class WildfireEpochUnlockPatches
 
     [HarmonyPatch(typeof(SaveManager), "GetRelicUnlockEpochIds")]
     [HarmonyPostfix]
-    public static void RelicEpochIdsPostfix(ref string[] __result)
+    public static void WildfireRelicEpochIdsPostfix(ref string[] __result)
     {
         try
         {

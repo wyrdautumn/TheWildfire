@@ -17,7 +17,7 @@ public class FlameConsuming() : TheWildfireCard(0,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(2), new PowerVar<RagingFirePower>(4), new AfterburnVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new IgniteVar(3), new PowerVar<RagingFirePower>(3), new AfterburnVar(3)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<RagingFirePower>(), GenerateAfterburnTooltip(), HoverTipFactory.Static(WildfireKeywords.Scorch)];
     protected override HashSet<CardTag> CanonicalTags
@@ -39,7 +39,7 @@ public class FlameConsuming() : TheWildfireCard(0,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Ignite"].UpgradeValueBy(1);
-        DynamicVars["RagingFirePower"].UpgradeValueBy(2);
+        DynamicVars["Ignite"].UpgradeValueBy(2);
+        DynamicVars["RagingFirePower"].UpgradeValueBy(1);
     }
 }

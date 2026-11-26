@@ -82,5 +82,8 @@
   "THEWILDFIRE-AFTERBURN_DRAW_POWER.title": "Afterburn Draw",
   "THEWILDFIRE-BURNING_BLADE_POWER.description": "At the start of its turn, takes damage.",
   "THEWILDFIRE-BURNING_BLADE_POWER.smartDescription": "At the start of its turn, takes [blue]{Amount}[/blue] damage.",
-  "THEWILDFIRE-BURNING_BLADE_POWER.title": "The Burning Blade"
+  "THEWILDFIRE-BURNING_BLADE_POWER.title": "The Burning Blade",
+  "THEWILDFIRE-GREATER_FORTITUDE_POWER.description": "Reduce the damage you take from your own [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img].",
+  "THEWILDFIRE-GREATER_FORTITUDE_POWER.smartDescription": "Reduce the damage you take from your own [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img] by [blue]{Amount}[/blue].",
+  "THEWILDFIRE-GREATER_FORTITUDE_POWER.title": "Greater Fortitude"
 }

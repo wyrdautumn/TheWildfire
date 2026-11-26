@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4cxjesc6pe0r"
-path="res://.godot/imported/bolster_flame.png-4179a64c50de6655b167dba14c058236.ctex"
+uid="uid://dsnr7n3xnfh4m"
+path="res://.godot/imported/bolster_flames.png-b00fe00aac553417cf2d0b73f3e906f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TheWildfire/images/card_portraits/bolster_flame.png"
-dest_files=["res://.godot/imported/bolster_flame.png-4179a64c50de6655b167dba14c058236.ctex"]
+source_file="res://TheWildfire/images/card_portraits/bolster_flames.png"
+dest_files=["res://.godot/imported/bolster_flames.png-b00fe00aac553417cf2d0b73f3e906f1.ctex"]
 
 [params]
 

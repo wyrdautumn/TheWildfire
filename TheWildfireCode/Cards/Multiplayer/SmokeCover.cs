@@ -13,7 +13,7 @@ public class SmokeCover() : TheWildfireCard(1,
     CardType.Power, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<SmokeCoverPower>(5)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<SmokeCoverPower>(3)];
     
     public override CardMultiplayerConstraint MultiplayerConstraint
     {
@@ -33,6 +33,6 @@ public class SmokeCover() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["SmokeCoverPower"].UpgradeValueBy(2);
+        DynamicVars["SmokeCoverPower"].UpgradeValueBy(1);
     }
 }

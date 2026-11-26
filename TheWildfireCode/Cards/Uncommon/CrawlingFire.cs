@@ -12,7 +12,7 @@ public class CrawlingFire() : TheWildfireCard(1,
     CardType.Power, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<CrawlingFirePower>(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<CrawlingFirePower>(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<RagingFirePower>()];
     protected override async Task OnPlay(
@@ -25,6 +25,6 @@ public class CrawlingFire() : TheWildfireCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["CrawlingFirePower"].UpgradeValueBy(1);
+        AddKeyword(CardKeyword.Innate);
     }
 }

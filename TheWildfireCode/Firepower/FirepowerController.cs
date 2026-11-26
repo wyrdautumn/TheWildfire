@@ -83,7 +83,7 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
             Player? player = creature.Player;
             if (player == null || player.PlayerCombatState == null)
                 continue;
-            int val = CalculateOverheatDamage(player);
+            int val = CalculateOverheatDamageWithoutMitigation(player);
             if (val >= 1)
             {
                 await DealOverheatDamage(choiceContext, player);
@@ -175,7 +175,8 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
         if (player.PlayerCombatState == null || player.Creature.CombatState == null)
             return;
         int hpLoss = CalculateOverheatDamage(player);
-        if (hpLoss > 0)
+        int total = CalculateOverheatDamageWithoutMitigation(player);
+        if (total > 0)
         {
             if (hpLoss > 2 && skipEffect == false)
             {
@@ -189,7 +190,7 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
                 player.Creature, null, null);
         }
         await FirepowerHooks.AfterOverheatDamage(player.Creature.CombatState, choiceContext, hpLoss,
-            CalculateOverheatDamageWithoutMitigation(player), player);
+            total, player);
     }
 
     public static async Task DealFirepowerDamage(PlayerChoiceContext choiceContext, Player player,
@@ -197,7 +198,7 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
     {
         if (player.PlayerCombatState == null || player.Creature.CombatState == null)
             return;
-        int damage = Firepower.Get(player.PlayerCombatState);
+        int damage = Firepower.Get(player.PlayerCombatState) - player.Creature.GetPowerAmount<GreaterFortitudePower>();
         if (damage > 0)
         {
             if (damage > 4 && skipEffect == false)
@@ -218,6 +219,7 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
         if (player.PlayerCombatState == null)
             return 0;
         int val = Firepower.Get(player.PlayerCombatState) / 10;
+        val -= player.Creature.GetPowerAmount<GreaterFortitudePower>();
         return val;
     }
     

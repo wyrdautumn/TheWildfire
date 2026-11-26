@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using TheWildfire.TheWildfireCode.Cards;
 using TheWildfire.TheWildfireCode.Firepower;
+using TheWildfire.TheWildfireCode.Powers;
 
 namespace TheWildfire.TheWildfireCode.Cards.Uncommon;
 
@@ -23,7 +24,7 @@ public class HarmoniousDiscipline() : TheWildfireCard(0,
     {
         if (card.Owner.PlayerCombatState == null)
             return 0;
-        return FirepowerController.Firepower.Get(card.Owner.PlayerCombatState);
+        return FirepowerController.Firepower.Get(card.Owner.PlayerCombatState) - card.Owner.Creature.GetPowerAmount<GreaterFortitudePower>();
     }
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<StrengthPower>(),HoverTipFactory.Static(WildfireKeywords.Firepower)];
@@ -34,7 +35,7 @@ public class HarmoniousDiscipline() : TheWildfireCard(0,
         {
             if (Owner.PlayerCombatState == null)
                 return false;
-            int damage = FirepowerController.Firepower.Get(Owner.PlayerCombatState);
+            int damage = FirepowerController.Firepower.Get(Owner.PlayerCombatState) - Owner.Creature.GetPowerAmount<GreaterFortitudePower>();
             int health = Owner.Creature.CurrentHp + Owner.Creature.Block;
             if (damage >= health)
                 return true;

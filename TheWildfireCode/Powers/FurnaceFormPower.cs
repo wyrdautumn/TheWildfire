@@ -25,7 +25,7 @@ public class FurnaceFormPower : TheWildfirePower
     {
         if (player.Creature == Owner)
         {
-            int fire = FirepowerController.CalculateOverheatDamage(player);
+            int fire = FirepowerController.CalculateOverheatDamageWithoutMitigation(player);
             await PowerCmd.Apply<RagingFirePower>(new BlockingPlayerChoiceContext(), Owner, fire, Owner, null);
         }
     }
