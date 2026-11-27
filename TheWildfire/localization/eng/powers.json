@@ -85,5 +85,17 @@
   "THEWILDFIRE-BURNING_BLADE_POWER.title": "The Burning Blade",
   "THEWILDFIRE-GREATER_FORTITUDE_POWER.description": "Reduce the damage you take from your own [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img].",
   "THEWILDFIRE-GREATER_FORTITUDE_POWER.smartDescription": "Reduce the damage you take from your own [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img] by [blue]{Amount}[/blue].",
-  "THEWILDFIRE-GREATER_FORTITUDE_POWER.title": "Greater Fortitude"
+  "THEWILDFIRE-GREATER_FORTITUDE_POWER.title": "Greater Fortitude",
+  "THEWILDFIRE-LINGERING_FLAMES_DEBUFF.description": "At the end of its next turn, takes damage and applier gains [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img].",
+  "THEWILDFIRE-LINGERING_FLAMES_DEBUFF.smartDescription": "At the end of its next turn, takes [blue]{Amount}[/blue] damage and applier gains [blue]{Amount}[/blue] [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img].",
+  "THEWILDFIRE-LINGERING_FLAMES_DEBUFF.title": "Lingering Flames",
+  "THEWILDFIRE-LINGERING_FLAMES_POWER.description": "Whenever an Attack deals unblocked damage, the enemy takes damage at the end of their next turn and you gain the same amount of [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img].",
+  "THEWILDFIRE-LINGERING_FLAMES_POWER.smartDescription": "Whenever an Attack deals unblocked damage, the enemy takes [blue]{Amount}[/blue] damage at the end of their next turn and you gain [blue]{Amount}[/blue] [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img].",
+  "THEWILDFIRE-LINGERING_FLAMES_POWER.title": "Lingering Flames",
+  "THEWILDFIRE-BLAZING_TALON_POWER.description": "At the start of your turn, add [gold]Talon Surge[/gold] into your [gold]Hand[/gold].",
+  "THEWILDFIRE-BLAZING_TALON_POWER.smartDescription": "At the start of your turn, add {Amount:plural:[gold]Talon Surge[/gold]|[blue]{}[/blue] [gold]Talon Surges[/gold]} into your [gold]Hand[/gold].",
+  "THEWILDFIRE-BLAZING_TALON_POWER.title": "Blazing Talon",
+  "THEWILDFIRE-BLAZING_TALON_UPGRADE_POWER.description": "At the start of your turn, add [gold]Talon Surge+[/gold] into your [gold]Hand[/gold].",
+  "THEWILDFIRE-BLAZING_TALON_UPGRADE_POWER.smartDescription": "At the start of your turn, add {Amount:plural:[gold]Talon Surge+[/gold]|[blue]{}[/blue] [gold]Talon Surges+[/gold]} into your [gold]Hand[/gold].",
+  "THEWILDFIRE-BLAZING_TALON_UPGRADE_POWER.title": "Blazing Talon+"
 }

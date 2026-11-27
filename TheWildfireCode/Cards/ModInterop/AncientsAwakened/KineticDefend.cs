@@ -19,6 +19,8 @@ public class KineticDefend : TheWildfireAncientsAwakenedCard
     
     public override CardPoolModel VisualCardPool => AncientsAwakenedPerfectedInterop.PerfectedCardPool(Pool) ?? base.VisualCardPool;
     
+    public override bool GainsBlock => true;
+    
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [..AddAncientsAwakened()];
     

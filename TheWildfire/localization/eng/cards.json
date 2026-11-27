@@ -219,5 +219,11 @@
   "THEWILDFIRE-TORNADO_STANCE.description": "Deal {Damage:diff()} damage to ALL enemies.\n[gold]Overheat[/gold] {Afterburn:diff()}.",
   "THEWILDFIRE-TORNADO_STANCE.title": "Tornado Stance",
   "THEWILDFIRE-GREATER_FORTITUDE.description": "Reduce the damage you take from your own [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img] by {GreaterFortitudePower:diff()}.",
-  "THEWILDFIRE-GREATER_FORTITUDE.title": "Greater Fortitude"
+  "THEWILDFIRE-GREATER_FORTITUDE.title": "Greater Fortitude",
+  "THEWILDFIRE-CRANE_STANCE.description": "Deal {Damage:diff()} damage.\nGain {Block:diff()} [gold]Block[/gold].",
+  "THEWILDFIRE-CRANE_STANCE.title": "Crane Stance",
+  "THEWILDFIRE-LINGERING_FLAMES.description": "Whenever an Attack deals unblocked damage, the enemy takes {LingeringFlamesPower:diff()} damage at the end of their next turn and you gain the same amount of [img]res://TheWildfire/images/charui/firepower_text_icon.png[/img].",
+  "THEWILDFIRE-LINGERING_FLAMES.title": "Lingering Flames",
+  "THEWILDFIRE-BLAZING_TALON.description": "At the start of your turn, add {IfUpgraded:show:[gold]Talon Surge+[/gold]|[gold]Talon Surge[/gold]} into your [gold]Hand[/gold].",
+  "THEWILDFIRE-BLAZING_TALON.title": "Blazing Talon"
 }

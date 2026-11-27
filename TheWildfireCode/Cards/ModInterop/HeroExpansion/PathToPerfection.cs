@@ -33,7 +33,7 @@ public class PathToPerfection : TheWildfireHeroExpansionCard
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [..AddHeroExpansion(),HoverTipFactory.FromCard<TalonSurge>(IsUpgraded),HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
+        [..AddHeroExpansion(),HoverTipFactory.FromCard<TalonSurge>(IsUpgraded)];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

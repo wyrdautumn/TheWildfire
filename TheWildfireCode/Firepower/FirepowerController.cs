@@ -198,7 +198,7 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
     {
         if (player.PlayerCombatState == null || player.Creature.CombatState == null)
             return;
-        int damage = Firepower.Get(player.PlayerCombatState) - player.Creature.GetPowerAmount<GreaterFortitudePower>();
+        int damage = Math.Max(0, Firepower.Get(player.PlayerCombatState) - player.Creature.GetPowerAmount<GreaterFortitudePower>());
         if (damage > 0)
         {
             if (damage > 4 && skipEffect == false)
@@ -220,7 +220,7 @@ public class FirepowerController() : CustomSingletonModel(HookType.Combat)
             return 0;
         int val = Firepower.Get(player.PlayerCombatState) / 10;
         val -= player.Creature.GetPowerAmount<GreaterFortitudePower>();
-        return val;
+        return Math.Max(0, val);
     }
     
     public static int CalculateOverheatDamageWithoutMitigation(Player player)

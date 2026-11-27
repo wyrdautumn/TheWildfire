@@ -33,7 +33,7 @@ public class DesertWindFlurry() : TheWildfireCard(2,
     {
         if (card.Owner.PlayerCombatState == null)
             return 0;
-        return FirepowerController.Firepower.Get(card.Owner.PlayerCombatState) - card.Owner.Creature.GetPowerAmount<GreaterFortitudePower>();
+        return Math.Max(0, FirepowerController.Firepower.Get(card.Owner.PlayerCombatState) - card.Owner.Creature.GetPowerAmount<GreaterFortitudePower>());
     }
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(WildfireKeywords.Firepower)];
